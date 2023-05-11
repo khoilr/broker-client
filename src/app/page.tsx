@@ -2,6 +2,7 @@
 
 import Side from '@/components/side'
 import IndicatorModel from '@/model/Indicator'
+import CompanyModel from '@/model/Company'
 import {
     Button,
     Col,
@@ -14,15 +15,17 @@ import {
 } from 'antd'
 import { useEffect, useState } from 'react'
 import indicatorsJSON from '../data/indicators.json'
-import stockSymbols from '../data/stockSymbols.json'
+import companiesJSON from '../data/companies.json'
 
 const { Title, Text } = Typography
 
 export default function Home() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
+    const [companies, setCompanies] = useState<CompanyModel[]>([])
 
     useEffect(() => {
         setIndicators(indicatorsJSON)
+        setCompanies(companiesJSON)
     }, [])
 
     const [form] = Form.useForm()
@@ -59,13 +62,13 @@ export default function Home() {
                         >
                             <div className='flex justify-between'>
                                 <Form.Item
-                                    name='stock_symbol'
-                                    label='Stock symbol'
+                                    name='stock'
+                                    label='Stock'
                                     className='mx-2 w-full'
                                 >
                                     <Select
                                         showSearch
-                                        placeholder='Select stock symbol'
+                                        placeholder='Select stock'
                                         optionFilterProp='children'
                                         filterOption={(input, option) =>
                                             (option?.label ?? '')
@@ -73,18 +76,18 @@ export default function Home() {
                                                 .includes(input.toLowerCase())
                                         }
                                         filterSort={(optionA, optionB) =>
-                                            (optionA?.label ?? '')
+                                            (optionA?.value ?? '')
                                                 .toLowerCase()
                                                 .localeCompare(
                                                     (
-                                                        optionB?.label ?? ''
+                                                        optionB?.value ?? ''
                                                     ).toLowerCase()
                                                 )
                                         }
-                                        options={stockSymbols.map(e => {
+                                        options={companies.map(e => {
                                             return {
-                                                value: e,
-                                                label: e
+                                                value: e.symbol,
+                                                label: `${e.symbol} - ${e.name}`
                                             }
                                         })}
                                     />
