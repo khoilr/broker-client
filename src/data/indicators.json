@@ -1,0 +1,109 @@
+[
+    {
+        "name": "Exponential Moving Average",
+        "value": "EMA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 20
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Moving Average",
+        "value": "MA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 20
+            },
+            {
+                "name": "matype",
+                "label": "MA Type",
+                "type": "selection",
+                "values": [0, 1],
+                "default": 0
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Simple Moving Average",
+        "value": "SMA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 20
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Bollinger Bands",
+        "value": "BB",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 5
+            },
+            {
+                "name": "nbdevup",
+                "label": "Nbdevup",
+                "type": "number",
+                "default": 2
+            },
+            {
+                "name": "nbdevdn",
+                "label": "Nbdevdn",
+                "type": "number",
+                "default": 2
+            },
+            {
+                "name": "matype",
+                "label": "MA Type",
+                "type": "selection",
+                "values": [0, 1],
+                "default": 0
+            }
+        ],
+        "returns": ["upperband", "middleband", "lowerband"]
+    }
+]

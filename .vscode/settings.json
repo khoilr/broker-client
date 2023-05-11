@@ -1,7 +1,14 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": [
-    "antd"
-  ]
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "cSpell.words": [
+        "antd",
+        "Bollinger",
+        "lowerband",
+        "matype",
+        "middleband",
+        "nbdevdn",
+        "nbdevup",
+        "upperband"
+    ]
 }
