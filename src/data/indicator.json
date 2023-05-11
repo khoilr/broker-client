@@ -1,0 +1,466 @@
+[
+    {
+        "name": "Exponential Moving Average",
+        "value": "EMA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 20
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Moving Average",
+        "value": "MA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 20
+            },
+            {
+                "name": "matype",
+                "label": "MA Type",
+                "type": "selection",
+                "values": [0, 1],
+                "default": 0
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Simple Moving Average",
+        "value": "SMA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 20
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Double Exponential Moving Average",
+        "value": "DEMA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 20
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Hilbert Transform - Instantaneous Trendline",
+        "value": "HT_TRENDLINE",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Kaufman Adaptive Moving Average",
+        "value": "KAMA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 20
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "MESA Adaptive Moving Average",
+        "value": "MAMA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "fastlimit",
+                "label": "Fast Limit",
+                "type": "number",
+                "default": 0
+            },
+            {
+                "name": "slowlimit",
+                "label": "Slow Limit",
+                "type": "number",
+                "default": 0
+            }
+        ],
+        "returns": ["mama", "fama"]
+    },
+    {
+        "name": "Moving average with variable period",
+        "value": "MAVP",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "periods",
+                "label": "Periods",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "minperiod",
+                "label": "Min Period",
+                "type": "number",
+                "default": 2
+            },
+            {
+                "name": "maxperiod",
+                "label": "Max Period",
+                "type": "number",
+                "default": 30
+            },
+            {
+                "name": "matype",
+                "label": "MA Type",
+                "type": "selection",
+                "values": [0, 1],
+                "default": 0
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "MidPoint over period",
+        "value": "MIDPOINT",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 14
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Midpoint Price over period",
+        "value": "MIDPRICE",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "high"
+            },
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "low"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 14
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Parabolic SAR",
+        "value": "SAR",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "high"
+            },
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "low"
+            },
+            {
+                "name": "acceleration",
+                "label": "Acceleration",
+                "type": "number",
+                "default": 0
+            },
+            {
+                "name": "maximum",
+                "label": "Maximum",
+                "type": "number",
+                "default": 0
+            }
+           
+        ],
+        "returns": ["real"]
+    },
+    
+    {
+        "name": "Parabolic SAR - Extended",
+        "value": "SAREXT",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "high"
+            },
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "low"
+            },
+            {
+                "name": "startvalue",
+                "label": "Start Value",
+                "type": "number",
+                "default": 0
+            },
+            {
+                "name": "offsetonreverse",
+                "label": "Offset On Severse",
+                "type": "number",
+                "default": 0
+            },
+            {
+                "name": "accelerationinitlong",
+                "label": "Acceleration Init Long",
+                "type": "number",
+                "default": 0
+            },
+            {
+                "name": "accelerationlong",
+                "label": "Acceleration Long",
+                "type": "number",
+                "default": 0
+            },
+            {
+                "name": "accelerationmaxlong",
+                "label": "Acceleration Max Long",
+                "type": "number",
+                "default": 0
+            },
+            {
+                "name": "accelerationinitshort",
+                "label": "Acceleration Init Short",
+                "type": "number",
+                "default": 0
+            },
+            {
+                "name": "accelerationshort",
+                "label": "Acceleration Short",
+                "type": "number",
+                "default": 0
+            },
+            {
+                "name": "accelerationmaxshort",
+                "label": "Acceleration Max Short",
+                "type": "number",
+                "default": 0
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Triple Exponential Moving Average (T3)",
+        "value": "T3",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 5
+            },
+            {
+                "name": "vfactor",
+                "label": "V Factor",
+                "type": "number",
+                "default": 0
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Triple Exponential Moving Average",
+        "value": "TEMA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 30
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Triangular Moving Average",
+        "value": "TRIMA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 30
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Weighted Moving Average",
+        "value": "WMA",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 30
+            }
+        ],
+        "returns": ["real"]
+    },
+    {
+        "name": "Bollinger Bands",
+        "value": "BB",
+        "parameters": [
+            {
+                "name": "price",
+                "label": "Price",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close"
+            },
+
+            {
+                "name": "period",
+                "label": "Period",
+                "type": "number",
+                "default": 5
+            },
+            {
+                "name": "nbdevup",
+                "label": "Nbdevup",
+                "type": "number",
+                "default": 2
+            },
+            {
+                "name": "nbdevdn",
+                "label": "Nbdevdn",
+                "type": "number",
+                "default": 2
+            },
+            {
+                "name": "matype",
+                "label": "MA Type",
+                "type": "selection",
+                "values": [0, 1],
+                "default": 0
+            }
+        ],
+        "returns": ["upperband", "middleband", "lowerband"]
+    }
+]
