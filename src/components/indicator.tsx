@@ -1,4 +1,4 @@
-import { Button, Form, Select } from 'antd'
+import { Button, Form, Select, Typography } from 'antd'
 import { toTitleCase } from '@/lib/helper'
 import Indicator from '@/model/Indicator'
 import { useEffect, useState } from 'react'
@@ -6,6 +6,8 @@ import ParameterModel from '@/model/Parameter'
 import Parameter from './parameter'
 import IndicatorModel from '@/model/Indicator'
 import { MinusCircleOutlined } from '@ant-design/icons'
+
+const { Title, Text } = Typography
 
 type props = {
     side: String
@@ -35,7 +37,7 @@ export default function Indicator(props: props) {
                 className={`border border-solid rounded-lg border-${color}-600 p-2 w-full mb-6`}
             >
                 <Form.Item
-                    label='Indicator'
+                    label={<Title level={3}>Indicator</Title>}
                     name={[props.name.toString(), 'name']}
                 >
                     <Select
@@ -65,25 +67,43 @@ export default function Indicator(props: props) {
                         }}
                         options={props.indicators.map(e => ({
                             value: e.value,
-                            label: toTitleCase(e.name)
+                            label: toTitleCase(e.label)
                         }))}
                     />
                 </Form.Item>
                 {indicator && (
-                    <Form.Item label='Parameters'>
-                        <div
-                            className={`flex justify-between border border-solid border-${color}-500 rounded-lg`}
+                    <>
+                        <Form.Item
+                            label={<Title level={4}>Parameters</Title>}
+                            className={`border border-solid border-${color}-500 rounded-lg p-2`}
                         >
-                            {options.map((e, index) => (
-                                <Parameter
-                                    key={index}
-                                    indicator={indicator as IndicatorModel}
-                                    parameter={e}
-                                    name={props.name}
-                                />
-                            ))}
-                        </div>
-                    </Form.Item>
+                            <div className={`flex justify-between`}>
+                                {options.map((e, index) => (
+                                    <Parameter
+                                        key={index}
+                                        indicator={indicator as IndicatorModel}
+                                        parameter={e}
+                                        name={props.name}
+                                    />
+                                ))}
+                            </div>
+                        </Form.Item>
+                        {/* <Form.Item
+                            label={<Title level={4}>Condition</Title>}
+                            className={`border border-solid border-${color}-500 rounded-lg p-2`}
+                        >
+                            <div className={`flex justify-between`}>
+                                {options.map((e, index) => (
+                                    <Parameter
+                                        key={index}
+                                        indicator={indicator as IndicatorModel}
+                                        parameter={e}
+                                        name={props.name}
+                                    />
+                                ))}
+                            </div>
+                        </Form.Item> */}
+                    </>
                 )}
             </div>
             <MinusCircleOutlined

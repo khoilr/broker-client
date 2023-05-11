@@ -1,7 +1,7 @@
 import Parameter from './Parameter'
 
 type Indicator = {
-    name: String
+    label: String
     value: String
     parameters: Parameter[]
     returns: String[]

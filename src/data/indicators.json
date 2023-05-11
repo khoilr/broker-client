@@ -1,6 +1,6 @@
 [
     {
-        "name": "Exponential Moving Average",
+        "label": "Exponential Moving Average",
         "value": "EMA",
         "parameters": [
             {
@@ -20,7 +20,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Moving Average",
+        "label": "Moving Average",
         "value": "MA",
         "parameters": [
             {
@@ -47,7 +47,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Simple Moving Average",
+        "label": "Simple Moving Average",
         "value": "SMA",
         "parameters": [
             {
@@ -67,7 +67,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Bollinger Bands",
+        "label": "Bollinger Bands",
         "value": "BB",
         "parameters": [
             {

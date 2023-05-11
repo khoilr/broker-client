@@ -40,7 +40,7 @@ export default function Home() {
             componentSize='large'
             theme={{
                 token: {
-                    colorPrimary: '#eb13c7',
+                    // colorPrimary: '#eb13c7',
                     fontSize: 16,
                     borderRadius: 16
                 }
