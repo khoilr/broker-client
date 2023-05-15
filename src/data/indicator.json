@@ -1,6 +1,5 @@
 [
     {
-        "name": "Exponential Moving Average",
         "value": "EMA",
         "parameters": [
             {
@@ -17,10 +16,15 @@
                 "default": 20
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "EMA",
+                "value": "EMA"
+            }
+        ],
+        "label": "Exponential Moving Average"
     },
     {
-        "name": "Moving Average",
         "value": "MA",
         "parameters": [
             {
@@ -35,19 +39,17 @@
                 "label": "Period",
                 "type": "number",
                 "default": 20
-            },
-            {
-                "name": "matype",
-                "label": "MA Type",
-                "type": "selection",
-                "values": [0, 1],
-                "default": 0
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "MA",
+                "value": "MA"
+            }
+        ],
+        "label": "Moving Average"
     },
     {
-        "name": "Simple Moving Average",
         "value": "SMA",
         "parameters": [
             {
@@ -64,10 +66,15 @@
                 "default": 20
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "SMA",
+                "value": "SMA"
+            }
+        ],
+        "label": "Simple Moving Average"
     },
     {
-        "name": "Double Exponential Moving Average",
         "value": "DEMA",
         "parameters": [
             {
@@ -84,10 +91,15 @@
                 "default": 20
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "DEMA",
+                "value": "DEMA"
+            }
+        ],
+        "label": "Double Exponential Moving Average"
     },
     {
-        "name": "Hilbert Transform - Instantaneous Trendline",
         "value": "HT_TRENDLINE",
         "parameters": [
             {
@@ -98,10 +110,15 @@
                 "default": "close"
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "HT_TRENDLINE",
+                "value": "HT_TRENDLINE"
+            }
+        ],
+        "label": "Hilbert Transform - Instantaneous Trendline"
     },
     {
-        "name": "Kaufman Adaptive Moving Average",
         "value": "KAMA",
         "parameters": [
             {
@@ -118,10 +135,15 @@
                 "default": 20
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "KAMA",
+                "value": "KAMA"
+            }
+        ],
+        "label": "Kaufman Adaptive Moving Average"
     },
     {
-        "name": "MESA Adaptive Moving Average",
         "value": "MAMA",
         "parameters": [
             {
@@ -144,10 +166,19 @@
                 "default": 0
             }
         ],
-        "returns": ["mama", "fama"]
+        "returns": [
+            {
+                "label": "MAMA",
+                "value": "MAMA"
+            },
+            {
+                "label": "FAMA",
+                "value": "FAMA"
+            }
+        ],
+        "label": "MESA Adaptive Moving Average"
     },
     {
-        "name": "Moving average with variable period",
         "value": "MAVP",
         "parameters": [
             {
@@ -175,19 +206,17 @@
                 "label": "Max Period",
                 "type": "number",
                 "default": 30
-            },
-            {
-                "name": "matype",
-                "label": "MA Type",
-                "type": "selection",
-                "values": [0, 1],
-                "default": 0
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "MAVP",
+                "value": "MAVP"
+            }
+        ],
+        "label": "Moving average with variable period"
     },
     {
-        "name": "MidPoint over period",
         "value": "MIDPOINT",
         "parameters": [
             {
@@ -204,10 +233,15 @@
                 "default": 14
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "MIDPOINT",
+                "value": "MIDPOINT"
+            }
+        ],
+        "label": "MidPoint over period"
     },
     {
-        "name": "Midpoint Price over period",
         "value": "MIDPRICE",
         "parameters": [
             {
@@ -231,10 +265,15 @@
                 "default": 14
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "MIDPRICE",
+                "value": "MIDPRICE"
+            }
+        ],
+        "label": "Midpoint Price over period"
     },
     {
-        "name": "Parabolic SAR",
         "value": "SAR",
         "parameters": [
             {
@@ -263,13 +302,16 @@
                 "type": "number",
                 "default": 0
             }
-           
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "SAR",
+                "value": "SAR"
+            }
+        ],
+        "label": "Parabolic SAR"
     },
-    
     {
-        "name": "Parabolic SAR - Extended",
         "value": "SAREXT",
         "parameters": [
             {
@@ -335,10 +377,15 @@
                 "default": 0
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "SAR - Extended",
+                "value": "SAREXT"
+            }
+        ],
+        "label": "Parabolic SAR - Extended"
     },
     {
-        "name": "Triple Exponential Moving Average (T3)",
         "value": "T3",
         "parameters": [
             {
@@ -361,10 +408,15 @@
                 "default": 0
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "T3",
+                "value": "T3"
+            }
+        ],
+        "label": "Triple Exponential Moving Average (T3)"
     },
     {
-        "name": "Triple Exponential Moving Average",
         "value": "TEMA",
         "parameters": [
             {
@@ -381,10 +433,15 @@
                 "default": 30
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "TEMA",
+                "value": "TEMA"
+            }
+        ],
+        "label": "Triple Exponential Moving Average"
     },
     {
-        "name": "Triangular Moving Average",
         "value": "TRIMA",
         "parameters": [
             {
@@ -401,10 +458,15 @@
                 "default": 30
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "TRIMA",
+                "value": "TRIMA"
+            }
+        ],
+        "label": "Triangular Moving Average"
     },
     {
-        "name": "Weighted Moving Average",
         "value": "WMA",
         "parameters": [
             {
@@ -421,10 +483,15 @@
                 "default": 30
             }
         ],
-        "returns": ["real"]
+        "returns": [
+            {
+                "label": "WMA",
+                "value": "WMA"
+            }
+        ],
+        "label": "Weighted Moving Average"
     },
     {
-        "name": "Bollinger Bands",
         "value": "BB",
         "parameters": [
             {
@@ -434,7 +501,6 @@
                 "values": ["open", "close", "high", "low"],
                 "default": "close"
             },
-
             {
                 "name": "period",
                 "label": "Period",
@@ -452,15 +518,22 @@
                 "label": "Nbdevdn",
                 "type": "number",
                 "default": 2
-            },
-            {
-                "name": "matype",
-                "label": "MA Type",
-                "type": "selection",
-                "values": [0, 1],
-                "default": 0
             }
         ],
-        "returns": ["upperband", "middleband", "lowerband"]
+        "returns": [
+            {
+                "label": "Upper Band",
+                "value": "upperband"
+            },
+            {
+                "label": "Middle Band",
+                "value": "middleband"
+            },
+            {
+                "label": "Lower Band",
+                "value": "lowerband"
+            }
+        ],
+        "label": "Bollinger Bands"
     }
 ]

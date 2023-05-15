@@ -1,10 +1,11 @@
 import Parameter from './Parameter'
+import Return from './Return'
 
 type Indicator = {
     label: String
     value: String
     parameters: Parameter[]
-    returns: String[]
+    returns: Return[]
 }
 
 export default Indicator
