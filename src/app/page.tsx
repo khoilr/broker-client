@@ -96,7 +96,8 @@ export default function Home() {
                                     indicators={indicators}
                                 />
                             </div>
-                            <Form.Item>
+                            <Row justify ="center">
+                            <Form.Item className="m-2">
                                 <Button
                                     type='primary'
                                     htmlType='submit'
@@ -104,6 +105,16 @@ export default function Home() {
                                     Start auto trading
                                 </Button>
                             </Form.Item>
+
+                            <Form.Item className="m-2">
+                                <Button
+                                    type='primary'
+                                    htmlType='submit'
+                                >
+                                    Back testing
+                                </Button>
+                            </Form.Item>
+                            </Row>  
                         </Form>
                     </Col>
                 </Row>
