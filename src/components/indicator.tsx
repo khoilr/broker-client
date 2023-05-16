@@ -1,11 +1,10 @@
-import { Button, Form, Select, Typography } from 'antd'
 import { toTitleCase } from '@/lib/helper'
-import Indicator from '@/model/Indicator'
-import { useEffect, useState } from 'react'
-import ParameterModel from '@/model/Parameter'
-import Parameter from './parameter'
 import IndicatorModel from '@/model/Indicator'
 import { MinusCircleOutlined } from '@ant-design/icons'
+import { Form, Select, Typography } from 'antd'
+import { useEffect, useState } from 'react'
+import Condition from './Condition'
+import Parameter from './Parameter'
 
 const { Title, Text } = Typography
 
@@ -29,7 +28,6 @@ export default function Indicator(props: props) {
     }, [props.side])
 
     const [indicator, setIndicator] = useState<IndicatorModel>()
-    const [options, setOptions] = useState<ParameterModel[]>([])
 
     return (
         <div className='flex items-start'>
@@ -60,10 +58,6 @@ export default function Indicator(props: props) {
                             setIndicator(
                                 props.indicators.find(e => e.value === value)
                             )
-                            setOptions(
-                                props.indicators.find(e => e.value === value)
-                                    ?.parameters ?? []
-                            )
                         }}
                         options={props.indicators.map(e => ({
                             value: e.value,
@@ -73,12 +67,18 @@ export default function Indicator(props: props) {
                 </Form.Item>
                 {indicator && (
                     <>
+                        <Form.Item label={<Title level={3}>Condition</Title>}>
+                            <Condition
+                                returns={indicator.returns}
+                                name={props.name}
+                            />
+                        </Form.Item>
                         <Form.Item
-                            label={<Title level={4}>Parameters</Title>}
+                            label={<Title level={3}>Parameters</Title>}
                             className={`border border-solid border-${color}-500 rounded-lg p-2`}
                         >
-                            <div className={`flex justify-between`}>
-                                {options.map((e, index) => (
+                            <div className={`flex flex-wrap`}>
+                                {indicator.parameters.map((e, index) => (
                                     <Parameter
                                         key={index}
                                         indicator={indicator as IndicatorModel}
@@ -88,21 +88,6 @@ export default function Indicator(props: props) {
                                 ))}
                             </div>
                         </Form.Item>
-                        {/* <Form.Item
-                            label={<Title level={4}>Condition</Title>}
-                            className={`border border-solid border-${color}-500 rounded-lg p-2`}
-                        >
-                            <div className={`flex justify-between`}>
-                                {options.map((e, index) => (
-                                    <Parameter
-                                        key={index}
-                                        indicator={indicator as IndicatorModel}
-                                        parameter={e}
-                                        name={props.name}
-                                    />
-                                ))}
-                            </div>
-                        </Form.Item> */}
                     </>
                 )}
             </div>

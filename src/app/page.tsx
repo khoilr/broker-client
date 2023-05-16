@@ -1,8 +1,8 @@
 'use client'
 
-import Side from '@/components/side'
 import IndicatorModel from '@/model/Indicator'
-import CompanyModel from '@/model/Company'
+import ParameterModel from '@/model/Parameter'
+import ParameterType from '@/model/ParameterType'
 import {
     Button,
     Col,
@@ -14,18 +14,41 @@ import {
     ConfigProvider
 } from 'antd'
 import { useEffect, useState } from 'react'
-import indicatorsJSON from '../data/indicators.json'
-import companiesJSON from '../data/companies.json'
+import indicatorsJSON from '../data/indicator.json'
+import StockSelection from '@/components/StockSelection'
+import TimeFrameSelection from '@/components/TimeFrameSelection'
+import Side from '@/components/Side'
 
 const { Title, Text } = Typography
 
 export default function Home() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
-    const [companies, setCompanies] = useState<CompanyModel[]>([])
 
     useEffect(() => {
-        setIndicators(indicatorsJSON)
-        setCompanies(companiesJSON)
+        const _indicators = indicatorsJSON.map(indicator => {
+            const parameters = indicator.parameters.map(parameter => {
+                if (
+                    ParameterType[
+                        parameter.type.toUpperCase() as keyof typeof ParameterType
+                    ] === undefined
+                )
+                    console.log(parameter.type)
+
+                return {
+                    ...parameter,
+                    type: ParameterType[
+                        parameter.type.toUpperCase() as keyof typeof ParameterType
+                    ]
+                } as ParameterModel
+            })
+
+            return {
+                ...indicator,
+                parameters
+            } as IndicatorModel
+        })
+
+        setIndicators(_indicators)
     }, [])
 
     const [form] = Form.useForm()
@@ -61,68 +84,8 @@ export default function Home() {
                             onFinish={onFinish}
                         >
                             <div className='flex justify-between'>
-                                <Form.Item
-                                    name='stock'
-                                    label='Stock'
-                                    className='mx-2 w-full'
-                                >
-                                    <Select
-                                        showSearch
-                                        placeholder='Select stock'
-                                        optionFilterProp='children'
-                                        filterOption={(input, option) =>
-                                            (option?.label ?? '')
-                                                .toLowerCase()
-                                                .includes(input.toLowerCase())
-                                        }
-                                        filterSort={(optionA, optionB) =>
-                                            (optionA?.value ?? '')
-                                                .toLowerCase()
-                                                .localeCompare(
-                                                    (
-                                                        optionB?.value ?? ''
-                                                    ).toLowerCase()
-                                                )
-                                        }
-                                        options={companies.map(e => {
-                                            return {
-                                                value: e.symbol,
-                                                label: `${e.symbol} - ${e.name}`
-                                            }
-                                        })}
-                                    />
-                                </Form.Item>
-                                <Form.Item
-                                    name='time_frame'
-                                    label='Time frame'
-                                    className='mx-2 w-full'
-                                >
-                                    <Select
-                                        showSearch
-                                        placeholder='Select time frame'
-                                        optionFilterProp='children'
-                                        filterOption={(input, option) =>
-                                            (option?.label ?? '')
-                                                .toLowerCase()
-                                                .includes(input.toLowerCase())
-                                        }
-                                        filterSort={(optionA, optionB) =>
-                                            (optionA?.label ?? '')
-                                                .toLowerCase()
-                                                .localeCompare(
-                                                    (
-                                                        optionB?.label ?? ''
-                                                    ).toLowerCase()
-                                                )
-                                        }
-                                        options={[
-                                            { value: '60', label: '1 hour' },
-                                            { value: 'D', label: '1 day' },
-                                            { value: 'W', label: '1 week' },
-                                            { value: 'M', label: '1 month' }
-                                        ]}
-                                    />
-                                </Form.Item>
+                                <StockSelection />
+                                <TimeFrameSelection />
                             </div>
                             <div className='flex justify-between items-start'>
                                 <Side

@@ -1,9 +1,9 @@
 import { Button, Form } from 'antd'
 import { useEffect, useState } from 'react'
-import Indicator from './indicator'
 import IndicatorModel from '@/model/Indicator'
 import { Typography } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
+import Indicator from './Indicator'
 
 const { Title, Text } = Typography
 

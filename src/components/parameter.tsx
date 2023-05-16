@@ -1,5 +1,6 @@
 import Indicator from '@/model/Indicator'
 import Parameter from '@/model/Parameter'
+import ParameterType from '@/model/ParameterType'
 import { Form, Input, Select } from 'antd'
 import { sentenceCase } from 'change-case'
 
@@ -11,7 +12,7 @@ type props = {
 
 const switchCase = (parameter: Parameter) => {
     switch (parameter.type) {
-        case 'selection':
+        case ParameterType.SELECTION:
             return (
                 <Select
                     showSearch
@@ -39,7 +40,7 @@ const switchCase = (parameter: Parameter) => {
                     })}
                 />
             )
-        case 'number':
+        case ParameterType.NUMBER:
             return <Input type='number' />
     }
 }
@@ -54,7 +55,7 @@ export default function Parameter(props: props) {
             ]}
             label={props.parameter.label as String}
             initialValue={props.parameter.default}
-            className='mx-2 w-full'
+            className='px-2 w-full basis-2/6'
         >
             {switchCase(props.parameter)}
         </Form.Item>
