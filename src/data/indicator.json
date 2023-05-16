@@ -1,6 +1,6 @@
 [
     {
-        "name": "Exponential Moving Average",
+        "label": "Exponential Moving Average",
         "value": "EMA",
         "parameters": [
             {
@@ -20,7 +20,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Moving Average",
+        "label": "Moving Average",
         "value": "MA",
         "parameters": [
             {
@@ -47,7 +47,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Simple Moving Average",
+        "label": "Simple Moving Average",
         "value": "SMA",
         "parameters": [
             {
@@ -67,7 +67,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Double Exponential Moving Average",
+        "label": "Double Exponential Moving Average",
         "value": "DEMA",
         "parameters": [
             {
@@ -87,7 +87,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Hilbert Transform - Instantaneous Trendline",
+        "label": "Hilbert Transform - Instantaneous Trendline",
         "value": "HT_TRENDLINE",
         "parameters": [
             {
@@ -101,7 +101,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Kaufman Adaptive Moving Average",
+        "label": "Kaufman Adaptive Moving Average",
         "value": "KAMA",
         "parameters": [
             {
@@ -121,7 +121,7 @@
         "returns": ["real"]
     },
     {
-        "name": "MESA Adaptive Moving Average",
+        "label": "MESA Adaptive Moving Average",
         "value": "MAMA",
         "parameters": [
             {
@@ -147,7 +147,7 @@
         "returns": ["mama", "fama"]
     },
     {
-        "name": "Moving average with variable period",
+        "label": "Moving average with variable period",
         "value": "MAVP",
         "parameters": [
             {
@@ -187,7 +187,7 @@
         "returns": ["real"]
     },
     {
-        "name": "MidPoint over period",
+        "label": "MidPoint over period",
         "value": "MIDPOINT",
         "parameters": [
             {
@@ -207,7 +207,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Midpoint Price over period",
+        "label": "Midpoint Price over period",
         "value": "MIDPRICE",
         "parameters": [
             {
@@ -234,7 +234,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Parabolic SAR",
+        "label": "Parabolic SAR",
         "value": "SAR",
         "parameters": [
             {
@@ -267,9 +267,8 @@
         ],
         "returns": ["real"]
     },
-    
     {
-        "name": "Parabolic SAR - Extended",
+        "label": "Parabolic SAR - Extended",
         "value": "SAREXT",
         "parameters": [
             {
@@ -338,7 +337,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Triple Exponential Moving Average (T3)",
+        "label": "Triple Exponential Moving Average (T3)",
         "value": "T3",
         "parameters": [
             {
@@ -384,7 +383,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Triangular Moving Average",
+        "label": "Triangular Moving Average",
         "value": "TRIMA",
         "parameters": [
             {
@@ -404,7 +403,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Weighted Moving Average",
+        "label": "Weighted Moving Average",
         "value": "WMA",
         "parameters": [
             {
@@ -424,7 +423,7 @@
         "returns": ["real"]
     },
     {
-        "name": "Bollinger Bands",
+        "label": "Bollinger Bands",
         "value": "BB",
         "parameters": [
             {
