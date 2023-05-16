@@ -9,7 +9,7 @@ const { Title } = Typography
 type props = {
     side: string
     indicators: IndicatorModel[]
-    resetCondition: (_return: string) => void
+    resetCondition: (_return: string, side: string, index: number) => void
 }
 
 export default function Side(props: props) {

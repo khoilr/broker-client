@@ -18,23 +18,20 @@ const units = [
 type props = {
     returns: ReturnModel[]
     name: number
-    resetCondition: (_return: string) => void
+    resetCondition: (_return: string, side: string, index: number) => void
+    side: string
 }
 
 export default function Condition(props: props) {
-    const { returns, name, resetCondition } = props
+    const { returns, name, resetCondition, side } = props
 
     const [returnOptions, setReturnOptions] = useState<BaseOptionType[]>([])
-    // const [initialReturn, setInitialReturn] = useState<BaseOptionType>()
-    // useRef for Select
-
-    // const [selectedReturn, setSelectedReturn] = useState<string>()
 
     useEffect(() => {
         const thisReturn = returns.map(e => e as BaseOptionType)
         setReturnOptions(thisReturn)
-        resetCondition(thisReturn[0].value as string)
-    }, [returns, resetCondition])
+        resetCondition(thisReturn[0].value as string, side, name)
+    }, [returns, resetCondition, name, side])
 
     return (
         <Space.Compact

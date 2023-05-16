@@ -12,7 +12,7 @@ type props = {
     indicators: IndicatorModel[]
     name: number
     remove: (name: number) => void
-    resetCondition: (_return: string) => void
+    resetCondition: (_return: string, side: string, index: number) => void
 }
 
 export default function Indicator(props: props) {
@@ -72,6 +72,7 @@ export default function Indicator(props: props) {
                                 returns={indicator.returns}
                                 name={name}
                                 resetCondition={resetCondition}
+                                side={side}
                             />
                         </Form.Item>
                         <Form.Item

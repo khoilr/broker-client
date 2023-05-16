@@ -58,35 +58,30 @@ export default function Home() {
         console.log(values)
     }
 
-    const resetCondition = (_return: string) => {
+    const resetCondition = (_return: string, side: string, index: number) => {
         const fieldsValue = form.getFieldsValue()
 
+        // replace return in condition in side and index with _return
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const buyFields = fieldsValue.buy?.map((indicator: any) => {
-            const condition = {
-                ...indicator?.condition,
-                return: _return
+        const fields = fieldsValue[side]?.map((indicator: any, i: number) => {
+            if (i === index) {
+                const condition = {
+                    ...indicator?.condition,
+                    return: _return
+                }
+                return {
+                    ...indicator,
+                    condition
+                }
             }
-            return {
-                ...indicator,
-                condition
-            }
-        })
-        const sellFields = fieldsValue.sell?.map((indicator: object) => {
-            const condition = null
-            return {
-                ...indicator,
-                condition
-            }
+            return indicator
         })
 
-        const fields = {
-            ...fieldsValue,
-            buy: buyFields,
-            sell: sellFields
+        const fieldsObject = {
+            [side]: fields
         }
 
-        form.setFieldsValue(fields)
+        form.setFieldsValue(fieldsObject)
     }
 
     return (
