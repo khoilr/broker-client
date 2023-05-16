@@ -3,7 +3,7 @@ import { BaseOptionType } from 'antd/es/select'
 import { useEffect, useState } from 'react'
 import ReturnModel from '@/model/Return'
 
-const conditions = [
+const changes = [
     { value: 'increase-to', label: 'Increase to' },
     { value: 'increase-by', label: 'Increase by' },
     { value: 'decrease-to', label: 'Decrease to' },
@@ -25,8 +25,8 @@ export default function Condition(props: props) {
 
     useEffect(() => {
         const _returns = props.returns.map(e => e as BaseOptionType)
-        setInitialReturn(_returns[0])
         setReturns(_returns)
+        setInitialReturn(_returns[0])
     }, [props.returns])
 
     return (
@@ -74,7 +74,7 @@ export default function Condition(props: props) {
                             .toLowerCase()
                             .localeCompare((optionB?.label ?? '').toLowerCase())
                     }
-                    options={conditions}
+                    options={changes}
                 />
             </Form.Item>
             <Form.Item

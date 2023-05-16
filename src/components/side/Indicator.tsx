@@ -1,4 +1,3 @@
-import { toTitleCase } from '@/lib/helper'
 import IndicatorModel from '@/model/Indicator'
 import { MinusCircleOutlined } from '@ant-design/icons'
 import { Form, Select, Typography } from 'antd'
@@ -61,7 +60,7 @@ export default function Indicator(props: props) {
                         }}
                         options={props.indicators.map(e => ({
                             value: e.value,
-                            label: toTitleCase(e.label)
+                            label: e.label
                         }))}
                     />
                 </Form.Item>

@@ -1,23 +1,22 @@
 'use client'
 
+import StockSelection from '@/components/StockSelection'
+import TimeFrameSelection from '@/components/TimeFrameSelection'
+import Side from '@/components/side/Side'
 import IndicatorModel from '@/model/Indicator'
 import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
 import {
     Button,
     Col,
+    ConfigProvider,
     Form,
     Layout,
     Row,
-    Typography,
-    Select,
-    ConfigProvider
+    Typography
 } from 'antd'
 import { useEffect, useState } from 'react'
 import indicatorsJSON from '../data/indicator.json'
-import StockSelection from '@/components/StockSelection'
-import TimeFrameSelection from '@/components/TimeFrameSelection'
-import Side from '@/components/Side'
 
 const { Title, Text } = Typography
 
