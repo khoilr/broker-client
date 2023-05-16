@@ -1,6 +1,6 @@
 type Return = {
-    label: String
-    value: String
+    label: string
+    value: string
 }
 
 export default Return

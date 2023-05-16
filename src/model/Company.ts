@@ -1,6 +1,6 @@
 type Company = {
-    symbol: String
-    name: String
+    symbol: string
+    name: string
 }
 
 export default Company

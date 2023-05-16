@@ -1,63 +1,53 @@
-import Indicator from '@/model/Indicator'
-import Parameter from '@/model/Parameter'
+import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
 import { Form, Input, Select } from 'antd'
 import { sentenceCase } from 'change-case'
 
 type props = {
-    indicator: Indicator
-    parameter: Parameter
-    name: Number
+    parameter: ParameterModel
+    name: number
 }
 
-const switchCase = (parameter: Parameter) => {
-    switch (parameter.type) {
-        case ParameterType.SELECTION:
-            return (
-                <Select
-                    showSearch
-                    placeholder={parameter.name as String}
-                    optionFilterProp='children'
-                    filterOption={(input, option) =>
-                        (option?.label ?? '')
-                            .toLowerCase()
-                            .includes(input.toLowerCase())
-                    }
-                    filterSort={(optionA, optionB) =>
-                        (optionA?.label ?? '')
-                            .toString()
-                            .toLowerCase()
-                            .localeCompare(
-                                (optionB?.label ?? '').toString().toLowerCase()
-                            )
-                    }
-                    // onSelect={(value, option) => { }}
-                    options={parameter.values?.map(value => {
-                        return {
-                            label: sentenceCase(value.toString()),
-                            value: value as String
-                        }
-                    })}
-                />
-            )
-        case ParameterType.NUMBER:
-            return <Input type='number' />
-    }
+const switchCase = (parameter: ParameterModel) => {
+    return parameter.type === ParameterType.SELECTION ? (
+        <Select
+            showSearch
+            placeholder={parameter.name as string}
+            optionFilterProp='children'
+            filterOption={(input, option) =>
+                (option?.label ?? '')
+                    .toLowerCase()
+                    .includes(input.toLowerCase())
+            }
+            filterSort={(optionA, optionB) =>
+                (optionA?.label ?? '')
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? '').toLowerCase())
+            }
+            // onSelect={(value, option) => { }}
+            options={parameter.values?.map(value => {
+                return {
+                    label: sentenceCase(value.toString()),
+                    value: value as string
+                }
+            })}
+        />
+    ) : (
+        <Input type='number' />
+    )
 }
 
 export default function Parameter(props: props) {
+    const { name, parameter } = props
+
     return (
         <Form.Item
-            name={[
-                props.name.toString(),
-                'parameters',
-                props.parameter.name.toString()
-            ]}
-            label={props.parameter.label as String}
-            initialValue={props.parameter.default}
+            name={[name.toString(), 'parameters', parameter.name.toString()]}
+            label={parameter.label as string}
+            initialValue={parameter.default}
             className='px-2 w-full basis-2/6'
         >
-            {switchCase(props.parameter)}
+            {switchCase(parameter)}
         </Form.Item>
     )
 }

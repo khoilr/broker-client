@@ -18,20 +18,21 @@ import {
 import { useEffect, useState } from 'react'
 import indicatorsJSON from '../data/indicator.json'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 export default function Home() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
 
     useEffect(() => {
-        const _indicators = indicatorsJSON.map(indicator => {
+        const thisIndicators = indicatorsJSON.map(indicator => {
             const parameters = indicator.parameters.map(parameter => {
                 if (
                     ParameterType[
                         parameter.type.toUpperCase() as keyof typeof ParameterType
                     ] === undefined
-                )
+                ) {
                     console.log(parameter.type)
+                }
 
                 return {
                     ...parameter,
@@ -47,7 +48,7 @@ export default function Home() {
             } as IndicatorModel
         })
 
-        setIndicators(_indicators)
+        setIndicators(thisIndicators)
     }, [])
 
     const [form] = Form.useForm()
@@ -96,25 +97,25 @@ export default function Home() {
                                     indicators={indicators}
                                 />
                             </div>
-                            <Row justify ="center">
-                            <Form.Item className="m-2">
-                                <Button
-                                    type='primary'
-                                    htmlType='submit'
-                                >
-                                    Start auto trading
-                                </Button>
-                            </Form.Item>
+                            <Row justify='center'>
+                                <Form.Item className='m-2'>
+                                    <Button
+                                        type='primary'
+                                        htmlType='submit'
+                                    >
+                                        Start auto trading
+                                    </Button>
+                                </Form.Item>
 
-                            <Form.Item className="m-2">
-                                <Button
-                                    type='primary'
-                                    htmlType='submit'
-                                >
-                                    Back testing
-                                </Button>
-                            </Form.Item>
-                            </Row>  
+                                <Form.Item className='m-2'>
+                                    <Button
+                                        type='primary'
+                                        htmlType='submit'
+                                    >
+                                        Back testing
+                                    </Button>
+                                </Form.Item>
+                            </Row>
                         </Form>
                     </Col>
                 </Row>

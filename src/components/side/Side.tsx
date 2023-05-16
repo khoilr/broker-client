@@ -1,27 +1,27 @@
-import { Button, Form } from 'antd'
-import { useEffect, useState } from 'react'
 import IndicatorModel from '@/model/Indicator'
-import { Typography } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
+import { Button, Form, Typography } from 'antd'
+import { useEffect, useState } from 'react'
 import Indicator from './Indicator'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 type props = {
-    side: String
+    side: string
     indicators: IndicatorModel[]
 }
 
 export default function Side(props: props) {
-    const [color, setColor] = useState<String>()
+    const { side, indicators } = props
+    const [color, setColor] = useState<string>()
 
     useEffect(() => {
-        if (props.side === 'buy') {
+        if (side === 'buy') {
             setColor('green')
         } else {
             setColor('red')
         }
-    }, [props.side])
+    }, [side])
 
     return (
         <div
@@ -31,17 +31,17 @@ export default function Side(props: props) {
                 level={2}
                 className={`text-center text-${color}-500`}
             >
-                {`When to ${props.side}`}
+                {`When to ${side}`}
             </Title>
-            <Form.List name={props.side.toString()}>
+            <Form.List name={side}>
                 {(fields, { add, remove }) => (
                     <>
-                        {fields.map(({ key, name, ...restField }) => (
+                        {fields.map(({ key, name }) => (
                             <Indicator
                                 key={key}
                                 name={name}
-                                side={props.side}
-                                indicators={props.indicators}
+                                side={side}
+                                indicators={indicators}
                                 remove={remove}
                             />
                         ))}

@@ -1,11 +1,11 @@
 import ParameterType from './ParameterType'
 
-export type Parameter = {
-    name: String
-    label: String
+type Parameter = {
+    name: string
+    label: string
     type: ParameterType
-    values?: String[] | Number[]
-    default: String | Number
+    values?: string[] | number[]
+    default: string | number
 }
 
 export default Parameter

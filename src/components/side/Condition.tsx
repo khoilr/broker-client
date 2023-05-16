@@ -1,7 +1,7 @@
-import { Form, Input, Select, Space } from 'antd'
-import { BaseOptionType } from 'antd/es/select'
 import { useEffect, useState } from 'react'
 import ReturnModel from '@/model/Return'
+import { Form, Input, Select, Space } from 'antd'
+import { BaseOptionType } from 'antd/es/select'
 
 const changes = [
     { value: 'increase-to', label: 'Increase to' },
@@ -16,18 +16,20 @@ const units = [
 
 type props = {
     returns: ReturnModel[]
-    name: Number
+    name: number
 }
 
 export default function Condition(props: props) {
-    const [returns, setReturns] = useState<BaseOptionType[]>([])
+    const { returns, name } = props
+
+    const [returnOptions, setReturnOptions] = useState<BaseOptionType[]>([])
     const [initialReturn, setInitialReturn] = useState<BaseOptionType>()
 
     useEffect(() => {
-        const _returns = props.returns.map(e => e as BaseOptionType)
-        setReturns(_returns)
-        setInitialReturn(_returns[0])
-    }, [props.returns])
+        const thisReturn = returns.map(e => e as BaseOptionType)
+        setReturnOptions(thisReturn)
+        setInitialReturn(thisReturn[0])
+    }, [returns])
 
     return (
         <Space.Compact
@@ -36,7 +38,7 @@ export default function Condition(props: props) {
         >
             <Form.Item
                 className='w-full'
-                name={[props.name.toString(), 'condition', 'return']}
+                name={[name.toString(), 'condition', 'return']}
             >
                 <Select
                     showSearch
@@ -52,13 +54,13 @@ export default function Condition(props: props) {
                             .toLowerCase()
                             .localeCompare((optionB?.label ?? '').toLowerCase())
                     }
-                    options={returns}
+                    options={returnOptions}
                     value={initialReturn}
                 />
             </Form.Item>
             <Form.Item
                 className='w-full'
-                name={[props.name.toString(), 'condition', 'change']}
+                name={[name.toString(), 'condition', 'change']}
             >
                 <Select
                     showSearch
@@ -79,13 +81,13 @@ export default function Condition(props: props) {
             </Form.Item>
             <Form.Item
                 className='w-full'
-                name={[props.name.toString(), 'condition', 'value']}
+                name={[name.toString(), 'condition', 'value']}
             >
                 <Input type='number' />
             </Form.Item>
             <Form.Item
                 className='w-full'
-                name={[props.name.toString(), 'condition', 'unit']}
+                name={[name.toString(), 'condition', 'unit']}
             >
                 <Select
                     showSearch

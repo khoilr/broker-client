@@ -5,28 +5,28 @@ import { useEffect, useState } from 'react'
 import Condition from './Condition'
 import Parameter from './Parameter'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 type props = {
-    side: String
+    side: string
     indicators: IndicatorModel[]
-    key: Number
-    name: Number
-    remove: Function
+    name: number
+    remove: (name: number) => void
 }
 
 export default function Indicator(props: props) {
-    const [color, setColor] = useState<String>()
+    const { side, indicators, name, remove } = props
+
+    const [color, setColor] = useState<string>()
+    const [indicator, setIndicator] = useState<IndicatorModel>()
 
     useEffect(() => {
-        if (props.side === 'buy') {
+        if (side === 'buy') {
             setColor('green')
         } else {
             setColor('red')
         }
-    }, [props.side])
-
-    const [indicator, setIndicator] = useState<IndicatorModel>()
+    }, [side])
 
     return (
         <div className='flex items-start'>
@@ -35,7 +35,7 @@ export default function Indicator(props: props) {
             >
                 <Form.Item
                     label={<Title level={3}>Indicator</Title>}
-                    name={[props.name.toString(), 'name']}
+                    name={[name.toString(), 'name']}
                 >
                     <Select
                         showSearch
@@ -53,12 +53,12 @@ export default function Indicator(props: props) {
                                     (optionB?.label ?? '').toLowerCase()
                                 )
                         }
-                        onSelect={(value, option) => {
+                        onSelect={value => {
                             setIndicator(
-                                props.indicators.find(e => e.value === value)
+                                indicators.find(e => e.value === value)
                             )
                         }}
-                        options={props.indicators.map(e => ({
+                        options={indicators.map(e => ({
                             value: e.value,
                             label: e.label
                         }))}
@@ -69,20 +69,19 @@ export default function Indicator(props: props) {
                         <Form.Item label={<Title level={3}>Condition</Title>}>
                             <Condition
                                 returns={indicator.returns}
-                                name={props.name}
+                                name={name}
                             />
                         </Form.Item>
                         <Form.Item
                             label={<Title level={3}>Parameters</Title>}
                             className={`border border-solid border-${color}-500 rounded-lg p-2`}
                         >
-                            <div className={`flex flex-wrap`}>
+                            <div className='flex flex-wrap'>
                                 {indicator.parameters.map((e, index) => (
                                     <Parameter
                                         key={index}
-                                        indicator={indicator as IndicatorModel}
                                         parameter={e}
-                                        name={props.name}
+                                        name={name}
                                     />
                                 ))}
                             </div>
@@ -93,7 +92,7 @@ export default function Indicator(props: props) {
             <MinusCircleOutlined
                 className='ml-2'
                 onClick={() => {
-                    props.remove(props.name)
+                    remove(name)
                 }}
             />
         </div>

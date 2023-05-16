@@ -1,13 +1,29 @@
 {
-	"plugins": ["@typescript-eslint"],
-	"extends": [
-		"next/core-web-vitals",
-		"plugin:@typescript-eslint/recommended",
-		"prettier",
-		"airbnb"
-	],
-	"rules": {
-		"@typescript-eslint/no-unused-vars": "error",
-		"@typescript-eslint/no-explicit-any": "error"
-	}
+    "plugins": ["@typescript-eslint"],
+    "extends": [
+        "next/core-web-vitals",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "airbnb"
+    ],
+    "rules": {
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-explicit-any": "warn",
+        "semi": "off",
+        "indent": "off",
+        "comma-dangle": "off",
+        "no-shadow": "off",
+        "jsx-quotes": "off",
+        "react/jsx-indent": "off",
+        "react/jsx-indent-props": "off",
+        "import/extensions": "off",
+        "implicit-arrow-linebreak": "off",
+        "react/jsx-curly-newline": "off",
+        "react/jsx-filename-extension": "off",
+        "react/react-in-jsx-scope": "off",
+        "arrow-parens": "off",
+        "arrow-body-style": "off",
+        "object-curly-newline": "off",
+        "react/no-array-index-key": "warn"
+    }
 }

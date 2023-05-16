@@ -1,6 +1,6 @@
 type Condition = {
-    name: String
-    label: String
+    name: string
+    label: string
 }
 
 export default Condition
