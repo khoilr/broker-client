@@ -24,7 +24,6 @@ const switchCase = (parameter: ParameterModel) => {
                     .toLowerCase()
                     .localeCompare((optionB?.label ?? '').toLowerCase())
             }
-            // onSelect={(value, option) => { }}
             options={parameter.values?.map(value => {
                 return {
                     label: sentenceCase(value.toString()),

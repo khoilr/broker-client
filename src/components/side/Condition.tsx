@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
 import ReturnModel from '@/model/Return'
 import { Form, Input, Select, Space } from 'antd'
+// import ConditionSelection from './ConditionSelection'
 import { BaseOptionType } from 'antd/es/select'
+import { useEffect, useState } from 'react'
 
 const changes = [
     { value: 'increase-to', label: 'Increase to' },
@@ -17,19 +18,23 @@ const units = [
 type props = {
     returns: ReturnModel[]
     name: number
+    resetCondition: (_return: string) => void
 }
 
 export default function Condition(props: props) {
-    const { returns, name } = props
+    const { returns, name, resetCondition } = props
 
     const [returnOptions, setReturnOptions] = useState<BaseOptionType[]>([])
-    const [initialReturn, setInitialReturn] = useState<BaseOptionType>()
+    // const [initialReturn, setInitialReturn] = useState<BaseOptionType>()
+    // useRef for Select
+
+    // const [selectedReturn, setSelectedReturn] = useState<string>()
 
     useEffect(() => {
         const thisReturn = returns.map(e => e as BaseOptionType)
         setReturnOptions(thisReturn)
-        setInitialReturn(thisReturn[0])
-    }, [returns])
+        resetCondition(thisReturn[0].value as string)
+    }, [returns, resetCondition])
 
     return (
         <Space.Compact
@@ -55,9 +60,10 @@ export default function Condition(props: props) {
                             .localeCompare((optionB?.label ?? '').toLowerCase())
                     }
                     options={returnOptions}
-                    value={initialReturn}
+                    // value={initialReturn}
                 />
             </Form.Item>
+
             <Form.Item
                 className='w-full'
                 name={[name.toString(), 'condition', 'change']}
@@ -83,7 +89,10 @@ export default function Condition(props: props) {
                 className='w-full'
                 name={[name.toString(), 'condition', 'value']}
             >
-                <Input type='number' />
+                <Input
+                    type='number'
+                    min={0}
+                />
             </Form.Item>
             <Form.Item
                 className='w-full'

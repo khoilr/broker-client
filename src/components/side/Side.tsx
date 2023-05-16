@@ -9,10 +9,11 @@ const { Title } = Typography
 type props = {
     side: string
     indicators: IndicatorModel[]
+    resetCondition: (_return: string) => void
 }
 
 export default function Side(props: props) {
-    const { side, indicators } = props
+    const { side, indicators, resetCondition } = props
     const [color, setColor] = useState<string>()
 
     useEffect(() => {
@@ -43,6 +44,7 @@ export default function Side(props: props) {
                                 side={side}
                                 indicators={indicators}
                                 remove={remove}
+                                resetCondition={resetCondition}
                             />
                         ))}
                         <Form.Item>

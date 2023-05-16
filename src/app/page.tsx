@@ -54,8 +54,39 @@ export default function Home() {
     const [form] = Form.useForm()
 
     // handle form submission
-    const onFinish = (values: any) => {
+    const onFinish = (values: unknown) => {
         console.log(values)
+    }
+
+    const resetCondition = (_return: string) => {
+        const fieldsValue = form.getFieldsValue()
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const buyFields = fieldsValue.buy?.map((indicator: any) => {
+            const condition = {
+                ...indicator?.condition,
+                return: _return
+            }
+            return {
+                ...indicator,
+                condition
+            }
+        })
+        const sellFields = fieldsValue.sell?.map((indicator: object) => {
+            const condition = null
+            return {
+                ...indicator,
+                condition
+            }
+        })
+
+        const fields = {
+            ...fieldsValue,
+            buy: buyFields,
+            sell: sellFields
+        }
+
+        form.setFieldsValue(fields)
     }
 
     return (
@@ -91,31 +122,34 @@ export default function Home() {
                                 <Side
                                     side='buy'
                                     indicators={indicators}
+                                    resetCondition={resetCondition}
                                 />
                                 <Side
+                                    resetCondition={resetCondition}
                                     side='sell'
                                     indicators={indicators}
                                 />
                             </div>
-                            <Row justify='center'>
-                                <Form.Item className='m-2'>
+                            <div className='flex justify-center'>
+                                <Form.Item className='mx-2'>
                                     <Button
                                         type='primary'
                                         htmlType='submit'
                                     >
-                                        Start auto trading
+                                        Auto trading
                                     </Button>
                                 </Form.Item>
 
-                                <Form.Item className='m-2'>
+                                <Form.Item className='mx-2'>
                                     <Button
                                         type='primary'
                                         htmlType='submit'
+                                        // onClick={resetCondition}
                                     >
                                         Back testing
                                     </Button>
                                 </Form.Item>
-                            </Row>
+                            </div>
                         </Form>
                     </Col>
                 </Row>

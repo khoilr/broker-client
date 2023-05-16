@@ -12,10 +12,11 @@ type props = {
     indicators: IndicatorModel[]
     name: number
     remove: (name: number) => void
+    resetCondition: (_return: string) => void
 }
 
 export default function Indicator(props: props) {
-    const { side, indicators, name, remove } = props
+    const { side, indicators, name, remove, resetCondition } = props
 
     const [color, setColor] = useState<string>()
     const [indicator, setIndicator] = useState<IndicatorModel>()
@@ -39,7 +40,7 @@ export default function Indicator(props: props) {
                 >
                     <Select
                         showSearch
-                        placeholder='Select buy indicator'
+                        placeholder={`Select ${side} indicator`}
                         optionFilterProp='children'
                         filterOption={(input, option) =>
                             (option?.label ?? '')
@@ -70,6 +71,7 @@ export default function Indicator(props: props) {
                             <Condition
                                 returns={indicator.returns}
                                 name={name}
+                                resetCondition={resetCondition}
                             />
                         </Form.Item>
                         <Form.Item
