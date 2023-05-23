@@ -6,6 +6,7 @@ type Parameter = {
     type: ParameterType
     values?: string[] | number[]
     default: string | number
+    readOnly: boolean
 }
 
 export default Parameter

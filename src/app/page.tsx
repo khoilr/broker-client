@@ -15,8 +15,9 @@ import {
     Row,
     Typography
 } from 'antd'
+import axios from 'axios'
 import { useEffect, useState } from 'react'
-import indicatorsJSON from '../data/indicator.json'
+import indicatorsJSON from '../data/indicators.json'
 
 const { Title } = Typography
 
@@ -26,14 +27,6 @@ export default function Home() {
     useEffect(() => {
         const thisIndicators = indicatorsJSON.map(indicator => {
             const parameters = indicator.parameters.map(parameter => {
-                if (
-                    ParameterType[
-                        parameter.type.toUpperCase() as keyof typeof ParameterType
-                    ] === undefined
-                ) {
-                    console.log(parameter.type)
-                }
-
                 return {
                     ...parameter,
                     type: ParameterType[
@@ -54,8 +47,12 @@ export default function Home() {
     const [form] = Form.useForm()
 
     // handle form submission
-    const onFinish = (values: unknown) => {
-        console.log(values)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const onFinish = (values: any) => {
+        axios.post('http://localhost:8000/', values).then(response => {
+            // print url and query params
+            console.log(response.data)
+        })
     }
 
     const resetCondition = (_return: string, side: string, index: number) => {
@@ -146,6 +143,7 @@ export default function Home() {
                                 </Form.Item>
                             </div>
                         </Form>
+                        {/* <Chart/>        */}
                     </Col>
                 </Row>
             </Layout>

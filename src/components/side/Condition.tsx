@@ -1,6 +1,5 @@
 import ReturnModel from '@/model/Return'
 import { Form, Input, Select, Space } from 'antd'
-// import ConditionSelection from './ConditionSelection'
 import { BaseOptionType } from 'antd/es/select'
 import { useEffect, useState } from 'react'
 
@@ -57,10 +56,8 @@ export default function Condition(props: props) {
                             .localeCompare((optionB?.label ?? '').toLowerCase())
                     }
                     options={returnOptions}
-                    // value={initialReturn}
                 />
             </Form.Item>
-
             <Form.Item
                 className='w-full'
                 name={[name.toString(), 'condition', 'change']}

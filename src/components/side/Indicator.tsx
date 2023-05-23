@@ -31,9 +31,7 @@ export default function Indicator(props: props) {
 
     return (
         <div className='flex items-start'>
-            <div
-                className={`border border-solid rounded-lg border-${color}-600 p-2 w-full mb-6`}
-            >
+            <div className={`border border-solid rounded-lg border-${color}-600 p-2 w-full mb-6`}>
                 <Form.Item
                     label={<Title level={3}>Indicator</Title>}
                     name={[name.toString(), 'name']}
@@ -43,21 +41,13 @@ export default function Indicator(props: props) {
                         placeholder={`Select ${side} indicator`}
                         optionFilterProp='children'
                         filterOption={(input, option) =>
-                            (option?.label ?? '')
-                                .toLowerCase()
-                                .includes(input.toLowerCase())
+                            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                         }
                         filterSort={(optionA, optionB) =>
-                            (optionA?.label ?? '')
-                                .toLowerCase()
-                                .localeCompare(
-                                    (optionB?.label ?? '').toLowerCase()
-                                )
+                            (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                         }
                         onSelect={value => {
-                            setIndicator(
-                                indicators.find(e => e.value === value)
-                            )
+                            setIndicator(indicators.find(e => e.value === value))
                         }}
                         options={indicators.map(e => ({
                             value: e.value,
@@ -76,19 +66,28 @@ export default function Indicator(props: props) {
                             />
                         </Form.Item>
                         <Form.Item
-                            label={<Title level={3}>Parameters</Title>}
-                            className={`border border-solid border-${color}-500 rounded-lg p-2`}
-                        >
-                            <div className='flex flex-wrap'>
-                                {indicator.parameters.map((e, index) => (
-                                    <Parameter
-                                        key={index}
-                                        parameter={e}
-                                        name={name}
-                                    />
-                                ))}
-                            </div>
-                        </Form.Item>
+                            name={[name.toString(), 'returns']}
+                            hidden
+                            initialValue={indicator.returns.map(e => e.value)}
+                        />
+                        {indicator.parameters.filter(e => e.readOnly).length > 0 && (
+                            <Form.Item
+                                label={<Title level={3}>Parameters</Title>}
+                                className={`border border-solid border-${color}-500 rounded-lg p-2`}
+                            >
+                                <div className='flex flex-wrap'>
+                                    {indicator.parameters
+                                        .filter(e => e.readOnly)
+                                        .map(e => (
+                                            <Parameter
+                                                key={e.name}
+                                                parameter={e}
+                                                name={name}
+                                            />
+                                        ))}
+                                </div>
+                            </Form.Item>
+                        )}
                     </>
                 )}
             </div>
