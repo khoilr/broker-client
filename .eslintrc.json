@@ -33,6 +33,7 @@
         "object-curly-newline": "off",
         "react/no-array-index-key": "warn",
         "no-console": "warn",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "react/jsx-wrap-multilines": "off"
     }
 }
