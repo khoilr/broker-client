@@ -4,13 +4,7 @@
         "es2021": true
     },
     "plugins": ["@typescript-eslint"],
-    "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "next",
-        "next/core-web-vitals",
-        "prettier",
-        "airbnb"
-    ],
+    "extends": ["plugin:@typescript-eslint/recommended", "next", "next/core-web-vitals", "prettier", "airbnb"],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
@@ -38,6 +32,7 @@
         "arrow-body-style": "off",
         "object-curly-newline": "off",
         "react/no-array-index-key": "warn",
-        "no-console": "warn"
+        "no-console": "warn",
+        "linebreak-style": "off"
     }
 }

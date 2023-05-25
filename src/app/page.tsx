@@ -8,25 +8,9 @@ import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
 import { PlusOutlined } from '@ant-design/icons'
 
-import {
-    Button,
-    Col,
-    ConfigProvider,
-    Form,
-    Layout,
-    Row,
-    Typography,
-    Modal,
-    message
-} from 'antd'
+import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd'
 
-import {
-    ModalForm,
-    ProForm,
-    ProFormDateRangePicker,
-    ProFormSelect,
-    ProFormText,
-  } from '@ant-design/pro-components'
+import { ModalForm, ProForm, ProFormText } from '@ant-design/pro-components'
 
 import axios from 'axios'
 import { useEffect, useState } from 'react'
@@ -34,13 +18,13 @@ import indicatorsJSON from '../data/indicators.json'
 
 const { Title } = Typography
 
-const waitTime = (time: number = 100) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(true);
-      }, time);
-    });
-  }
+// const waitTime = (time: number = 100) => {
+//     return new Promise(resolve => {
+//         setTimeout(() => {
+//             resolve(true)
+//         }, time)
+//     })
+// }
 
 export default function Home() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
@@ -50,9 +34,7 @@ export default function Home() {
             const parameters = indicator.parameters.map(parameter => {
                 return {
                     ...parameter,
-                    type: ParameterType[
-                        parameter.type.toUpperCase() as keyof typeof ParameterType
-                    ]
+                    type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
                 } as ParameterModel
             })
 
@@ -66,9 +48,6 @@ export default function Home() {
     }, [])
 
     const [form] = Form.useForm()
-
-    
-
 
     // handle form submission
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -122,9 +101,7 @@ export default function Home() {
                         md={24}
                         lg={20}
                     >
-                        <Title className='text-center'>
-                            Build stock trading strategy
-                        </Title>
+                        <Title className='text-center'>Build stock trading strategy</Title>
                         <Form
                             form={form}
                             layout='vertical'
@@ -159,39 +136,38 @@ export default function Home() {
 
                                 <Form.Item className='mx-2'>
                                     <ModalForm
-                                    title="Enter Username"
-                                    trigger={
-                                    <Button type="primary">
-                                        <PlusOutlined />
-                                            Notification
-                                    </Button>
-                                    }
-                                form={form}
-                                autoFocusFirstInput
-                                modalProps={{
-                                destroyOnClose: true,
-                                onCancel: () => console.log('run'),
-                                }}
-                                    submitTimeout={2000}
-                            //     onFinish={async (values) => {
-                            //     await waitTime(2000);
-                            //     console.log(values.name);
-                            //     message.success('Success');
-                            //     return true;
-                            //     }
-                            // }
+                                        title='Enter Username'
+                                        trigger={
+                                            <Button type='primary'>
+                                                <PlusOutlined />
+                                                Notification
+                                            </Button>
+                                        }
+                                        form={form}
+                                        autoFocusFirstInput
+                                        modalProps={{
+                                            destroyOnClose: true,
+                                            onCancel: () => console.log('run')
+                                        }}
+                                        submitTimeout={2000}
+                                        //     onFinish={async (values) => {
+                                        //     await waitTime(2000);
+                                        //     console.log(values.name);
+                                        //     message.success('Success');
+                                        //     return true;
+                                        //     }
+                                        // }
                                     >
-                                    <ProForm.Group>
-                                    <ProFormText
-                                        width="md"
-                                        name="name"
-                                        label="Enter username"
-                                        tooltip="Enter username"
-                                        placeholder="hienhine0310"
-                                        />
-                                </ProForm.Group>
-                            </ModalForm>
-
+                                        <ProForm.Group>
+                                            <ProFormText
+                                                width='md'
+                                                name='name'
+                                                label='Enter username'
+                                                tooltip='Enter username'
+                                                placeholder='hienhine0310'
+                                            />
+                                        </ProForm.Group>
+                                    </ModalForm>
                                 </Form.Item>
                             </div>
                         </Form>
