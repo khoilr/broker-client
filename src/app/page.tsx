@@ -7,7 +7,7 @@ import IndicatorModel from '@/model/Indicator'
 import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
 
-import { Button, Col, ConfigProvider, Form, Layout, Row, Typography, message } from 'antd'
+import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd'
 
 import InputTelegramUser from '@/components/InputTelegramUser'
 import axios from 'axios'
@@ -16,13 +16,13 @@ import indicatorsJSON from '../data/indicators.json'
 
 const { Title } = Typography
 
-const waitTime = (time: number = 100) => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve(true)
-        }, time)
-    })
-}
+// const waitTime = (time: number = 100) => {
+//     return new Promise(resolve => {
+//         setTimeout(() => {
+//             resolve(true)
+//         }, time)
+//     })
+// }
 
 export default function Home() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
