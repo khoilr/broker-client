@@ -8,7 +8,7 @@ import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
 import { PlusOutlined } from '@ant-design/icons'
 
-import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd'
+import { Button, Col, ConfigProvider, Form, Layout, Row, Typography, message } from 'antd'
 
 import { ModalForm, ProForm, ProFormText } from '@ant-design/pro-components'
 
@@ -18,13 +18,13 @@ import indicatorsJSON from '../data/indicators.json'
 
 const { Title } = Typography
 
-// const waitTime = (time: number = 100) => {
-//     return new Promise(resolve => {
-//         setTimeout(() => {
-//             resolve(true)
-//         }, time)
-//     })
-// }
+const waitTime = (time: number = 100) => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(true)
+        }, time)
+    })
+}
 
 export default function Home() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
@@ -150,13 +150,13 @@ export default function Home() {
                                             onCancel: () => console.log('run')
                                         }}
                                         submitTimeout={2000}
-                                        //     onFinish={async (values) => {
-                                        //     await waitTime(2000);
-                                        //     console.log(values.name);
-                                        //     message.success('Success');
-                                        //     return true;
-                                        //     }
-                                        // }
+                                            onFinish={async (values) => {
+                                            await waitTime(2000);
+                                            console.log(values.name);
+                                            message.success('Success');
+                                            return true;
+                                            }
+                                        }
                                     >
                                         <ProForm.Group>
                                             <ProFormText

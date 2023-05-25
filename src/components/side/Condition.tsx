@@ -4,7 +4,7 @@ import { BaseOptionType } from 'antd/es/select'
 import { useEffect, useState } from 'react'
 
 const changes = [
-    { value: 'equal', label: 'Increase to' }
+    { value: 'equal', label: '=' }
 ]
 const units = [
     { value: 'vnd', label: 'VND' },
