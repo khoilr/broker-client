@@ -7,12 +7,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },
@@ -67,21 +62,7 @@
     {
         "value": "price",
         "label": "Price",
-        "parameters": [
-            {
-                "name": "source",
-                "label": "Source",
-                "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
-                "default": "close",
-                "readOnly": true
-            }
-        ],
+        "parameters": [],
         "returns": [
             {
                 "label": "Price",
@@ -97,12 +78,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },
@@ -129,12 +105,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },
@@ -161,12 +132,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             }
@@ -186,12 +152,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },
@@ -218,12 +179,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },
@@ -250,12 +206,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },
@@ -293,12 +244,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },
@@ -325,12 +271,7 @@
                 "name": "high",
                 "label": "High",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "high",
                 "readOnly": true
             },
@@ -338,12 +279,7 @@
                 "name": "low",
                 "label": "Low",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "low",
                 "readOnly": true
             },
@@ -370,12 +306,7 @@
                 "name": "high",
                 "label": "High",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "high",
                 "readOnly": true
             },
@@ -383,12 +314,7 @@
                 "name": "low",
                 "label": "Low",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "low",
                 "readOnly": true
             },
@@ -422,12 +348,7 @@
                 "name": "high",
                 "label": "High",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "high",
                 "readOnly": true
             },
@@ -435,12 +356,7 @@
                 "name": "low",
                 "label": "Low",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "low",
                 "readOnly": true
             },
@@ -516,12 +432,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },
@@ -548,12 +459,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },
@@ -587,12 +493,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },
@@ -619,12 +520,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },
@@ -651,12 +547,7 @@
                 "name": "source",
                 "label": "Source",
                 "type": "selection",
-                "values": [
-                    "open",
-                    "close",
-                    "high",
-                    "low"
-                ],
+                "values": ["open", "close", "high", "low"],
                 "default": "close",
                 "readOnly": true
             },

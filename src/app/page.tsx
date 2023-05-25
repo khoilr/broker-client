@@ -6,12 +6,10 @@ import Side from '@/components/side/Side'
 import IndicatorModel from '@/model/Indicator'
 import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
-import { PlusOutlined } from '@ant-design/icons'
 
 import { Button, Col, ConfigProvider, Form, Layout, Row, Typography, message } from 'antd'
 
-import { ModalForm, ProForm, ProFormText } from '@ant-design/pro-components'
-
+import InputTelegramUser from '@/components/InputTelegramUser'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import indicatorsJSON from '../data/indicators.json'
@@ -112,6 +110,7 @@ export default function Home() {
                             <div className='flex justify-between'>
                                 <StockSelection />
                                 <TimeFrameSelection />
+                                <InputTelegramUser />
                             </div>
                             <div className='flex justify-between items-start'>
                                 <Side
@@ -132,47 +131,8 @@ export default function Home() {
                                         htmlType='submit'
                                         // onClick={getMessage}
                                     >
-                                        Auto trading
+                                        Notify me
                                     </Button>
-                                </Form.Item>
-
-                                <Form.Item
-                                    className='mx-2'
-                                    name='telegram-user'
-                                >
-                                    <ModalForm
-                                        title='Enter Username'
-                                        trigger={
-                                            <Button type='primary'>
-                                                <PlusOutlined />
-                                                Notification
-                                            </Button>
-                                        }
-                                        form={form}
-                                        autoFocusFirstInput
-                                        modalProps={{
-                                            destroyOnClose: true,
-                                            onCancel: () => console.log('run')
-                                        }}
-                                        submitTimeout={2000}
-                                            onFinish={async (values) => {
-                                            await waitTime(2000);
-                                            console.log(values.name);
-                                            message.success('Success');
-                                            return true;
-                                            }
-                                        }
-                                    >
-                                        <ProForm.Group>
-                                            <ProFormText
-                                                width='md'
-                                                name='name'
-                                                label='Enter username'
-                                                tooltip='Enter username'
-                                                placeholder='hienhine0310'
-                                            />
-                                        </ProForm.Group>
-                                    </ModalForm>
                                 </Form.Item>
                             </div>
                         </Form>
