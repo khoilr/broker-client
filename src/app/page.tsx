@@ -52,6 +52,8 @@ export default function Home() {
     // handle form submission
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onFinish = (values: any) => {
+        console.log(values)
+
         axios.post('http://localhost:8000/', values).then(response => {
             // print url and query params
             console.log(response.data)
@@ -134,7 +136,10 @@ export default function Home() {
                                     </Button>
                                 </Form.Item>
 
-                                <Form.Item className='mx-2'>
+                                <Form.Item
+                                    className='mx-2'
+                                    name='telegram-user'
+                                >
                                     <ModalForm
                                         title='Enter Username'
                                         trigger={
