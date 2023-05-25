@@ -5,6 +5,7 @@ export default function InputPrice() {
         <Form.Item
             name='price'
             label='Price'
+            className='w-full mx-2'
         >
             <Input type='number' />
         </Form.Item>
