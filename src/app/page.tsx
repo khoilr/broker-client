@@ -6,6 +6,8 @@ import Side from '@/components/side/Side'
 import IndicatorModel from '@/model/Indicator'
 import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
+import { PlusOutlined } from '@ant-design/icons'
+
 import {
     Button,
     Col,
@@ -13,13 +15,32 @@ import {
     Form,
     Layout,
     Row,
-    Typography
+    Typography,
+    Modal,
+    message
 } from 'antd'
+
+import {
+    ModalForm,
+    ProForm,
+    ProFormDateRangePicker,
+    ProFormSelect,
+    ProFormText,
+  } from '@ant-design/pro-components'
+
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import indicatorsJSON from '../data/indicators.json'
 
 const { Title } = Typography
+
+const waitTime = (time: number = 100) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(true);
+      }, time);
+    });
+  }
 
 export default function Home() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
@@ -45,6 +66,9 @@ export default function Home() {
     }, [])
 
     const [form] = Form.useForm()
+
+    
+
 
     // handle form submission
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -127,19 +151,47 @@ export default function Home() {
                                     <Button
                                         type='primary'
                                         htmlType='submit'
+                                        // onClick={getMessage}
                                     >
                                         Auto trading
                                     </Button>
                                 </Form.Item>
 
                                 <Form.Item className='mx-2'>
-                                    <Button
-                                        type='primary'
-                                        htmlType='submit'
-                                        // onClick={resetCondition}
-                                    >
-                                        Back testing
+                                    <ModalForm
+                                    title="Enter Username"
+                                    trigger={
+                                    <Button type="primary">
+                                        <PlusOutlined />
+                                            Notification
                                     </Button>
+                                    }
+                                form={form}
+                                autoFocusFirstInput
+                                modalProps={{
+                                destroyOnClose: true,
+                                onCancel: () => console.log('run'),
+                                }}
+                                    submitTimeout={2000}
+                            //     onFinish={async (values) => {
+                            //     await waitTime(2000);
+                            //     console.log(values.name);
+                            //     message.success('Success');
+                            //     return true;
+                            //     }
+                            // }
+                                    >
+                                    <ProForm.Group>
+                                    <ProFormText
+                                        width="md"
+                                        name="name"
+                                        label="Enter username"
+                                        tooltip="Enter username"
+                                        placeholder="hienhine0310"
+                                        />
+                                </ProForm.Group>
+                            </ModalForm>
+
                                 </Form.Item>
                             </div>
                         </Form>

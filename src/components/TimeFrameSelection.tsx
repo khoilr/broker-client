@@ -36,16 +36,21 @@ const options = [
         ]
     },
     {
-        value: '1D',
-        label: '1 day'
-    },
-    {
-        value: '1W',
-        label: '1 week'
-    },
-    {
-        value: '1M',
-        label: '1 month'
+        label: 'Other',
+        options: [
+            {
+                value: '1D',
+                label: '1 day'
+            },
+            {
+                value: '1W',
+                label: '1 week'
+            },
+            {
+                value: '1M',
+                label: '1 month'
+            }
+        ]
     }
 ]
 export default function TimeFrameSelection() {
