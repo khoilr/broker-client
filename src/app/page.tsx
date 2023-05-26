@@ -2,19 +2,20 @@
 
 import StockSelection from '@/components/StockSelection'
 import TimeFrameSelection from '@/components/TimeFrameSelection'
-// import Side from '@/components/side/Side'
-// import IndicatorModel from '@/model/Indicator'
-// import ParameterModel from '@/model/Parameter'
-// import ParameterType from '@/model/ParameterType'
+import Side from '@/components/side/Side'
+import IndicatorModel from '@/model/Indicator'
+import ParameterModel from '@/model/Parameter'
+import ParameterType from '@/model/ParameterType'
 
 import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd'
 
 import InputTelegramUser from '@/components/InputTelegramUser'
 import axios from 'axios'
-// import { useEffect, useState } from 'react'
-// import indicatorsJSON from '../data/indicators.json'
+import { useEffect, useState } from 'react'
 import InputPrice from '@/components/InputPrice'
 import InputVolume from '@/components/InputVolume'
+import InputWhatsappUser from '@/components/InputWhatsappUser'
+import indicatorsJSON from '../data/indicators.json'
 
 const { Title } = Typography
 
@@ -27,25 +28,25 @@ const { Title } = Typography
 // }
 
 export default function Home() {
-    // const [indicators, setIndicators] = useState<IndicatorModel[]>([])
+    const [indicators, setIndicators] = useState<IndicatorModel[]>([])
 
-    // useEffect(() => {
-    //     const thisIndicators = indicatorsJSON.map(indicator => {
-    //         const parameters = indicator.parameters.map(parameter => {
-    //             return {
-    //                 ...parameter,
-    //                 type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
-    //             } as ParameterModel
-    //         })
+    useEffect(() => {
+        const thisIndicators = indicatorsJSON.map(indicator => {
+            const parameters = indicator.parameters.map(parameter => {
+                return {
+                    ...parameter,
+                    type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
+                } as ParameterModel
+            })
 
-    //         return {
-    //             ...indicator,
-    //             parameters
-    //         } as IndicatorModel
-    //     })
+            return {
+                ...indicator,
+                parameters
+            } as IndicatorModel
+        })
 
-    //     setIndicators(thisIndicators)
-    // }, [])
+        setIndicators(thisIndicators)
+    }, [])
 
     const [form] = Form.useForm()
 
@@ -60,31 +61,31 @@ export default function Home() {
         })
     }
 
-    // const resetCondition = (_return: string, side: string, index: number) => {
-    //     const fieldsValue = form.getFieldsValue()
+    const resetCondition = (_return: string, side: string, index: number) => {
+        const fieldsValue = form.getFieldsValue()
 
-    //     // replace return in condition in side and index with _return
-    //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    //     const fields = fieldsValue[side]?.map((indicator: any, i: number) => {
-    //         if (i === index) {
-    //             const condition = {
-    //                 ...indicator?.condition,
-    //                 return: _return
-    //             }
-    //             return {
-    //                 ...indicator,
-    //                 condition
-    //             }
-    //         }
-    //         return indicator
-    //     })
+        // replace return in condition in side and index with _return
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const fields = fieldsValue[side]?.map((indicator: any, i: number) => {
+            if (i === index) {
+                const condition = {
+                    ...indicator?.condition,
+                    return: _return
+                }
+                return {
+                    ...indicator,
+                    condition
+                }
+            }
+            return indicator
+        })
 
-    //     const fieldsObject = {
-    //         [side]: fields
-    //     }
+        const fieldsObject = {
+            [side]: fields
+        }
 
-    //     form.setFieldsValue(fieldsObject)
-    // }
+        form.setFieldsValue(fieldsObject)
+    }
 
     return (
         <ConfigProvider
@@ -113,12 +114,13 @@ export default function Home() {
                                 <StockSelection />
                                 <TimeFrameSelection />
                                 <InputTelegramUser />
+                                <InputWhatsappUser />
                             </div>
-                            <div className='flex justify-between'>
+                            {/* <div className='flex justify-between'>
                                 <InputPrice />
                                 <InputVolume />
-                            </div>
-                            {/* <div className='flex justify-between items-start'>
+                            </div> */}
+                            <div className='flex justify-between items-start'>
                                 <Side
                                     side='buy'
                                     indicators={indicators}
@@ -129,7 +131,7 @@ export default function Home() {
                                     side='sell'
                                     indicators={indicators}
                                 />
-                            </div> */}
+                            </div>
                             <div className='flex justify-center'>
                                 <Form.Item className='mx-2'>
                                     <Button
