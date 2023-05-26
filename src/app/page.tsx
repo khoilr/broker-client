@@ -12,8 +12,8 @@ import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd
 import InputTelegramUser from '@/components/InputTelegramUser'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import InputPrice from '@/components/InputPrice'
-import InputVolume from '@/components/InputVolume'
+// import InputPrice from '@/components/InputPrice'
+// import InputVolume from '@/components/InputVolume'
 import InputWhatsappUser from '@/components/InputWhatsappUser'
 import indicatorsJSON from '../data/indicators.json'
 
