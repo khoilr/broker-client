@@ -2,7 +2,6 @@
 
 import StockSelection from '@/components/StockSelection'
 import TimeFrameSelection from '@/components/TimeFrameSelection'
-import Side from '@/components/side/Side'
 import IndicatorModel from '@/model/Indicator'
 import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
@@ -12,23 +11,14 @@ import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd
 import InputTelegramUser from '@/components/InputTelegramUser'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-// import InputPrice from '@/components/InputPrice'
-// import InputVolume from '@/components/InputVolume'
 import InputWhatsappUser from '@/components/InputWhatsappUser'
 import indicatorsJSON from '../data/indicators.json'
-import { useRouter } from 'next/navigation'
-import RootLayout from './layout'
-import Link from 'next/link'
-import {
-    BrowserRouter,
-    Routes,
-    Route
-  } from "react-router-dom"
+import InputVolume from '@/components/InputVolume'
+import InputPrice from '@/components/InputPrice'
 
 const { Title } = Typography
 
-
-export default function HomePage() {
+export default function NotificationPage() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
 
     useEffect(() => {
@@ -62,39 +52,9 @@ export default function HomePage() {
         })
     }
 
-    const resetCondition = (_return: string, side: string, index: number) => {
-        const fieldsValue = form.getFieldsValue()
-
-        // replace return in condition in side and index with _return
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const fields = fieldsValue[side]?.map((indicator: any, i: number) => {
-            if (i === index) {
-                const condition = {
-                    ...indicator?.condition,
-                    return: _return
-                }
-                return {
-                    ...indicator,
-                    condition
-                }
-            }
-            return indicator
-        })
-
-        const fieldsObject = {
-            [side]: fields
-        }
-
-        form.setFieldsValue(fieldsObject)
-    }
-
-    const router = useRouter()
-
-    const res = axios.get("http://localhost:3000/posts")
-
     return (
-        <RootLayout>
-        <ConfigProvider
+        <html>
+            <ConfigProvider
             componentSize='large'
             theme={{
                 token: {
@@ -122,45 +82,20 @@ export default function HomePage() {
                                 <InputTelegramUser />
                                 <InputWhatsappUser />
                             </div>
-                            {/* <div className='flex justify-between'>
+                            <div className='flex justify-between'>
                                 <InputPrice />
                                 <InputVolume />
-                            </div> */}
-                            <div className='flex justify-between items-start'>
-                                <Side
-                                    side='buy'
-                                    indicators={indicators}
-                                    resetCondition={resetCondition}
-                                />
-                                <Side
-                                    resetCondition={resetCondition}
-                                    side='sell'
-                                    indicators={indicators}
-                                />
                             </div>
                             <div className='flex justify-center'>
-                                <Row>
                                 <Form.Item className='mx-2'>
                                     <Button
                                         type='primary'
-                                        // htmlType='submit'
-                                        // // onClick={getMessage}
-                                    >
-                                        Auto trading
-                                    </Button>
-                                </Form.Item>
-
-                                <Form.Item className='mx-2'>
-                                    <Button
-                                        type='primary'
-                                        // htmlType='submit'    
-                                        onClick={() => router.push('/notify_page')}
+                                        htmlType='submit'
+                                        // onClick={getMessage}
                                     >
                                         Notify me
                                     </Button>
                                 </Form.Item>
-                                </Row>
-                                
                             </div>
                         </Form>
                         {/* <Chart/>        */}
@@ -168,6 +103,6 @@ export default function HomePage() {
                 </Row>
             </Layout>
         </ConfigProvider>
-        </RootLayout>
+        </html>
     )
 }
