@@ -32,7 +32,7 @@ export default function NotifyCondition(props: props) {
             >
                 Notification
             </Title>
-            <Form.List name='notification'>
+            <Form.List name='indicators'>
                 {(fields, { add, remove }) => (
                     <>
                         {fields.map(({ key, name }) => (

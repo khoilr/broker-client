@@ -4,7 +4,11 @@ import { BaseOptionType } from 'antd/es/select'
 import { useEffect, useState } from 'react'
 
 const changes = [
-    { value: 'equal', label: '=' }
+    { value: '=', label: '==' },
+    { value: '>', label: '>' },
+    { value: '>=', label: '>=' },
+    { value: '<', label: '<' },
+    { value: '<=', label: '<=' }
 ]
 const units = [
     { value: 'vnd', label: 'VND' },
@@ -42,15 +46,9 @@ export default function Condition(props: props) {
                     showSearch
                     placeholder='Select return'
                     optionFilterProp='children'
-                    filterOption={(input, option) =>
-                        (option?.label ?? '')
-                            .toLowerCase()
-                            .includes(input.toLowerCase())
-                    }
+                    filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
                     filterSort={(optionA, optionB) =>
-                        (optionA?.label ?? '')
-                            .toLowerCase()
-                            .localeCompare((optionB?.label ?? '').toLowerCase())
+                        (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                     }
                     options={returnOptions}
                 />
@@ -63,15 +61,9 @@ export default function Condition(props: props) {
                     showSearch
                     placeholder='Select condition'
                     optionFilterProp='children'
-                    filterOption={(input, option) =>
-                        (option?.label ?? '')
-                            .toLowerCase()
-                            .includes(input.toLowerCase())
-                    }
+                    filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
                     filterSort={(optionA, optionB) =>
-                        (optionA?.label ?? '')
-                            .toLowerCase()
-                            .localeCompare((optionB?.label ?? '').toLowerCase())
+                        (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                     }
                     options={changes}
                 />
@@ -93,15 +85,9 @@ export default function Condition(props: props) {
                     showSearch
                     placeholder='Select unit'
                     optionFilterProp='children'
-                    filterOption={(input, option) =>
-                        (option?.label ?? '')
-                            .toLowerCase()
-                            .includes(input.toLowerCase())
-                    }
+                    filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
                     filterSort={(optionA, optionB) =>
-                        (optionA?.label ?? '')
-                            .toLowerCase()
-                            .localeCompare((optionB?.label ?? '').toLowerCase())
+                        (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                     }
                     options={units}
                 />

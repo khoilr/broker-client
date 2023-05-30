@@ -24,7 +24,8 @@ export default function Indicator(props: props) {
     useEffect(() => {
         if (side === 'buy') {
             setColor('green')
-        } if (side === 'notification') {
+        }
+        if (side === 'notification') {
             setColor('black')
         } else {
             setColor('red')
@@ -74,6 +75,7 @@ export default function Indicator(props: props) {
                         />
                         {indicator.parameters.filter(e => e.readOnly).length > 0 && (
                             <Form.Item
+                                name={[name.toString(), 'parameters']}
                                 label={<Title level={3}>Parameters</Title>}
                                 className={`border border-solid border-${color}-500 rounded-lg p-2`}
                             >
@@ -82,6 +84,7 @@ export default function Indicator(props: props) {
                                         .filter(e => e.readOnly)
                                         .map(e => (
                                             <Parameter
+                                                // index={index}
                                                 key={e.name}
                                                 parameter={e}
                                                 name={name}

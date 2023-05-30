@@ -5,10 +5,10 @@ import TimeFrameSelection from '@/components/TimeFrameSelection'
 
 import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd'
 
-import InputTelegramUser from '@/components/InputTelegramUser'
+// import InputTelegramUser from '@/components/InputTelegramUser'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import InputWhatsappUser from '@/components/InputWhatsappUser'
+// import InputWhatsappUser from '@/components/InputWhatsappUser'
 import NotifyCondition from '@/components/NotifyCondition'
 import ParameterType from '@/model/ParameterType'
 import IndicatorModel from '@/model/Indicator'
@@ -94,8 +94,8 @@ export default function NotifyPage() {
                             <div className='flex justify-between'>
                                 <StockSelection />
                                 <TimeFrameSelection />
-                                <InputTelegramUser />
-                                <InputWhatsappUser />
+                                {/* <InputTelegramUser />
+                                <InputWhatsappUser /> */}
                             </div>
                             <div className='flex justify-between'>
                                 <NotifyCondition
