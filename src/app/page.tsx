@@ -19,11 +19,6 @@ import indicatorsJSON from '../data/indicators.json'
 import { useRouter } from 'next/navigation'
 import RootLayout from './layout'
 import Link from 'next/link'
-import {
-    BrowserRouter,
-    Routes,
-    Route
-  } from "react-router-dom"
 
 const { Title } = Typography
 
@@ -122,10 +117,6 @@ export default function HomePage() {
                                 <InputTelegramUser />
                                 <InputWhatsappUser />
                             </div>
-                            {/* <div className='flex justify-between'>
-                                <InputPrice />
-                                <InputVolume />
-                            </div> */}
                             <div className='flex justify-between items-start'>
                                 <Side
                                     side='buy'
@@ -154,7 +145,7 @@ export default function HomePage() {
                                     <Button
                                         type='primary'
                                         // htmlType='submit'    
-                                        onClick={() => router.push('/notify_page')}
+                                        onClick={() => router.push('/notify')}
                                     >
                                         Notify me
                                     </Button>

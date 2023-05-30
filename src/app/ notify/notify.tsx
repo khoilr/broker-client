@@ -12,13 +12,13 @@ import InputTelegramUser from '@/components/InputTelegramUser'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import InputWhatsappUser from '@/components/InputWhatsappUser'
-import indicatorsJSON from '../data/indicators.json'
+import indicatorsJSON from '../../data/indicators.json'
 import InputVolume from '@/components/InputVolume'
 import InputPrice from '@/components/InputPrice'
 
 const { Title } = Typography
 
-export default function NotificationPage() {
+export default function Notification() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
 
     useEffect(() => {
@@ -53,7 +53,6 @@ export default function NotificationPage() {
     }
 
     return (
-        <html>
             <ConfigProvider
             componentSize='large'
             theme={{
@@ -103,6 +102,5 @@ export default function NotificationPage() {
                 </Row>
             </Layout>
         </ConfigProvider>
-        </html>
     )
 }
