@@ -14,15 +14,9 @@ const switchCase = (parameter: ParameterModel) => {
             showSearch
             placeholder={parameter.name as string}
             optionFilterProp='children'
-            filterOption={(input, option) =>
-                (option?.label ?? '')
-                    .toLowerCase()
-                    .includes(input.toLowerCase())
-            }
+            filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
             filterSort={(optionA, optionB) =>
-                (optionA?.label ?? '')
-                    .toLowerCase()
-                    .localeCompare((optionB?.label ?? '').toLowerCase())
+                (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
             }
             options={parameter.values?.map(value => {
                 return {
@@ -32,7 +26,11 @@ const switchCase = (parameter: ParameterModel) => {
             })}
         />
     ) : (
-        <Input type='number' />
+        <Input
+            type='number'
+            min={0}
+            step={0.01}
+        />
     )
 }
 
