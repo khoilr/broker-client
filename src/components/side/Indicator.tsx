@@ -17,7 +17,6 @@ type props = {
 
 export default function Indicator(props: props) {
     const { side, indicators, name, remove, resetCondition } = props
-
     const [color, setColor] = useState<string>()
     const [indicator, setIndicator] = useState<IndicatorModel>()
 
@@ -27,7 +26,7 @@ export default function Indicator(props: props) {
         }
         if (side === 'notification') {
             setColor('black')
-        } else {
+        } else if (side === 'sell') {
             setColor('red')
         }
     }, [side])

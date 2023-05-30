@@ -19,7 +19,7 @@ export default function Side(props: props) {
     useEffect(() => {
         if (side === 'buy') {
             setColor('green')
-        } else if (side === 'sell') {
+        } else {
             setColor('red')
         }
     }, [side])

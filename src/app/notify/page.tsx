@@ -19,7 +19,7 @@ const { Title } = Typography
 
 export default function NotifyPage() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
-    // const [parameters, setParameters] = useState<ParameterModel[]>([])
+    const [parameters, setparameters] = useState<ParameterModel[]>([])
     const buttonSubmit = useRef(null)
 
     useEffect(() => {
@@ -37,12 +37,12 @@ export default function NotifyPage() {
         })
 
         setIndicators(thisIndicators)
-    }, [])
+    }, [parameters])
     const [form] = Form.useForm()
 
     // handle form submission
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const onFinish = (values: IndicatorModel[]) => {
+    const onFinish = (values: any) => {
         console.log(values)
 
         axios.post('http://localhost:8000/', values).then(response => {
