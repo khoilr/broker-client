@@ -8,6 +8,7 @@ import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
 
 import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd'
+import { useRouter } from 'next/navigation'
 
 import InputTelegramUser from '@/components/InputTelegramUser'
 import axios from 'axios'
@@ -16,12 +17,10 @@ import { useEffect, useState } from 'react'
 // import InputVolume from '@/components/InputVolume'
 import InputWhatsappUser from '@/components/InputWhatsappUser'
 import indicatorsJSON from '../data/indicators.json'
-import { useRouter } from 'next/navigation'
+
 import RootLayout from './layout'
-import Link from 'next/link'
 
 const { Title } = Typography
-
 
 export default function HomePage() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
@@ -85,8 +84,6 @@ export default function HomePage() {
 
     const router = useRouter()
 
-    const res = axios.get("http://localhost:3000/posts")
-
     return (
         <RootLayout>
         <ConfigProvider
@@ -140,18 +137,10 @@ export default function HomePage() {
                                         Auto trading
                                     </Button>
                                 </Form.Item>
-
                                 <Form.Item className='mx-2'>
-                                    <Button
-                                        type='primary'
-                                        // htmlType='submit'    
-                                        onClick={() => router.push('/notify')}
-                                    >
-                                        Notify me
-                                    </Button>
+                                    <Button type='primary' onClick={() => router.push('/notify')}> Notify me </Button>
                                 </Form.Item>
                                 </Row>
-                                
                             </div>
                         </Form>
                         {/* <Chart/>        */}

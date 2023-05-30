@@ -2,42 +2,37 @@
 
 import StockSelection from '@/components/StockSelection'
 import TimeFrameSelection from '@/components/TimeFrameSelection'
-import IndicatorModel from '@/model/Indicator'
-import ParameterModel from '@/model/Parameter'
-import ParameterType from '@/model/ParameterType'
 
 import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd'
 
 import InputTelegramUser from '@/components/InputTelegramUser'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-import InputWhatsappUser from '@/components/InputWhatsappUser'
-import indicatorsJSON from '../../data/indicators.json'
-import InputVolume from '@/components/InputVolume'
 import InputPrice from '@/components/InputPrice'
+import InputVolume from '@/components/InputVolume'
+import InputWhatsappUser from '@/components/InputWhatsappUser'
 
 const { Title } = Typography
 
 export default function Notification() {
-    const [indicators, setIndicators] = useState<IndicatorModel[]>([])
+    // const [indicators, setIndicators] = useState<IndicatorModel[]>([])
 
-    useEffect(() => {
-        const thisIndicators = indicatorsJSON.map(indicator => {
-            const parameters = indicator.parameters.map(parameter => {
-                return {
-                    ...parameter,
-                    type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
-                } as ParameterModel
-            })
+    // useEffect(() => {
+    //     const thisIndicators = indicatorsJSON.map(indicator => {
+    //         const parameters = indicator.parameters.map(parameter => {
+    //             return {
+    //                 ...parameter,
+    //                 type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
+    //             } as ParameterModel
+    //         })
 
-            return {
-                ...indicator,
-                parameters
-            } as IndicatorModel
-        })
+    //         return {
+    //             ...indicator,
+    //             parameters
+    //         } as IndicatorModel
+    //     })
 
-        setIndicators(thisIndicators)
-    }, [])
+    //     setIndicators(thisIndicators)
+    // }, [])
 
     const [form] = Form.useForm()
 
@@ -53,16 +48,7 @@ export default function Notification() {
     }
 
     return (
-            <ConfigProvider
-            componentSize='large'
-            theme={{
-                token: {
-                    // colorPrimary: '#eb13c7',
-                    fontSize: 16,
-                    borderRadius: 16
-                }
-            }}
-        >
+        <ConfigProvider componentSize='large' theme={{ token: { fontSize: 16, borderRadius: 16 } }}>
             <Layout>
                 <Row justify='center'>
                     <Col
