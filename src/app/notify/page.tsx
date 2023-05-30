@@ -7,7 +7,7 @@ import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd
 
 // import InputTelegramUser from '@/components/InputTelegramUser'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 // import InputWhatsappUser from '@/components/InputWhatsappUser'
 import NotifyCondition from '@/components/NotifyCondition'
 import ParameterType from '@/model/ParameterType'
@@ -19,16 +19,17 @@ const { Title } = Typography
 
 export default function NotifyPage() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
+    // const [parameters, setParameters] = useState<ParameterModel[]>([])
+    const buttonSubmit = useRef(null)
 
     useEffect(() => {
         const thisIndicators = indicatorsJSON.map(indicator => {
             const parameters = indicator.parameters.map(parameter => {
-                return {
-                    ...parameter,
-                    type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
-                } as ParameterModel
+                    return {
+                        ...parameter,
+                        type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
+                    } as ParameterModel
             })
-
             return {
                 ...indicator,
                 parameters
@@ -37,12 +38,11 @@ export default function NotifyPage() {
 
         setIndicators(thisIndicators)
     }, [])
-
     const [form] = Form.useForm()
 
     // handle form submission
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const onFinish = (values: any) => {
+    const onFinish = (values: IndicatorModel[]) => {
         console.log(values)
 
         axios.post('http://localhost:8000/', values).then(response => {
@@ -53,7 +53,6 @@ export default function NotifyPage() {
 
     const resetCondition = (_return: string, side: string, index: number) => {
         const fieldsValue = form.getFieldsValue()
-
         // replace return in condition in side and index with _return
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const fields = fieldsValue[side]?.map((indicator: any, i: number) => {
@@ -69,7 +68,6 @@ export default function NotifyPage() {
             }
             return indicator
         })
-
         const fieldsObject = {
             [side]: fields
         }
@@ -107,9 +105,9 @@ export default function NotifyPage() {
                             <div className='flex justify-center'>
                                 <Form.Item className='mx-2'>
                                     <Button
+                                        ref={buttonSubmit}
                                         type='primary'
                                         htmlType='submit'
-                                        // onClick={getMessage}
                                     >
                                         Notify me
                                     </Button>
