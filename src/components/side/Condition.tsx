@@ -4,7 +4,7 @@ import { BaseOptionType } from 'antd/es/select'
 import { useEffect, useState } from 'react'
 
 const changes = [
-    { value: '=', label: '==' },
+    { value: '==', label: '=' },
     { value: '>', label: '>' },
     { value: '>=', label: '>=' },
     { value: '<', label: '<' },
