@@ -13,7 +13,7 @@ import InputWhatsappUser from '@/components/InputWhatsappUser'
 
 const { Title } = Typography
 
-export default function Notification() {
+export default function NotifyPage() {
     // const [indicators, setIndicators] = useState<IndicatorModel[]>([])
 
     // useEffect(() => {
