@@ -121,8 +121,8 @@ export default function HomePage() {
                                     resetCondition={resetCondition}
                                 />
                                 <Side
-                                    resetCondition={resetCondition}
                                     side='sell'
+                                    resetCondition={resetCondition}
                                     indicators={indicators}
                                 />
                             </div>
@@ -138,7 +138,7 @@ export default function HomePage() {
                                     </Button>
                                 </Form.Item>
                                 <Form.Item className='mx-2'>
-                                    <Button type='primary' onClick={() => router.push('/notify')}> Notify me </Button>
+                                    <Button type='primary' onClick={() => router.push('/notify')}> Notification </Button>
                                 </Form.Item>
                                 </Row>
                             </div>

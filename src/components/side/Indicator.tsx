@@ -24,6 +24,8 @@ export default function Indicator(props: props) {
     useEffect(() => {
         if (side === 'buy') {
             setColor('green')
+        } if (side === 'notification') {
+            setColor('black')
         } else {
             setColor('red')
         }
