@@ -16,9 +16,9 @@ import { useEffect, useState } from 'react'
 // import InputPrice from '@/components/InputPrice'
 // import InputVolume from '@/components/InputVolume'
 import InputWhatsappUser from '@/components/InputWhatsappUser'
-import indicatorsJSON from '../data/indicators.json'
+import RootLayout from '../layout'
 
-import RootLayout from './layout'
+import indicatorsJSON from '../../data/indicators.json'
 
 const { Title } = Typography
 
