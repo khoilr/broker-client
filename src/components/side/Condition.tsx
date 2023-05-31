@@ -75,6 +75,7 @@ export default function Condition(props: props) {
                 <Input
                     type='number'
                     min={0}
+                    step={0.01}
                 />
             </Form.Item>
             <Form.Item
