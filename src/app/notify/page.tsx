@@ -19,7 +19,6 @@ const { Title } = Typography
 
 export default function NotifyPage() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
-    const [parameters, setparameters] = useState<ParameterModel[]>([])
     const buttonSubmit = useRef(null)
 
     useEffect(() => {
@@ -37,7 +36,7 @@ export default function NotifyPage() {
         })
 
         setIndicators(thisIndicators)
-    }, [parameters])
+    }, [])
     const [form] = Form.useForm()
 
     // handle form submission
