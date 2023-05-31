@@ -16,7 +16,6 @@ import { useEffect, useState } from 'react'
 // import InputPrice from '@/components/InputPrice'
 // import InputVolume from '@/components/InputVolume'
 import InputWhatsappUser from '@/components/InputWhatsappUser'
-import RootLayout from '../layout'
 
 import indicatorsJSON from '../../data/indicators.json'
 
@@ -85,7 +84,6 @@ export default function HomePage() {
     const router = useRouter()
 
     return (
-        <RootLayout>
         <ConfigProvider
             componentSize='large'
             theme={{
@@ -128,18 +126,23 @@ export default function HomePage() {
                             </div>
                             <div className='flex justify-center'>
                                 <Row>
-                                <Form.Item className='mx-2'>
-                                    <Button
-                                        type='primary'
-                                        // htmlType='submit'
-                                        // // onClick={getMessage}
-                                    >
-                                        Auto trading
-                                    </Button>
-                                </Form.Item>
-                                <Form.Item className='mx-2'>
-                                    <Button type='primary' onClick={() => router.push('/notify')}> Notification </Button>
-                                </Form.Item>
+                                    <Form.Item className='mx-2'>
+                                        <Button
+                                            type='primary'
+                                            // htmlType='submit'
+                                            // // onClick={getMessage}
+                                        >
+                                            Auto trading
+                                        </Button>
+                                    </Form.Item>
+                                    <Form.Item className='mx-2'>
+                                        <Button
+                                            type='primary'
+                                            onClick={() => router.push('/notify')}
+                                        >
+                                            Notification
+                                        </Button>
+                                    </Form.Item>
                                 </Row>
                             </div>
                         </Form>
@@ -148,6 +151,5 @@ export default function HomePage() {
                 </Row>
             </Layout>
         </ConfigProvider>
-        </RootLayout>
     )
 }
