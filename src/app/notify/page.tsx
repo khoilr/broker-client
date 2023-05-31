@@ -2,33 +2,38 @@
 
 import StockSelection from '@/components/StockSelection'
 import TimeFrameSelection from '@/components/TimeFrameSelection'
-
-import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd'
-
-// import InputTelegramUser from '@/components/InputTelegramUser'
-import axios from 'axios'
-import { useEffect, useRef, useState } from 'react'
-// import InputWhatsappUser from '@/components/InputWhatsappUser'
-import NotifyCondition from '@/components/NotifyCondition'
-import ParameterType from '@/model/ParameterType'
+import Side from '@/components/side/Side'
 import IndicatorModel from '@/model/Indicator'
 import ParameterModel from '@/model/Parameter'
-import indicatorsJSON from '@/data/indicators.json'
+import ParameterType from '@/model/ParameterType'
+
+import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd'
+import { useRouter } from 'next/navigation'
+
+import InputTelegramUser from '@/components/InputTelegramUser'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+// import InputPrice from '@/components/InputPrice'
+// import InputVolume from '@/components/InputVolume'
+import InputWhatsappUser from '@/components/InputWhatsappUser'
+import indicatorsJSON from '../data/indicators.json'
+
+import RootLayout from './layout'
 
 const { Title } = Typography
 
-export default function NotifyPage() {
+export default function HomePage() {
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
-    const buttonSubmit = useRef(null)
 
     useEffect(() => {
         const thisIndicators = indicatorsJSON.map(indicator => {
             const parameters = indicator.parameters.map(parameter => {
-                    return {
-                        ...parameter,
-                        type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
-                    } as ParameterModel
+                return {
+                    ...parameter,
+                    type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
+                } as ParameterModel
             })
+
             return {
                 ...indicator,
                 parameters
@@ -37,6 +42,7 @@ export default function NotifyPage() {
 
         setIndicators(thisIndicators)
     }, [])
+
     const [form] = Form.useForm()
 
     // handle form submission
@@ -52,6 +58,7 @@ export default function NotifyPage() {
 
     const resetCondition = (_return: string, side: string, index: number) => {
         const fieldsValue = form.getFieldsValue()
+
         // replace return in condition in side and index with _return
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const fields = fieldsValue[side]?.map((indicator: any, i: number) => {
@@ -67,6 +74,7 @@ export default function NotifyPage() {
             }
             return indicator
         })
+
         const fieldsObject = {
             [side]: fields
         }
@@ -74,8 +82,20 @@ export default function NotifyPage() {
         form.setFieldsValue(fieldsObject)
     }
 
+    const router = useRouter()
+
     return (
-        <ConfigProvider componentSize='large' theme={{ token: { fontSize: 16, borderRadius: 16 } }}>
+        <RootLayout>
+        <ConfigProvider
+            componentSize='large'
+            theme={{
+                token: {
+                    // colorPrimary: '#eb13c7',
+                    fontSize: 16,
+                    borderRadius: 16
+                }
+            }}
+        >
             <Layout>
                 <Row justify='center'>
                     <Col
@@ -91,26 +111,36 @@ export default function NotifyPage() {
                             <div className='flex justify-between'>
                                 <StockSelection />
                                 <TimeFrameSelection />
-                                {/* <InputTelegramUser />
-                                <InputWhatsappUser /> */}
+                                <InputTelegramUser />
+                                <InputWhatsappUser />
                             </div>
-                            <div className='flex justify-between'>
-                                <NotifyCondition
+                            <div className='flex justify-between items-start'>
+                                <Side
+                                    side='buy'
+                                    indicators={indicators}
                                     resetCondition={resetCondition}
-                                    side='notification'
+                                />
+                                <Side
+                                    side='sell'
+                                    resetCondition={resetCondition}
                                     indicators={indicators}
                                 />
                             </div>
                             <div className='flex justify-center'>
+                                <Row>
                                 <Form.Item className='mx-2'>
                                     <Button
-                                        ref={buttonSubmit}
                                         type='primary'
-                                        htmlType='submit'
+                                        // htmlType='submit'
+                                        // // onClick={getMessage}
                                     >
-                                        Notify me
+                                        Auto trading
                                     </Button>
                                 </Form.Item>
+                                <Form.Item className='mx-2'>
+                                    <Button type='primary' onClick={() => router.push('/notify')}> Notification </Button>
+                                </Form.Item>
+                                </Row>
                             </div>
                         </Form>
                         {/* <Chart/>        */}
@@ -118,5 +148,6 @@ export default function NotifyPage() {
                 </Row>
             </Layout>
         </ConfigProvider>
+        </RootLayout>
     )
 }
