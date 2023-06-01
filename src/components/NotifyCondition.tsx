@@ -10,10 +10,11 @@ type props = {
     side: string
     indicators: IndicatorModel[]
     resetCondition: (_return: string, side: string, index: number) => void
+    dropParameters: (index: number) => void
 }
 
 export default function NotifyCondition(props: props) {
-    const { side, indicators, resetCondition } = props
+    const { side, indicators, resetCondition, dropParameters } = props
     const [color, setColor] = useState<string>()
 
     useEffect(() => {
@@ -23,9 +24,7 @@ export default function NotifyCondition(props: props) {
     }, [side])
 
     return (
-        <div
-            className={`border border-solid rounded-lg border-${color}-700 mx-2 p-2 w-full mb-6`}
-        >
+        <div className={`border border-solid rounded-lg border-${color}-700 mx-2 p-2 w-full mb-6`}>
             <Title
                 level={2}
                 className={`text-center text-${color}-500`}
@@ -43,6 +42,7 @@ export default function NotifyCondition(props: props) {
                                 indicators={indicators}
                                 remove={remove}
                                 resetCondition={resetCondition}
+                                dropParameters={dropParameters}
                             />
                         ))}
                         <Form.Item>

@@ -24,10 +24,10 @@ export default function NotifyPage() {
     useEffect(() => {
         const thisIndicators = indicatorsJSON.map(indicator => {
             const parameters = indicator.parameters.map(parameter => {
-                    return {
-                        ...parameter,
-                        type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
-                    } as ParameterModel
+                return {
+                    ...parameter,
+                    type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
+                } as ParameterModel
             })
             return {
                 ...indicator,
@@ -54,7 +54,7 @@ export default function NotifyPage() {
         const fieldsValue = form.getFieldsValue()
         // replace return in condition in side and index with _return
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const fields = fieldsValue[side]?.map((indicator: any, i: number) => {
+        const fields = fieldsValue.indicators?.map((indicator: any, i: number) => {
             if (i === index) {
                 const condition = {
                     ...indicator?.condition,
@@ -68,14 +68,39 @@ export default function NotifyPage() {
             return indicator
         })
         const fieldsObject = {
-            [side]: fields
+            indicators: fields
+        }
+
+        form.setFieldsValue(fieldsObject)
+    }
+
+    const dropParameters = (index: number) => {
+        const fieldsValue = form.getFieldsValue()
+        // replace return in condition in side and index with _return
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const fields = fieldsValue.indicators?.map((indicator: any, i: number) => {
+            // drop parameters in indicator with index
+            if (i === index) {
+                const parameters = null
+                return {
+                    ...indicator,
+                    parameters
+                }
+            }
+            return indicator
+        })
+        const fieldsObject = {
+            indicators: fields
         }
 
         form.setFieldsValue(fieldsObject)
     }
 
     return (
-        <ConfigProvider componentSize='large' theme={{ token: { fontSize: 16, borderRadius: 16 } }}>
+        <ConfigProvider
+            componentSize='large'
+            theme={{ token: { fontSize: 16, borderRadius: 16 } }}
+        >
             <Layout>
                 <Row justify='center'>
                     <Col
@@ -99,6 +124,7 @@ export default function NotifyPage() {
                                     resetCondition={resetCondition}
                                     side='notification'
                                     indicators={indicators}
+                                    dropParameters={dropParameters}
                                 />
                             </div>
                             <div className='flex justify-center'>

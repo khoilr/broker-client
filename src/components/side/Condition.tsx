@@ -18,20 +18,20 @@ const units = [
 type props = {
     returns: ReturnModel[]
     name: number
-    resetCondition: (_return: string, side: string, index: number) => void
     side: string
+    returnOptions: BaseOptionType[]
 }
 
 export default function Condition(props: props) {
-    const { returns, name, resetCondition, side } = props
+    const { returns, name, returnOptions } = props
 
-    const [returnOptions, setReturnOptions] = useState<BaseOptionType[]>([])
+    // const [returnOptions, setReturnOptions] = useState<BaseOptionType[]>([])
 
-    useEffect(() => {
-        const thisReturn = returns.map(e => e as BaseOptionType)
-        setReturnOptions(thisReturn)
-        resetCondition(thisReturn[0].value as string, side, name)
-    }, [returns, resetCondition, name, side])
+    // useEffect(() => {
+    //     const thisReturn = returns.map(e => e as BaseOptionType)
+    //     setReturnOptions(thisReturn)
+    //     resetCondition(thisReturn[0].value as string, side, name)
+    // }, [returns, resetCondition, name, side])
 
     return (
         <Space.Compact
@@ -40,7 +40,7 @@ export default function Condition(props: props) {
         >
             <Form.Item
                 className='w-full'
-                name={[name.toString(), 'condition', 'return']}
+                name={[name.toString(), 'condition', 'source']}
             >
                 <Select
                     showSearch
