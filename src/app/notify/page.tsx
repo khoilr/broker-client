@@ -4,8 +4,8 @@ import StockSelection from '@/components/StockSelection'
 import TimeFrameSelection from '@/components/TimeFrameSelection'
 import Side from '@/components/side/Side'
 import IndicatorModel from '@/model/Indicator'
-import ParameterModel from '@/model/Parameter'
-import ParameterType from '@/model/ParameterType'
+// import ParameterModel from '@/model/Parameter'
+// import ParameterType from '@/model/ParameterType'
 
 import { Button, Col, ConfigProvider, Form, Layout, Row, Typography } from 'antd'
 import { useRouter } from 'next/navigation'
@@ -26,16 +26,16 @@ export default function HomePage() {
 
     useEffect(() => {
         const thisIndicators = indicatorsJSON.map(indicator => {
-            const parameters = indicator.parameters.map(parameter => {
-                return {
-                    ...parameter,
-                    type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
-                } as ParameterModel
-            })
+            // const parameters = indicator.parameters.map(parameter => {
+                // return {
+                //     ...parameter,
+                //     type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
+                // } as ParameterModel
+            // })
 
             return {
                 ...indicator,
-                parameters
+                // parameters
             } as IndicatorModel
         })
 

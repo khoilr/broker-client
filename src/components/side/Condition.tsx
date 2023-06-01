@@ -1,7 +1,7 @@
 import ReturnModel from '@/model/Return'
 import { Form, Input, Select, Space } from 'antd'
 import { BaseOptionType } from 'antd/es/select'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const changes = [
     { value: '==', label: '=' },
@@ -19,19 +19,16 @@ type props = {
     returns: ReturnModel[]
     name: number
     side: string
-    returnOptions: BaseOptionType[]
+    resetCondition: (_return: string, side: string, index: number) => void
 }
 
 export default function Condition(props: props) {
-    const { returns, name, returnOptions } = props
+    const { returns, name, resetCondition, side } = props
 
-    // const [returnOptions, setReturnOptions] = useState<BaseOptionType[]>([])
-
-    // useEffect(() => {
-    //     const thisReturn = returns.map(e => e as BaseOptionType)
-    //     setReturnOptions(thisReturn)
-    //     resetCondition(thisReturn[0].value as string, side, name)
-    // }, [returns, resetCondition, name, side])
+    useEffect(() => {
+        const thisReturn = returns.map(e => e as BaseOptionType)
+        resetCondition(thisReturn[0].value as string, side, name)
+    }, [returns, resetCondition, name, side])
 
     return (
         <Space.Compact
@@ -50,7 +47,7 @@ export default function Condition(props: props) {
                     filterSort={(optionA, optionB) =>
                         (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                     }
-                    options={returnOptions}
+                    options={returns.map(e => e as BaseOptionType)}
                 />
             </Form.Item>
             <Form.Item
