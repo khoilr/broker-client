@@ -72,7 +72,7 @@ export default function Indicator(props: props) {
                             hidden
                             initialValue={indicator.returns.map(e => e.value)}
                         />
-                        {indicator.parameters.filter(e => e.readOnly).length > 0 && (
+                        {indicator.parameters.map(e => e.values).length > 0 && (
                             <Form.Item
                                 name={[name.toString(), 'parameters']}
                                 label={<Title level={3}>Parameters</Title>}
