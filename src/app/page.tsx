@@ -74,28 +74,6 @@ export default function NotifyPage() {
         form.setFieldsValue(fieldsObject)
     }
 
-    const dropParameters = (index: number) => {
-        const fieldsValue = form.getFieldsValue()
-        // replace return in condition in side and index with _return
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const fields = fieldsValue.indicators?.map((indicator: any, i: number) => {
-            // drop parameters in indicator with index
-            if (i === index) {
-                const parameters = null
-                return {
-                    ...indicator,
-                    parameters
-                }
-            }
-            return indicator
-        })
-        const fieldsObject = {
-            indicators: fields
-        }
-
-        form.setFieldsValue(fieldsObject)
-    }
-
     return (
         <ConfigProvider
             componentSize='large'
@@ -124,7 +102,6 @@ export default function NotifyPage() {
                                     resetCondition={resetCondition}
                                     side='notification'
                                     indicators={indicators}
-                                    dropParameters={dropParameters}
                                 />
                             </div>
                             <div className='flex justify-center'>
