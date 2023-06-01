@@ -3,7 +3,12 @@ import CompanyModel from '@/model/Company'
 import { Form, Select } from 'antd'
 import companiesJSON from '../data/companies.json'
 
-export default function StockSelection() {
+interface props {
+    setSymbol: (symbol: string) => void
+}
+export default function StockSelection(props: props) {
+    const { setSymbol } = props
+
     const [companies] = useState<CompanyModel[]>(companiesJSON)
 
     return (
@@ -16,15 +21,9 @@ export default function StockSelection() {
                 showSearch
                 placeholder='Select stock'
                 optionFilterProp='children'
-                filterOption={(input, option) =>
-                    (option?.label ?? '')
-                        .toLowerCase()
-                        .includes(input.toLowerCase())
-                }
+                filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
                 filterSort={(optionA, optionB) =>
-                    (optionA?.value ?? '')
-                        .toLowerCase()
-                        .localeCompare((optionB?.value ?? '').toLowerCase())
+                    (optionA?.value ?? '').toLowerCase().localeCompare((optionB?.value ?? '').toLowerCase())
                 }
                 options={companies.map(e => {
                     return {
@@ -32,6 +31,9 @@ export default function StockSelection() {
                         label: `${e.symbol} - ${e.name}`
                     }
                 })}
+                onSelect={(value: string) => {
+                    setSymbol(value)
+                }}
             />
         </Form.Item>
     )

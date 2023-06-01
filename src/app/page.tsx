@@ -14,10 +14,13 @@ import NotifyCondition from '@/components/NotifyCondition'
 import IndicatorModel from '@/model/Indicator'
 // import ParameterModel from '@/model/Parameter'
 import indicatorsJSON from '@/data/indicators.json'
+import Chart from '@/components/Chart'
 
 const { Title } = Typography
 
 export default function NotifyPage() {
+    const [symbol, setSymbol] = useState<string>()
+    const [timeFrame, setTimeFrame] = useState<string>('1D')
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
     const buttonSubmit = useRef(null)
 
@@ -92,8 +95,8 @@ export default function NotifyPage() {
                             onFinish={onFinish}
                         >
                             <div className='flex justify-between'>
-                                <StockSelection />
-                                <TimeFrameSelection />
+                                <StockSelection setSymbol={setSymbol} />
+                                <TimeFrameSelection setTimeFrame={setTimeFrame} />
                                 <InputTelegramUser />
                                 <InputWhatsappUser />
                             </div>
@@ -116,7 +119,10 @@ export default function NotifyPage() {
                                 </Form.Item>
                             </div>
                         </Form>
-                        {/* <Chart/>        */}
+                        <Chart
+                            symbol={symbol || ''}
+                            timeFrame={timeFrame || ''}
+                        />
                     </Col>
                 </Row>
             </Layout>

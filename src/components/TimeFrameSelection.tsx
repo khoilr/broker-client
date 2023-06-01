@@ -53,7 +53,14 @@ const options = [
         ]
     }
 ]
-export default function TimeFrameSelection() {
+
+interface props {
+    setTimeFrame: (timeFrame: string) => void
+}
+
+export default function TimeFrameSelection(props: props) {
+    const { setTimeFrame } = props
+
     return (
         <Form.Item
             name='time_frame'
@@ -64,11 +71,7 @@ export default function TimeFrameSelection() {
                 showSearch
                 placeholder='Select time frame'
                 optionFilterProp='children'
-                filterOption={(input, option) =>
-                    (option?.label ?? '')
-                        .toLowerCase()
-                        .includes(input.toLowerCase())
-                }
+                filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
                 // * don't sort
                 // filterSort={(optionA, optionB) =>
                 //     (optionA?.label ?? '')
@@ -76,6 +79,9 @@ export default function TimeFrameSelection() {
                 //         .localeCompare((optionB?.label ?? '').toLowerCase())
                 // }
                 options={options}
+                onSelect={(value: string) => {
+                    setTimeFrame(value)
+                }}
             />
         </Form.Item>
     )
