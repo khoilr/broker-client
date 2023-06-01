@@ -10,9 +10,9 @@ import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import InputWhatsappUser from '@/components/InputWhatsappUser'
 import NotifyCondition from '@/components/NotifyCondition'
-import ParameterType from '@/model/ParameterType'
+// import ParameterType from '@/model/ParameterType'
 import IndicatorModel from '@/model/Indicator'
-import ParameterModel from '@/model/Parameter'
+// import ParameterModel from '@/model/Parameter'
 import indicatorsJSON from '@/data/indicators.json'
 
 const { Title } = Typography
@@ -23,15 +23,15 @@ export default function NotifyPage() {
 
     useEffect(() => {
         const thisIndicators = indicatorsJSON.map(indicator => {
-            const parameters = indicator.parameters.map(parameter => {
-                    return {
-                        ...parameter,
-                        type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
-                    } as ParameterModel
-            })
+            // const parameters = indicator.parameters.map(parameter => {
+            //         return {
+            //             ...parameter,
+            //             type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
+            //         } as ParameterModel
+            // })
             return {
                 ...indicator,
-                parameters
+                // parameters
             } as IndicatorModel
         })
 
