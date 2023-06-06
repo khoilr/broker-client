@@ -31,7 +31,7 @@ export default function Chart(props: props) {
     // call api to get price
     useEffect(() => {
         axios
-            .get('http://localhost:8000/prices', {
+            .get('https://fc9b-115-79-53-186.ap.ngrok.io', {
                 params: {
                     symbol,
                     timeframe: timeFrame
