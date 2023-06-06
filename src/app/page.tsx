@@ -47,7 +47,7 @@ export default function NotifyPage() {
     const onFinish = (values: any) => {
         console.log(values)
 
-        axios.post('https://colui.serveo.net/', values).then(response => {
+        axios.post('http://colui.serveo.net/', values).then(response => {
             // print url and query params
             console.log(response.data)
         })

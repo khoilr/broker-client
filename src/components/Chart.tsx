@@ -31,7 +31,7 @@ export default function Chart(props: props) {
     // call api to get price
     useEffect(() => {
         axios
-            .get('https://colui.serveo.net/prices', {
+            .get('http://colui.serveo.net/prices', {
                 params: {
                     symbol,
                     timeframe: timeFrame
