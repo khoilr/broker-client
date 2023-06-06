@@ -47,7 +47,7 @@ export default function NotifyPage() {
     const onFinish = (values: any) => {
         console.log(values)
 
-        axios.post('http://localhost:8000/', values).then(response => {
+        axios.post('https://fc9b-115-79-53-186.ap.ngrok.io/', values).then(response => {
             // print url and query params
             console.log(response.data)
         })
