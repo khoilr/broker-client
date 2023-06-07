@@ -34,7 +34,7 @@ export default function Chart(props: props) {
             .get('https://khoilr.serveo.net/prices/', {
                 params: {
                     symbol,
-                    timeframe: timeFrame
+                    time_frame: timeFrame
                 }
             })
             .then(res => {
@@ -64,7 +64,7 @@ export default function Chart(props: props) {
                         <CartesianGrid strokeDasharray='3 3' />
                         <XAxis
                             dataKey='datetime'
-                            minTickGap={16}
+                            minTickGap={32}
                         />
                         <YAxis
                             yAxisId='left'
