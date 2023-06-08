@@ -47,9 +47,6 @@ export default function Chart(props: props) {
                 })
                 setPrice(data)
             })
-            .catch(err => {
-                console.log(err)
-            })
     }, [symbol, timeFrame])
 
     return (

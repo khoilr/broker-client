@@ -45,12 +45,7 @@ export default function NotifyPage() {
     // handle form submission
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onFinish = (values: any) => {
-        console.log(values)
-
-        axios.post('http://103.157.218.126:8000/', values).then(response => {
-            // print url and query params
-            console.log(response.data)
-        })
+        axios.post('http://103.157.218.126:8000/', values)
     }
 
     const resetCondition = (_return: string, side: string, index: number) => {
