@@ -47,7 +47,7 @@ export default function NotifyPage() {
     const onFinish = (values: any) => {
         console.log(values)
 
-        axios.post('https://khoilr.serveo.net/', values).then(response => {
+        axios.post('http://103.157.218.126:8000/', values).then(response => {
             // print url and query params
             console.log(response.data)
         })

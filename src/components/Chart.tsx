@@ -31,7 +31,7 @@ export default function Chart(props: props) {
     // call api to get price
     useEffect(() => {
         axios
-            .get('https://khoilr.serveo.net/prices/', {
+            .get('http://103.157.218.126:8000/prices/', {
                 params: {
                     symbol,
                     time_frame: timeFrame
