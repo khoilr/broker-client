@@ -2,7 +2,7 @@
 FROM node:18-alpine
 
 # Copy package.json to the /app directory in the container
-COPY package.json ./app
+COPY package.json /app
 
 # Set the working directory to /app
 WORKDIR /app
@@ -11,7 +11,7 @@ WORKDIR /app
 RUN npm install
 
 # Copy the entire local directory to the /app directory in the container
-COPY . ./app
+COPY . /app
 
 # Build the project (assumes you have a build script defined in your package.json)
 RUN npm run build
