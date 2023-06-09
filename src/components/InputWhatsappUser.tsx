@@ -4,7 +4,7 @@ export default function InputWhatsappUser() {
     return (
         <Form.Item
             name='whatsapp-number'
-            label='Whatsapp phone number'
+            label='Whatsapp phone number (+84)'
             className='mx-2 w-full'
             rules={[
                 {
@@ -16,8 +16,8 @@ export default function InputWhatsappUser() {
             <Input
                 placeholder='Whatsapp-number'
                 type='text'
-                minLength={10}
-                maxLength={10}
+                minLength={11}
+                maxLength={11}
             />
         </Form.Item>
     )
