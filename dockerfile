@@ -4,14 +4,11 @@ FROM node:18-alpine
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package.json .
+# Copy the entire Next.js app to the working directory
+COPY . .
 
 # Install dependencies
 RUN npm install
-
-# Copy the entire Next.js app to the working directory
-COPY . .
 
 # Build the Next.js app for production
 RUN npm run build
