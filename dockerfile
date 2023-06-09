@@ -1,23 +1,23 @@
-# Use the Node.js 18 Alpine base image
+# Use the official Node.js 18-alpine image as the base image
 FROM node:18-alpine
 
-# Copy package.json to the /app directory in the container
-COPY package.json /app
-
-# Set the working directory to /app
+# Set the working directory inside the container
 WORKDIR /app
 
-# Install dependencies based on the package.json file
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
-# Copy the entire local directory to the /app directory in the container
-COPY . /app
+# Copy the entire Next.js app to the working directory
+COPY . .
 
-# Build the project (assumes you have a build script defined in your package.json)
+# Build the Next.js app for production
 RUN npm run build
 
-# Expose port 3000 to allow external access to the application
+# Expose the desired port (adjust if necessary)
 EXPOSE 3000
 
-# Start the application using "npm start" as the command
+# Set the command to run the Next.js app
 CMD ["npm", "start"]
