@@ -9,6 +9,8 @@ type props = {
 }
 
 const switchCase = (parameter: ParameterModel) => {
+    console.log(parameter.type === ParameterType.SELECTION)
+
     return parameter.type === ParameterType.SELECTION ? (
         <Select
             showSearch

@@ -14,10 +14,11 @@ type props = {
     name: number
     remove: (name: number) => void
     resetCondition: (_return: string, side: string, index: number) => void
+    dropParameters: (index: number) => void
 }
 
 export default function Indicator(props: props) {
-    const { side, indicators, name, remove, resetCondition } = props
+    const { side, indicators, name, remove, resetCondition, dropParameters } = props
     const [color, setColor] = useState<string>()
     const [indicator, setIndicator] = useState<IndicatorModel>()
     // const [indicatorOption, setIndicatorOption] = useState<ReactElement | null>()
@@ -67,6 +68,7 @@ export default function Indicator(props: props) {
                 <Form.Item
                     label={<Title level={3}>Indicator</Title>}
                     name={[name.toString(), 'name']}
+                    rules={[{ required: true, message: 'Please select indicator' }]}
                 >
                     <Select
                         showSearch
@@ -79,6 +81,7 @@ export default function Indicator(props: props) {
                             (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                         }
                         onSelect={value => {
+                            dropParameters(name)
                             setIndicator(indicators.find(e => e.value === value))
                         }}
                         options={indicators.map(e => ({
@@ -107,6 +110,7 @@ export default function Indicator(props: props) {
                                 name={[name.toString(), 'parameters']}
                                 label={<Title level={3}>Parameters</Title>}
                                 className={`border border-solid border-${color}-500 rounded-lg p-2`}
+                                isList
                             >
                                 <div className='flex flex-wrap'>
                                     {indicator.parameters

@@ -16,6 +16,12 @@ export default function StockSelection(props: props) {
             name='stock'
             label='Stock'
             className='mx-2 w-full'
+            rules={[
+                {
+                    required: true,
+                    message: 'Please select a stock'
+                }
+            ]}
         >
             <Select
                 showSearch

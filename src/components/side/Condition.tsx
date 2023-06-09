@@ -27,6 +27,7 @@ export default function Condition(props: props) {
 
     useEffect(() => {
         const thisReturn = returns.map(e => e as BaseOptionType)
+
         resetCondition(thisReturn[0].value as string, side, name)
     }, [returns, resetCondition, name, side])
 
@@ -38,10 +39,16 @@ export default function Condition(props: props) {
             <Form.Item
                 className='w-full'
                 name={[name.toString(), 'condition', 'source']}
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please select source'
+                    }
+                ]}
             >
                 <Select
                     showSearch
-                    placeholder='Select return'
+                    placeholder='Select source'
                     optionFilterProp='children'
                     filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
                     filterSort={(optionA, optionB) =>
@@ -53,6 +60,12 @@ export default function Condition(props: props) {
             <Form.Item
                 className='w-full'
                 name={[name.toString(), 'condition', 'change']}
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please select condition'
+                    }
+                ]}
             >
                 <Select
                     showSearch
@@ -68,6 +81,7 @@ export default function Condition(props: props) {
             <Form.Item
                 className='w-full'
                 name={[name.toString(), 'condition', 'value']}
+                rules={[{ required: true, message: 'Please input value' }]}
             >
                 <Input
                     type='number'
@@ -78,6 +92,12 @@ export default function Condition(props: props) {
             <Form.Item
                 className='w-full'
                 name={[name.toString(), 'condition', 'unit']}
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please select unit'
+                    }
+                ]}
             >
                 <Select
                     showSearch

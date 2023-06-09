@@ -20,5 +20,81 @@
                 "value": "price"
             }
         ]
+    },
+    {
+        "value": "BBANDS",
+        "label": "Bollinger Bands",
+        "parameters": [
+            {
+                "name": "source",
+                "label": "Source",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close",
+                "readOnly": true
+            },
+            {
+                "name": "timeperiod",
+                "label": "Period",
+                "type": "number",
+                "default": 5,
+                "readOnly": true
+            },
+            {
+                "name": "nbdevup",
+                "label": "Nbdevup",
+                "type": "number",
+                "default": 2,
+                "readOnly": true
+            },
+            {
+                "name": "nbdevdn",
+                "label": "Nbdevdn",
+                "type": "number",
+                "default": 2,
+                "readOnly": true
+            }
+        ],
+        "returns": [
+            {
+                "label": "Upper Band",
+                "value": "upperband"
+            },
+            {
+                "label": "Middle Band",
+                "value": "middleband"
+            },
+            {
+                "label": "Lower Band",
+                "value": "lowerband"
+            }
+        ]
+    },
+    {
+        "value": "DEMA",
+        "label": "Double Exponential Moving Average",
+        "parameters": [
+            {
+                "name": "source",
+                "label": "Source",
+                "type": "selection",
+                "values": ["open", "close", "high", "low"],
+                "default": "close",
+                "readOnly": true
+            },
+            {
+                "name": "timeperiod",
+                "label": "Period",
+                "type": "number",
+                "default": 5,
+                "readOnly": true
+            }
+        ],
+        "returns": [
+            {
+                "label": "DEMA",
+                "value": "real"
+            }
+        ]
     }
 ]

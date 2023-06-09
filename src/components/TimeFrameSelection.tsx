@@ -66,6 +66,12 @@ export default function TimeFrameSelection(props: props) {
             name='time_frame'
             label='Time frame'
             className='mx-2 w-full'
+            rules={[
+                {
+                    required: true,
+                    message: 'Please select a time frame'
+                }
+            ]}
         >
             <Select
                 showSearch

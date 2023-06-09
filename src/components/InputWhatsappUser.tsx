@@ -6,6 +6,12 @@ export default function InputWhatsappUser() {
             name='whatsapp-number'
             label='Whatsapp phone number'
             className='mx-2 w-full'
+            rules={[
+                {
+                    required: true,
+                    message: 'Please input your Whatsapp phone number'
+                }
+            ]}
         >
             <Input
                 placeholder='Whatsapp-number'

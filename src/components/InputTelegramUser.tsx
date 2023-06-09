@@ -6,6 +6,25 @@ export default function InputTelegramUser() {
             name='telegram-user'
             label='Telegram user name'
             className='mx-2 w-full'
+            tooltip={
+                <p>
+                    Please go to{' '}
+                    <a
+                        target='_blank'
+                        href='https://t.me/broker_khoilr_bot'
+                        rel='noreferrer'
+                    >
+                        t.me/broker_khoilr_bot
+                    </a>{' '}
+                    to activate notification to your telegram account
+                </p>
+            }
+            rules={[
+                {
+                    required: true,
+                    message: 'Please input your Telegram user name'
+                }
+            ]}
         >
             <Input
                 placeholder='@user'
