@@ -11,7 +11,7 @@ export default function InputTelegramUser() {
                     Please go to{' '}
                     <a
                         target='_blank'
-                        href='https://t.me/broker_khoilr_bot'
+                        href={process.env.NEXT_PUBLIC_TELEGRAM_BOT_URL}
                         rel='noreferrer'
                     >
                         t.me/broker_khoilr_bot
