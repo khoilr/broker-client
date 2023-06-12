@@ -14,7 +14,7 @@ export default function InputTelegramUser() {
                         href={process.env.NEXT_PUBLIC_TELEGRAM_BOT_URL}
                         rel='noreferrer'
                     >
-                        t.me/broker_khoilr_bot
+                        Telegram bot
                     </a>{' '}
                     to activate notification to your telegram account
                 </p>
