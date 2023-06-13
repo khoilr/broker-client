@@ -1,3 +1,4 @@
+import IndicatorModel from '@/model/Indicator'
 import ReturnModel from '@/model/Return'
 import { Form, Input, Select, Space } from 'antd'
 import { BaseOptionType } from 'antd/es/select'
@@ -16,6 +17,7 @@ const units = [
 ]
 
 type props = {
+    indicator: IndicatorModel
     returns: ReturnModel[]
     name: number
     side: string
@@ -23,7 +25,7 @@ type props = {
 }
 
 export default function Condition(props: props) {
-    const { returns, name, resetCondition, side } = props
+const { returns, name, resetCondition, side, indicator } = props
 
     useEffect(() => {
         const thisReturn = returns.map(e => e as BaseOptionType)
@@ -38,7 +40,7 @@ export default function Condition(props: props) {
         >
             <Form.Item
                 className='w-full'
-                name={[name.toString(), 'condition', 'source']}
+                name={[name.toString(), indicator.value, 'condition', 'source']}
                 rules={[
                     {
                         required: true,
@@ -59,7 +61,7 @@ export default function Condition(props: props) {
             </Form.Item>
             <Form.Item
                 className='w-full'
-                name={[name.toString(), 'condition', 'change']}
+                name={[name.toString(), indicator.value, 'condition', 'change']}
                 rules={[
                     {
                         required: true,
@@ -80,7 +82,7 @@ export default function Condition(props: props) {
             </Form.Item>
             <Form.Item
                 className='w-full'
-                name={[name.toString(), 'condition', 'value']}
+                name={[name.toString(), indicator.value, 'condition', 'value']}
                 rules={[{ required: true, message: 'Please input value' }]}
             >
                 <Input
@@ -91,7 +93,7 @@ export default function Condition(props: props) {
             </Form.Item>
             <Form.Item
                 className='w-full'
-                name={[name.toString(), 'condition', 'unit']}
+                name={[name.toString(), indicator.value, 'condition', 'unit']}
                 rules={[
                     {
                         required: true,

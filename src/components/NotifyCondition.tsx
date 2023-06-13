@@ -10,11 +10,10 @@ type props = {
     side: string
     indicators: IndicatorModel[]
     resetCondition: (_return: string, side: string, index: number) => void
-    dropParameters: (index: number) => void
 }
 
 export default function NotifyCondition(props: props) {
-    const { side, indicators, resetCondition, dropParameters } = props
+    const { side, indicators, resetCondition } = props
     const [color, setColor] = useState<string>()
 
     useEffect(() => {
@@ -42,7 +41,6 @@ export default function NotifyCondition(props: props) {
                                 indicators={indicators}
                                 remove={remove}
                                 resetCondition={resetCondition}
-                                dropParameters={dropParameters}
                             />
                         ))}
                         <Form.Item>
