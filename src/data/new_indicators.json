@@ -1,24 +1,6 @@
 [
     {
       "name": "ADX",
-      "paramters": [
-        {
-          "name": "period_di",
-          "type": "int",
-          "label": "Period Di"
-        },
-        {
-          "name": "period_adx",
-          "type": "int",
-          "label": "Period Adx"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Average Directional Index",
       "returns": [
         {
             "label": "Average Directional Index",
@@ -35,79 +17,7 @@
     ]
     },
     {
-      "name": "ALMA",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "offset",
-          "type": "float",
-          "label": "Offset"
-        },
-        {
-          "name": "sigma",
-          "type": "float",
-          "label": "Sigma"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Arnaud Legoux Moving Average",
-      "returns": [
-        {
-            "label": "ALMA",
-            "value": "alma"
-        }
-    ]
-    },
-    {
-      "name": "AO",
-      "paramters": [
-        {
-          "name": "period_fast",
-          "type": "int",
-          "label": "Period Fast"
-        },
-        {
-          "name": "period_slow",
-          "type": "int",
-          "label": "Period Slow"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Awesome Oscillator",
-      "returns": [
-        {
-            "label": "AO",
-            "value": "ao"
-        }
-    ]
-    },
-    {
       "name": "ATR",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Average True Range",
       "returns": [
         {
             "label": "ATR",
@@ -116,37 +26,7 @@
     ]
     },
     {
-      "name": "AccuDist",
-      "paramters": [
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Accumulation and Distribution",
-      "returns": [
-        {
-            "label": "AccuDist",
-            "value": "acd"
-        }
-    ]
-    },
-    {
       "name": "Aroon",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Aroon Up/Down",
       "returns": [
         {
             "label": "Up",
@@ -160,29 +40,6 @@
     },
     {
       "name": "BB",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "std_dev_multiplier",
-          "type": "float",
-          "label": "Std Dev Multiplier"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        },
-        {
-          "name": "value_extractor",
-          "type": "Callable[..., Any] = None",
-          "label": "Value Extractor"
-        }
-      ],
-      "label": "Bollinger Bands",
       "returns": [
         {
             "label": "Upper Band",
@@ -199,38 +56,7 @@
     ]
     },
     {
-      "name": "BOP",
-      "paramters": [
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Balance Of Power",
-      "returns":[
-        {
-            "label": "BOP",
-            "value": "List[float]"
-        }
-      ]
-
-    },
-    {
       "name": "CCI",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Commodity Channel Index",
       "returns":[
         {
             "label": "CCI",
@@ -239,47 +65,7 @@
       ]
     },
     {
-      "name": "CHOP",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Choppiness Index",
-      "returns":[
-        {
-            "label": "CHOP",
-            "value": "List[talipp.ohlcv.OHLCV]"
-        }
-      ]
-    },
-    {
       "name": "ChaikinOsc",
-      "paramters": [
-        {
-          "name": "period_fast",
-          "type": "int",
-          "label": "Period Fast"
-        },
-        {
-          "name": "period_slow",
-          "type": "int",
-          "label": "Period Slow"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Chaikin Oscillator",
       "returns":[
         {
             "label": "CO",
@@ -289,29 +75,6 @@
     },
     {
       "name": "ChandeKrollStop",
-      "paramters": [
-        {
-          "name": "preliminary_period",
-          "type": "int",
-          "label": "Preliminary Period"
-        },
-        {
-          "name": "atr_mult",
-          "type": "float",
-          "label": "Atr Mult"
-        },
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Chande Kroll Stop",
       "returns":[
         {
             "label": "Short Stop",
@@ -324,52 +87,7 @@
       ]
     },
     {
-      "name": "CoppockCurve",
-      "paramters": [
-        {
-          "name": "fast_roc_period",
-          "type": "int",
-          "label": "Fast Roc Period"
-        },
-        {
-          "name": "slow_roc_period",
-          "type": "int",
-          "label": "Slow Roc Period"
-        },
-        {
-          "name": "wma_period",
-          "type": "int",
-          "label": "Wma Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "CoppockCurve",
-      "returns": [
-        {
-            "label": "CC",
-            "value": "List[float]"
-        }
-    ]
-    },
-    {
       "name": "DEMA",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Double Exponential Moving Average",
       "returns": [
         {
             "label": "DEMA",
@@ -379,24 +97,6 @@
     },
     {
       "name": "DPO",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        },
-        {
-          "name": "value_extractor",
-          "type": "Callable[..., Any] = None",
-          "label": "Value Extractor"
-        }
-      ],
-      "label": "Detrended Price Oscillator",
       "returns":[
         {
             "label": "DPO",
@@ -406,19 +106,6 @@
     },
     {
       "name": "DonchianChannels",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Donchian Channels",
       "returns": [
         {
             "label": "Upper Band",
@@ -436,24 +123,6 @@
     },
     {
       "name": "EMA",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        },
-        {
-          "name": "value_extractor",
-          "type": "Callable[..., Any] = None",
-          "label": "Value Extractor"
-        }
-      ],
-      "label": "Exponential Moving Average",
       "returns":[
         {
             "label": "EMA",
@@ -462,116 +131,7 @@
     ]
     },
     {
-      "name": "EMV",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "volume_div",
-          "type": "int",
-          "label": "Volume Div"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Ease of Movement",
-      "returns":[
-        {
-            "label": "EMV",
-            "value": "List[float]"
-        }
-    ]
-    },
-    {
-      "name": "FibRetracement",
-      "paramters": [],
-      "label": ""
-    },
-    {
-      "name": "ForceIndex",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Force Index",
-      "returns":[
-        {
-            "label": "FI",
-            "value": "List[float]"
-        }
-    ]
-    },
-    {
-      "name": "HMA",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Hull Moving Average",
-      "returns":[
-        {
-            "label": "HMA",
-            "value": "List[float]"
-        }
-    ]
-    },
-    {
       "name": "Ichimoku",
-      "paramters": [
-        {
-          "name": "kijun_period",
-          "type": "int",
-          "label": "Kijun Period"
-        },
-        {
-          "name": "tenkan_period",
-          "type": "int",
-          "label": "Tenkan Period"
-        },
-        {
-          "name": "chikou_lag_period",
-          "type": "int",
-          "label": "Chikou Lag Period"
-        },
-        {
-          "name": "senkou_slow_period",
-          "type": "int",
-          "label": "Senkou Slow Period"
-        },
-        {
-          "name": "senkou_lookup_period",
-          "type": "int",
-          "label": "Senkou Lookup Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Ichimoku Clouds",
       "returns":[
         {
             "label": "Kijun Sen",
@@ -597,29 +157,6 @@
     },
     {
       "name": "KAMA",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "fast_ema_constant_period",
-          "type": "int",
-          "label": "Fast Ema Constant Period"
-        },
-        {
-          "name": "slow_ema_constant_period",
-          "type": "int",
-          "label": "Slow Ema Constant Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Kaufman's Adaptive Moving Average",
       "returns":[
         {
             "label": "KAMA",
@@ -628,59 +165,6 @@
     },
     {
       "name": "KST",
-      "paramters": [
-        {
-          "name": "roc1_period",
-          "type": "int",
-          "label": "Roc1 Period"
-        },
-        {
-          "name": "roc1_ma_period",
-          "type": "int",
-          "label": "Roc1 Ma Period"
-        },
-        {
-          "name": "roc2_period",
-          "type": "int",
-          "label": "Roc2 Period"
-        },
-        {
-          "name": "roc2_ma_period",
-          "type": "int",
-          "label": "Roc2 Ma Period"
-        },
-        {
-          "name": "roc3_period",
-          "type": "int",
-          "label": "Roc3 Period"
-        },
-        {
-          "name": "roc3_ma_period",
-          "type": "int",
-          "label": "Roc3 Ma Period"
-        },
-        {
-          "name": "roc4_period",
-          "type": "int",
-          "label": "Roc4 Period"
-        },
-        {
-          "name": "roc4_ma_period",
-          "type": "int",
-          "label": "Roc4 Ma Period"
-        },
-        {
-          "name": "signal_period",
-          "type": "int",
-          "label": "Signal Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Know Sure Thing",
       "returns":[
         {
         "label": "KST",
@@ -693,61 +177,7 @@
     ]
     },
     {
-      "name": "KVO",
-      "paramters": [
-        {
-          "name": "fast_period",
-          "type": "int",
-          "label": "Fast Period"
-        },
-        {
-          "name": "slow_period",
-          "type": "int",
-          "label": "Slow Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Klinger Volume Oscillator",
-      "returns":[
-        {
-            "label": "KAMA",
-            "value": "List[float]"
-      }]
-    },
-    {
       "name": "KeltnerChannels",
-      "paramters": [
-        {
-          "name": "ma_period",
-          "type": "int",
-          "label": "Ma Period"
-        },
-        {
-          "name": "atr_period",
-          "type": "int",
-          "label": "Atr Period"
-        },
-        {
-          "name": "atr_mult_up",
-          "type": "float",
-          "label": "Atr Mult Up"
-        },
-        {
-          "name": "atr_mult_down",
-          "type": "float",
-          "label": "Atr Mult Down"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Keltner Channels",
       "returns": [
         {
             "label": "Upper Band",
@@ -765,29 +195,6 @@
     },
     {
       "name": "MACD",
-      "paramters": [
-        {
-          "name": "fast_period",
-          "type": "int",
-          "label": "Fast Period"
-        },
-        {
-          "name": "slow_period",
-          "type": "int",
-          "label": "Slow Period"
-        },
-        {
-          "name": "signal_period",
-          "type": "int",
-          "label": "Signal Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Moving Average Convergence Divergence",
       "returns": [
         {
             "label": "MACD",
@@ -805,29 +212,6 @@
     },
     {
       "name": "MassIndex",
-      "paramters": [
-        {
-          "name": "ema_period",
-          "type": "int",
-          "label": "Ema Period"
-        },
-        {
-          "name": "ema_ema_period",
-          "type": "int",
-          "label": "Ema Ema Period"
-        },
-        {
-          "name": "ema_ratio_period",
-          "type": "int",
-          "label": "Ema Ratio Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Mass Index",
       "returns": [
         {
             "label": "MA",
@@ -837,24 +221,6 @@
     },
     {
       "name": "McGinleyDynamic",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        },
-        {
-          "name": "value_extractor",
-          "type": "Callable[..., Any] = None",
-          "label": "Value Extractor"
-        }
-      ],
-      "label": "McGinley Dynamic",
       "returns": [
         {
             "label": "McD",
@@ -864,24 +230,6 @@
     },
     {
       "name": "MeanDev",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        },
-        {
-          "name": "value_extractor",
-          "type": "Callable[..., Any] = None",
-          "label": "Value Extractor"
-        }
-      ],
-      "label": "Mean Deviation",
       "returns": [
         {
             "label": "MD",
@@ -891,14 +239,6 @@
     },
     {
       "name": "OBV",
-      "paramters": [
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "On Balance Volume",
       "returns": [
         {
             "label": "OBV",
@@ -908,29 +248,6 @@
     },
     {
       "name": "ParabolicSAR",
-      "paramters": [
-        {
-          "name": "init_accel_factor",
-          "type": "float",
-          "label": "Init Accel Factor"
-        },
-        {
-          "name": "accel_factor_inc",
-          "type": "float",
-          "label": "Accel Factor Inc"
-        },
-        {
-          "name": "max_accel_factor",
-          "type": "float",
-          "label": "Max Accel Factor"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Parabolic Stop And Reverse",
       "returns": [
         {
             "label": "Value",
@@ -952,24 +269,6 @@
     },
     {
       "name": "PivotsHL",
-      "paramters": [
-        {
-          "name": "high_period",
-          "type": "int",
-          "label": "High Period"
-        },
-        {
-          "name": "low_period",
-          "type": "int",
-          "label": "Low Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "High/Low Pivots",
       "returns": [
         {
             "label": "OHLCV",
@@ -983,19 +282,6 @@
     },
     {
       "name": "ROC",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Rate Of Change",
       "returns": [
         {
             "label": "ROC",
@@ -1005,19 +291,6 @@
     },
     {
       "name": "RSI",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Relative Strength Index",
       "returns": [
         {
             "label": "RSI",
@@ -1027,29 +300,6 @@
     },
     {
       "name": "SFX",
-      "paramters": [
-        {
-          "name": "atr_period",
-          "type": "int",
-          "label": "Atr Period"
-        },
-        {
-          "name": "std_dev_period",
-          "type": "int",
-          "label": "Std Dev Period"
-        },
-        {
-          "name": "std_dev_smoothing_period",
-          "type": "int",
-          "label": "Std Dev Smoothing Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Output: A list of SFXVal",
       "returns": [
         {
             "label": "ATR",
@@ -1067,24 +317,6 @@
     },
     {
       "name": "SMA",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        },
-        {
-          "name": "value_extractor",
-          "type": "Callable[..., Any] = None",
-          "label": "Value Extractor"
-        }
-      ],
-      "label": "Simple Moving Average",
       "returns": [
         {
             "label": "SMA",
@@ -1094,19 +326,6 @@
     },
     {
       "name": "SMMA",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Smoothed Moving Average",
       "returns": [
         {
             "label": "SMMA",
@@ -1116,19 +335,6 @@
     },
     {
       "name": "SOBV",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Smoothed On Balance Volume",
       "returns": [
         {
             "label": "SOBV",
@@ -1138,24 +344,6 @@
     },
     {
       "name": "StdDev",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        },
-        {
-          "name": "value_extractor",
-          "type": "Callable[..., Any] = None",
-          "label": "Value Extractor"
-        }
-      ],
-      "label": "Standard Deviation",
       "returns": [
         {
             "label": "Std Dev",
@@ -1165,24 +353,6 @@
     },
     {
       "name": "Stoch",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "smoothing_period",
-          "type": "int",
-          "label": "Smoothing Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Stochastic",
       "returns": [
         {
             "label": "K",
@@ -1196,34 +366,6 @@
     },
     {
       "name": "StochRSI",
-      "paramters": [
-        {
-          "name": "rsi_period",
-          "type": "int",
-          "label": "Rsi Period"
-        },
-        {
-          "name": "stoch_period",
-          "type": "int",
-          "label": "Stoch Period"
-        },
-        {
-          "name": "smoothing_period_k",
-          "type": "int",
-          "label": "Smoothing Period K"
-        },
-        {
-          "name": "smoothing_period_d",
-          "type": "int",
-          "label": "Smoothing Period D"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Stochastic RSI",
       "returns": [
         {
             "label": "K",
@@ -1237,24 +379,6 @@
     },
     {
       "name": "SuperTrend",
-      "paramters": [
-        {
-          "name": "atr_period",
-          "type": "int",
-          "label": "Atr Period"
-        },
-        {
-          "name": "mult",
-          "type": "int",
-          "label": "Mult"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Output: A list of SuperTrendVal",
       "returns": [
         {
             "label": "Value",
@@ -1268,19 +392,6 @@
     },
     {
       "name": "TEMA",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Triple Exponential Moving Average",
       "returns": [
         {
             "label": "TEMA",
@@ -1290,24 +401,6 @@
     },
     {
       "name": "TRIX",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        },
-        {
-          "name": "value_extractor",
-          "type": "Callable[..., Any] = None",
-          "label": "Value Extractor"
-        }
-      ],
-      "label": "TRIX",
       "returns": [
         {
             "label": "TRIX",
@@ -1317,29 +410,6 @@
     },
     {
       "name": "TSI",
-      "paramters": [
-        {
-          "name": "fast_period",
-          "type": "int",
-          "label": "Fast Period"
-        },
-        {
-          "name": "slow_period",
-          "type": "int",
-          "label": "Slow Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        },
-        {
-          "name": "value_extractor",
-          "type": "Callable[..., Any] = None",
-          "label": "Value Extractor"
-        }
-      ],
-      "label": "True Strength Index",
       "returns": [
         {
             "label": "TSI",
@@ -1349,29 +419,6 @@
     },
     {
       "name": "TTM",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "bb_std_dev_mult",
-          "type": "float = 2",
-          "label": "Bb Std Dev Mult"
-        },
-        {
-          "name": "kc_atr_mult",
-          "type": "float = 1.5",
-          "label": "Kc Atr Mult"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "TTM Squeeze",
       "returns": [
         {
             "label": "Squeeze",
@@ -1385,29 +432,6 @@
     },
     {
       "name": "UO",
-      "paramters": [
-        {
-          "name": "period_fast",
-          "type": "int",
-          "label": "Period Fast"
-        },
-        {
-          "name": "period_mid",
-          "type": "int",
-          "label": "Period Mid"
-        },
-        {
-          "name": "period_slow",
-          "type": "int",
-          "label": "Period Slow"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Ultimate Oscillator",
       "returns": [
         {
             "label": "UO",
@@ -1417,19 +441,6 @@
     },
     {
       "name": "VTX",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Vortex Indicator",
       "returns": [
         {
             "label": "Plus VTX",
@@ -1442,37 +453,7 @@
     ]
     },
     {
-      "name": "VWAP",
-      "paramters": [
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Volume Weighted Average Price",
-      "returns": [
-        {
-            "label": "VWAP",
-            "value": "List[float]"
-        }
-    ]
-    },
-    {
       "name": "VWMA",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[talipp.ohlcv.OHLCV] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Volume Weighted Moving Average",
       "returns": [
         {
             "label": "VWMA",
@@ -1482,19 +463,6 @@
     },
     {
       "name": "WMA",
-      "paramters": [
-        {
-          "name": "period",
-          "type": "int",
-          "label": "Period"
-        },
-        {
-          "name": "input_values",
-          "type": "List[float] = None",
-          "label": "Input Values"
-        }
-      ],
-      "label": "Weighted Moving Average",
       "returns": [
         {
             "label": "WMA",
