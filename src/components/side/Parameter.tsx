@@ -1,52 +1,71 @@
-import IndicatorModel from '@/model/Indicator'
-import ParameterModel from '@/model/Parameter'
-import ParameterType from '@/model/ParameterType'
-import { Form, Input, Select } from 'antd'
-import { sentenceCase } from 'change-case'
+// import IndicatorModel from '@/model/Indicator'
+// import ParameterModel from '@/model/Parameter'
+// import ParameterType from '@/model/ParameterType'
+// import { Form, Input, Select } from 'antd'
 
-type props = {
-    indicator: IndicatorModel
-    parameter: ParameterModel
-    name: number
-}
+// const OHLC = [
+//     { value: 'open', label: 'Open' },
+//     { value: 'high', label: 'High' },
+//     { value: 'low', label: 'Low' },
+//     { value: 'close', label: 'Close' }
+// ]
 
-const switchCase = (parameter: ParameterModel) => {
-    return parameter.type === ParameterType.SELECTION ? (
-        <Select
-            showSearch
-            placeholder={parameter.name as string}
-            optionFilterProp='children'
-            filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
-            filterSort={(optionA, optionB) =>
-                (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-            }
-            options={parameter.values?.map(value => {
-                return {
-                    label: sentenceCase(value.toString()),
-                    value: value as string
-                }
-            })}
-        />
-    ) : (
-        <Input
-            type='number'
-            min={0}
-            step={0.01}
-        />
-    )
-}
+// type props = {
+//     indicator: IndicatorModel
+//     parameter: ParameterModel
+//     name: number
+// }
 
-export default function Parameter(props: props) {
-    const { name, parameter, indicator } = props
+// export default function Parameter(props: props) {
+//     const { name, parameter, indicator } = props
 
-    return (
-        <Form.Item
-            name={[name.toString(), indicator.value, 'parameters', parameter.name.toString()]}
-            label={parameter.label as string}
-            initialValue={parameter.default}
-            className='px-2 w-full basis-2/6'
-        >
-            {switchCase(parameter)}
-        </Form.Item>
-    )
-}
+//     switch (parameter.type) {
+//         case ParameterType.SELECTION:
+//             return (
+//                 <Form.Item
+//                     name={[name.toString(), 'parameters', parameter.name.toString()]}
+//                     label={parameter.label as string}
+//                     className='px-2 w-full basis-2/6'
+//                 >
+//                     <Select
+//                         showSearch
+//                         placeholder={parameter.name as string}
+//                         optionFilterProp='children'
+//                         filterOption={(input, option) =>
+//                             (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+//                         }
+//                         filterSort={(optionA, optionB) =>
+//                             (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+//                         }
+//                         options={OHLC}
+//                         defaultValue='close'
+//                     />{' '}
+//                 </Form.Item>
+//             )
+//         case ParameterType.NUMBER:
+//             return (
+//                 <Form.Item
+//                     name={[name.toString(), 'parameters', parameter.name.toString()]}
+//                     label={parameter.label as string}
+//                     initialValue={parameter.default}
+//                     className='px-2 w-full basis-2/6'
+//                 >
+//                     <Input
+//                         type='number'
+//                         min={0}
+//                         step={0.01}
+//                     />
+//                 </Form.Item>
+//             )
+//         case ParameterType.OHLCV:
+//             return (
+//                 <Form.Item
+//                     hidden
+//                     name={[name.toString(), 'parameters', parameter.name.toString()]}
+//                     initialValue='OHLCV'
+//                 />
+//             )
+//         default:
+//             return <div />
+//     }
+// }

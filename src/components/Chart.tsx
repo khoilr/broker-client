@@ -1,4 +1,4 @@
-import api from '@/lib/axios'
+import { clientApi } from '@/lib/axios'
 import StockPriceModel from '@/model/StockPrices'
 import { useEffect, useState } from 'react'
 import {
@@ -34,23 +34,25 @@ export default function Chart(props: props) {
             return
         }
 
-        api.get('prices/', {
-            params: {
-                symbol,
-                time_frame: timeFrame
-            }
-        }).then(res => {
-            const prices = res.data
-
-            const data = prices.map((price: StockPriceModel) => {
-                return {
-                    ...price,
-                    // average with rounded to 2 decimal places
-                    average: Math.round(((price.close + price.open + price.high + price.low) / 4) * 100) / 100
+        clientApi
+            .get('prices/', {
+                params: {
+                    symbol,
+                    time_frame: timeFrame
                 }
             })
-            setPrice(data)
-        })
+            .then(res => {
+                const prices = res.data
+
+                const data = prices.map((price: StockPriceModel) => {
+                    return {
+                        ...price,
+                        // average with rounded to 2 decimal places
+                        average: Math.round(((price.close + price.open + price.high + price.low) / 4) * 100) / 100
+                    }
+                })
+                setPrice(data)
+            })
     }, [symbol, timeFrame])
 
     return (

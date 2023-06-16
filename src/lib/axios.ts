@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const api = axios.create({
+const clientApi = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL, // Specify the base URL for your API
     timeout: 5000, // Set a timeout value if desired
     headers: {
@@ -8,4 +8,8 @@ const api = axios.create({
     }
 })
 
-export default api
+const serverApi = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL // Specify the base URL for your API
+})
+
+export { clientApi, serverApi }

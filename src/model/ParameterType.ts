@@ -1,4 +1,5 @@
 enum ParameterType {
+    OHLCV,
     SELECTION,
     NUMBER
 }

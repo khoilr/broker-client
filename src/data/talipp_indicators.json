@@ -1,0 +1,37 @@
+{
+    "value": "BB",
+    "label": "Bollinger Bands",
+    "parameters": [
+        {
+            "name": "period",
+            "label": "Period",
+            "type": "number"
+        },
+        {
+            "name": "std_dev_multiplier",
+            "label": "Std Dev Multiplier",
+            "type": "number"
+        },
+        {
+            "name": "input_values",
+            "label": "Input Values",
+            "type": "selection",
+            "values": ["open", "close", "high", "low"],
+            "default": "close"
+        }
+    ],
+    "returns": [
+        {
+            "label": "Upper Band",
+            "value": "ub"
+        },
+        {
+            "label": "Central Band",
+            "value": "cb"
+        },
+        {
+            "label": "Lower Band",
+            "value": "lb"
+        }
+    ]
+}

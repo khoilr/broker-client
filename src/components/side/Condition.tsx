@@ -2,7 +2,7 @@ import IndicatorModel from '@/model/Indicator'
 import ReturnModel from '@/model/Return'
 import { Form, Input, Select, Space } from 'antd'
 import { BaseOptionType } from 'antd/es/select'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const changes = [
     { value: '==', label: '=' },
@@ -18,20 +18,32 @@ const units = [
 
 type props = {
     indicator: IndicatorModel
-    returns: ReturnModel[]
+    returns?: ReturnModel[]
     name: number
     side: string
     resetCondition: (_return: string, side: string, index: number) => void
 }
 
-export default function Condition(props: props) {
-const { returns, name, resetCondition, side, indicator } = props
+function Condition(props: props) {
+    const { returns, name, resetCondition, side, indicator } = props
+
+    const [returnOptions, setReturnOptions] = useState<BaseOptionType[]>()
 
     useEffect(() => {
-        const thisReturn = returns.map(e => e as BaseOptionType)
+        // Get the returns of the indicator
+        let thisReturn = returns?.map(e => e as BaseOptionType)
 
+        // if thisReturn is empty, then add a new BaseOption with the name of the indicator
+        if (thisReturn?.length === 0 || thisReturn === undefined) {
+            thisReturn = [{ value: indicator.name, label: indicator.name } as BaseOptionType]
+        }
+
+        // Set the returnOptions
+        setReturnOptions(thisReturn)
+
+        // Reset the condition of the indicator
         resetCondition(thisReturn[0].value as string, side, name)
-    }, [returns, resetCondition, name, side])
+    }, [returns, resetCondition, name, side, indicator.name])
 
     return (
         <Space.Compact
@@ -40,7 +52,7 @@ const { returns, name, resetCondition, side, indicator } = props
         >
             <Form.Item
                 className='w-full'
-                name={[name.toString(), indicator.value, 'condition', 'source']}
+                name={[name.toString(), indicator.name, 'condition', 'source']}
                 rules={[
                     {
                         required: true,
@@ -56,12 +68,12 @@ const { returns, name, resetCondition, side, indicator } = props
                     filterSort={(optionA, optionB) =>
                         (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                     }
-                    options={returns.map(e => e as BaseOptionType)}
+                    options={returnOptions}
                 />
             </Form.Item>
             <Form.Item
                 className='w-full'
-                name={[name.toString(), indicator.value, 'condition', 'change']}
+                name={[name.toString(), indicator.name, 'condition', 'change']}
                 rules={[
                     {
                         required: true,
@@ -82,7 +94,7 @@ const { returns, name, resetCondition, side, indicator } = props
             </Form.Item>
             <Form.Item
                 className='w-full'
-                name={[name.toString(), indicator.value, 'condition', 'value']}
+                name={[name.toString(), indicator.name, 'condition', 'value']}
                 rules={[{ required: true, message: 'Please input value' }]}
             >
                 <Input
@@ -93,7 +105,7 @@ const { returns, name, resetCondition, side, indicator } = props
             </Form.Item>
             <Form.Item
                 className='w-full'
-                name={[name.toString(), indicator.value, 'condition', 'unit']}
+                name={[name.toString(), indicator.name, 'condition', 'unit']}
                 rules={[
                     {
                         required: true,
@@ -115,3 +127,9 @@ const { returns, name, resetCondition, side, indicator } = props
         </Space.Compact>
     )
 }
+
+Condition.defaultProps = {
+    returns: [] // Define an empty array as the default value for the "returns" prop
+}
+
+export default Condition

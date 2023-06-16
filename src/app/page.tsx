@@ -6,11 +6,13 @@ import InputWhatsappUser from '@/components/InputWhatsappUser'
 import NotifyCondition from '@/components/NotifyCondition'
 import StockSelection from '@/components/StockSelection'
 import TimeFrameSelection from '@/components/TimeFrameSelection'
-import indicatorsJSON from '@/data/indicators.json'
-import apiAxios from '@/lib/axios'
+// import Indicator from '@/components/side/Indicator'
+// import indicatorsJSON from '@/data/indicators.json'
+import { clientApi } from '@/lib/axios'
 import IndicatorModel from '@/model/Indicator'
 import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
+import ReturnModel from '@/model/Return'
 import { Button, Col, ConfigProvider, Form, Layout, Row, Typography, notification } from 'antd'
 import { useEffect, useRef, useState } from 'react'
 
@@ -25,21 +27,41 @@ export default function NotifyPage() {
     const buttonSubmit = useRef(null)
 
     useEffect(() => {
-        const thisIndicators = indicatorsJSON.map(indicator => {
-            const parameters = indicator.parameters.map(parameter => {
-                return {
-                    ...parameter,
-                    type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
-                } as ParameterModel
-            })
-            return {
-                ...indicator,
-                parameters
-            } as unknown as IndicatorModel
-        })
+        clientApi.get('/indicators/').then(res => {
+            const indicatorsData = res.data as []
 
-        setIndicators(thisIndicators)
+            // Parse indicators
+            const thisIndicators = indicatorsData.map((indicator: IndicatorModel) => {
+                // Parse parameters
+                const parameters = indicator.parameters.map((parameter: ParameterModel) => {
+                    return {
+                        ...parameter,
+                        type: ParameterType[parameter.type as unknown as keyof typeof ParameterType]
+                    } as ParameterModel
+                })
+
+                // Parse returns
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const returns = indicator.returns?.map((ret: any) => {
+                    return {
+                        ...ret,
+                        value: ret.name
+                    } as ReturnModel
+                })
+
+                // Return parsed Indicator Model
+                return {
+                    ...indicator,
+                    parameters,
+                    returns
+                } as unknown as IndicatorModel
+            })
+
+            // Set indicators
+            setIndicators(thisIndicators)
+        })
     }, [])
+
     const [form] = Form.useForm()
 
     // handle form submission
@@ -59,7 +81,10 @@ export default function NotifyPage() {
             whatsapp_number: `${whatsapp_area_code}${whatsapp_number}`
         }
 
-        apiAxios.post('/strategies/', valuesObject).then(res => {
+        console.log(values)
+        console.log(valuesObject)
+
+        clientApi.post('/strategies/', valuesObject).then(res => {
             if (res.status === 200) {
                 api.info({
                     message: 'Added notification',
@@ -72,7 +97,6 @@ export default function NotifyPage() {
     const resetCondition = (source: string, side: string, index: number) => {
         const fieldsValue = form.getFieldsValue()
 
-        // replace return in condition in side and index with _return
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const fields = fieldsValue.indicators?.map((indicator: any, i: number) => {
             if (i === index) {
@@ -156,3 +180,13 @@ export default function NotifyPage() {
         </ConfigProvider>
     )
 }
+
+// function Home() {
+//     return (
+//         <div className='flex items-center justify-center min-h-screen'>
+//             <MyForm />
+//         </div>
+//     )
+// }
+
+// export default Home

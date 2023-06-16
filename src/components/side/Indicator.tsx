@@ -4,7 +4,8 @@ import { Form, Select, Typography } from 'antd'
 import { useEffect, useState } from 'react'
 // import { BaseOptionType } from 'antd/es/select'
 import Condition from './Condition'
-import Parameter from './Parameter'
+// import Parameter from './Parameter'
+// import ParameterType from '@/model/ParameterType'
 
 const { Title } = Typography
 
@@ -34,33 +35,6 @@ export default function Indicator(props: props) {
         }
     }, [side])
 
-    // useEffect(() => {
-    //     dropParameters(name)
-    //     if (indicator) {
-    //         setIndicatorOption(
-    //             <IndicatorOption
-    //                 indicator={indicator}
-    //                 name={name}
-    //                 returnOptions={returnOptions}
-    //                 side={side}
-    //                 color={color || ''}
-    //             />
-    //         )
-    //     } else {
-    //         setIndicatorOption(null)
-    //     }
-    // }, [color, indicator, name, resetCondition, side, dropParameters, returnOptions])
-
-    // useEffect(() => {
-    //     if (indicator) {
-    //         const thisReturn = indicator?.returns.map(e => e as BaseOptionType)
-    //         if (thisReturn) {
-    //             setReturnOptions(thisReturn)
-    //             resetCondition(thisReturn[0].value as string, side, name)
-    //         }
-    //     }
-    // }, [indicator, name, resetCondition, returnOptions, side])
-
     return (
         <div className='flex items-start'>
             <div className={`border border-solid rounded-lg border-${color}-600 p-2 w-full mb-6`}>
@@ -80,11 +54,12 @@ export default function Indicator(props: props) {
                             (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                         }
                         onSelect={value => {
-                            setIndicator(indicators.find(e => e.value === value))
+                            setIndicator(indicators.find(e => e.name === value))
+                            console.log(indicators.find(e => e.name === value)?.parameters)
                         }}
                         options={indicators.map(e => ({
-                            value: e.value,
-                            label: e.label
+                            value: e.name,
+                            label: `${e.label} (${e.name}) `
                         }))}
                     />
                 </Form.Item>
@@ -100,20 +75,42 @@ export default function Indicator(props: props) {
                             />
                         </Form.Item>
                         <Form.Item
-                            name={[name.toString(), indicator.value, 'returns']}
+                            // name={[name.toString(), indicator.name, 'returns']}
+                            name={[name.toString(), 'returns']}
                             hidden
-                            initialValue={indicator.returns.map(e => e.value)}
+                            initialValue={indicator.returns?.map(e => e.value)}
                         />
-                        {indicator.parameters.map(e => e.values).length > 0 && (
+                        {/* // Todo: implement parameters */}
+                        {/* {indicator.parameters.length > 0 && (
+                            // <Form.List name={[name.toString(), indicator.name, 'parameters']}>
+                            <Form.List name={[name.toString(), 'parameters']}>
+                                {() => (
+                                    <div className='flex flex-wrap'>
+                                        {indicator.parameters
+                                            .sort((a, b) => a.name.localeCompare(b.name))
+                                            .map(e => (
+                                                <Parameter
+                                                    indicator={indicator}
+                                                    key={e.name}
+                                                    parameter={e}
+                                                    name={name}
+                                                />
+                                            ))}
+                                    </div>
+                                )}
+                            </Form.List>
+                        )} */}
+                        {/* {indicator.parameters.filter(
+                            e => e.type === ParameterType.NUMBER || e.type === ParameterType.SELECTION
+                        ).length > 0 && (
                             <Form.Item
-                                name={[name.toString(), indicator.value, 'parameters']}
+                                name={[name.toString(), 'parameters']}
                                 label={<Title level={3}>Parameters</Title>}
                                 className={`border border-solid border-${color}-500 rounded-lg p-2`}
-                                isList
                             >
                                 <div className='flex flex-wrap'>
                                     {indicator.parameters
-                                        .filter(e => e.readOnly)
+                                        .sort((a, b) => a.name.localeCompare(b.name))
                                         .map(e => (
                                             <Parameter
                                                 indicator={indicator}
@@ -124,7 +121,7 @@ export default function Indicator(props: props) {
                                         ))}
                                 </div>
                             </Form.Item>
-                        )}
+                        )} */}
                     </>
                 )}
             </div>
