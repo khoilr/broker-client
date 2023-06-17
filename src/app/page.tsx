@@ -180,13 +180,3 @@ export default function NotifyPage() {
         </ConfigProvider>
     )
 }
-
-// function Home() {
-//     return (
-//         <div className='flex items-center justify-center min-h-screen'>
-//             <MyForm />
-//         </div>
-//     )
-// }
-
-// export default Home
