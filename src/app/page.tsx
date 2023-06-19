@@ -146,10 +146,14 @@ export default function NotifyPage() {
                             onFinish={onFinish}
                         >
                             <div className='flex justify-between'>
-                                <StockSelection setSymbol={setSymbol} />
-                                <TimeFrameSelection setTimeFrame={setTimeFrame} />
-                                <InputTelegramUser />
-                                <InputWhatsappUser />
+                                <div className='w-1/2 mx-4'>
+                                    <StockSelection setSymbol={setSymbol} />
+                                    <TimeFrameSelection setTimeFrame={setTimeFrame} />
+                                </div>
+                                <div className='w-1/2 mx-4'>
+                                    <InputTelegramUser />
+                                    <InputWhatsappUser />
+                                </div>
                             </div>
                             <div className='flex justify-between'>
                                 <NotifyCondition
@@ -180,13 +184,3 @@ export default function NotifyPage() {
         </ConfigProvider>
     )
 }
-
-// function Home() {
-//     return (
-//         <div className='flex items-center justify-center min-h-screen'>
-//             <MyForm />
-//         </div>
-//     )
-// }
-
-// export default Home
