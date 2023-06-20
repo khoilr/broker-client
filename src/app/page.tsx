@@ -67,24 +67,7 @@ export default function NotifyPage() {
     // handle form submission
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onFinish = (values: any) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars, camelcase
-        const { indicators, whatsapp_area_code, whatsapp_number, ...rest } = values
-
-        const valuesObject = {
-            ...rest,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            indicators: values.indicators.map((indicator: any) => {
-                const { name } = indicator
-                return { ...indicator[name], name }
-            }),
-            // eslint-disable-next-line camelcase
-            whatsapp_number: `${whatsapp_area_code}${whatsapp_number}`
-        }
-
-        console.log(values)
-        console.log(valuesObject)
-
-        clientApi.post('/strategies/', valuesObject).then(res => {
+        clientApi.post('/strategies/', values).then(res => {
             if (res.status === 200) {
                 api.info({
                     message: 'Added notification',
@@ -94,38 +77,39 @@ export default function NotifyPage() {
         })
     }
 
-    const resetCondition = (source: string, side: string, index: number) => {
-        const fieldsValue = form.getFieldsValue()
+    // * Deprecated
+    // const resetCondition = (source: string, side: string, index: number) => {
+    //     const fieldsValue = form.getFieldsValue()
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const fields = fieldsValue.indicators?.map((indicator: any, i: number) => {
-            if (i === index) {
-                const { name } = indicator
-                const indicatorObject = indicator[name]
+    //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    //     const fields = fieldsValue.indicators?.map((indicator: any, i: number) => {
+    //         if (i === index) {
+    //             const { name } = indicator
+    //             const indicatorObject = indicator[name]
 
-                const condition = {
-                    ...indicatorObject?.condition,
-                    source
-                }
+    //             const condition = {
+    //                 ...indicatorObject?.condition,
+    //                 source
+    //             }
 
-                return {
-                    ...indicator,
-                    [name]: {
-                        ...indicatorObject,
-                        condition
-                    }
-                }
-            }
+    //             return {
+    //                 ...indicator,
+    //                 [name]: {
+    //                     ...indicatorObject,
+    //                     condition
+    //                 }
+    //             }
+    //         }
 
-            return indicator
-        })
+    //         return indicator
+    //     })
 
-        const fieldsObject = {
-            indicators: fields
-        }
+    //     const fieldsObject = {
+    //         indicators: fields
+    //     }
 
-        form.setFieldsValue(fieldsObject)
-    }
+    //     form.setFieldsValue(fieldsObject)
+    // }
 
     return (
         <ConfigProvider
@@ -157,7 +141,6 @@ export default function NotifyPage() {
                             </div>
                             <div className='flex justify-between'>
                                 <NotifyCondition
-                                    resetCondition={resetCondition}
                                     side='notification'
                                     indicators={indicators}
                                 />
@@ -174,10 +157,7 @@ export default function NotifyPage() {
                                 </Form.Item>
                             </div>
                         </Form>
-                        <Chart
-                            symbol={symbol || ''}
-                            timeFrame={timeFrame || ''}
-                        />
+                        <Chart />
                     </Col>
                 </Row>
             </Layout>

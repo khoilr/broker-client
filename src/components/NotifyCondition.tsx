@@ -9,13 +9,12 @@ const { Title } = Typography
 type props = {
     side: string
     indicators: IndicatorModel[]
-    resetCondition: (_return: string, side: string, index: number) => void
 }
 
 export default function NotifyCondition(props: props) {
-    const { side, indicators, resetCondition } = props
+    const { side, indicators } = props
     const [color, setColor] = useState<string>()
-    const [selectingIndicator, setSelectingIndicator] = useState<string>()
+    const [selectingIndicator, setSelectingIndicator] = useState<IndicatorModel>()
 
     useEffect(() => {
         if (side === 'notification') {
@@ -34,32 +33,15 @@ export default function NotifyCondition(props: props) {
             <Form.List name='indicators'>
                 {(fields, { add, remove }) => (
                     <>
-                        {fields.map(({ key, name }) => (
-                            <Indicator
-                                key={key}
-                                name={name}
-                                side='notification'
-                                indicator={selectingIndicator}
-                                // indicators={indicators}
-                                remove={remove}
-                                resetCondition={resetCondition}
-                            />
-                        ))}
-                        <Form.Item>
-                            <Button
-                                type='dashed'
-                                onClick={() => add('hihi')}
-                                block
-                                icon={<PlusOutlined />}
+                        <Form.Item className='w-full'>
+                            <Space.Compact
+                                size='large'
+                                className='w-full'
                             >
-                                Add indicator
-                            </Button>
-                        </Form.Item>
-                        <Form.Item>
-                            <Space.Compact size='large'>
                                 <Select
+                                    className='w-full'
                                     showSearch
-                                    placeholder={`Search ${side} indicator`}
+                                    placeholder={`Select ${side} indicator`}
                                     optionFilterProp='children'
                                     filterOption={(input, option) =>
                                         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
@@ -69,25 +51,42 @@ export default function NotifyCondition(props: props) {
                                             .toLowerCase()
                                             .localeCompare((optionB?.label ?? '').toLowerCase())
                                     }
-                                    options={[
-                                        { label: 'AND', value: 'AND' },
-                                        { label: 'OR', value: 'OR' }
-                                    ]}
                                     onSelect={value => {
-                                        // setSelectingIndicator(indicators.find(e => e.name === value))
-                                        setSelectingIndicator(value)
+                                        setSelectingIndicator(indicators.find(e => e.name === value))
                                     }}
+                                    options={indicators.map(e => ({
+                                        value: e.name,
+                                        label: `${e.label} (${e.name}) `
+                                    }))}
                                 />
                                 <Button
                                     type='primary'
+                                    icon={<PlusOutlined />}
                                     onClick={() => {
-                                        add()
+                                        if (selectingIndicator) add()
                                     }}
                                 >
                                     Add indicator
                                 </Button>
                             </Space.Compact>
                         </Form.Item>
+                        {fields.map(({ key, name }) => (
+                            <Indicator
+                                key={key}
+                                name={name}
+                                side='notification'
+                                selectingIndicator={
+                                    selectingIndicator ?? {
+                                        id: '',
+                                        name: '',
+                                        label: '',
+                                        returns: [],
+                                        parameters: []
+                                    }
+                                }
+                                remove={remove}
+                            />
+                        ))}
                     </>
                 )}
             </Form.List>

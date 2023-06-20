@@ -1,37 +1,29 @@
 import IndicatorModel from '@/model/Indicator'
-import { MinusCircleOutlined } from '@ant-design/icons'
-import { Form, Select, Typography } from 'antd'
+import { DeleteOutlined } from '@ant-design/icons'
+import { Button, Form, Input, Typography } from 'antd'
 import { useEffect, useState } from 'react'
-// import { BaseOptionType } from 'antd/es/select'
 import Condition from './Condition'
-// import Parameter from './Parameter'
-// import ParameterType from '@/model/ParameterType'
+import Parameter from './Parameter'
 
 const { Title } = Typography
 
 type props = {
     side: string
     // indicators: IndicatorModel[]
-    indicator: string | undefined
+    selectingIndicator: IndicatorModel
     name: number
     remove: (name: number) => void
-    resetCondition: (_return: string, side: string, index: number) => void
 }
 
 export default function Indicator(props: props) {
-    const { side, indicator, name, remove, resetCondition } = props
+    const { side, selectingIndicator, name, remove } = props
     const [color, setColor] = useState<string>()
-    console.log(indicator)
-
-    // const [indicator, setIndicator] = useState<IndicatorModel>()
-    // const [indicatorOption, setIndicatorOption] = useState<ReactElement | null>()
-    // const [returnOptions, setReturnOptions] = useState<BaseOptionType[]>([])
+    const [indicator] = useState<IndicatorModel>(selectingIndicator)
 
     useEffect(() => {
         if (side === 'buy') {
             setColor('green')
-        }
-        if (side === 'notification') {
+        } else if (side === 'notification') {
             setColor('black')
         } else if (side === 'sell') {
             setColor('red')
@@ -41,98 +33,56 @@ export default function Indicator(props: props) {
     return (
         <div className='flex items-start'>
             <div className={`border border-solid rounded-lg border-${color}-600 p-2 w-full mb-6`}>
-                {/* <Form.Item
+                <Form.Item
                     label={<Title level={3}>Indicator</Title>}
                     name={[name.toString(), 'name']}
-                    rules={[{ required: true, message: 'Please select indicator' }]}
-                > */}
-                {/* <Select
-                        showSearch
-                        placeholder={`Select ${side} indicator`}
-                        optionFilterProp='children'
-                        filterOption={(input, option) =>
-                            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                        }
-                        filterSort={(optionA, optionB) =>
-                            (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-                        }
-                        onSelect={value => {
-                            setIndicator(indicators.find(e => e.name === value))
-                            console.log(indicators.find(e => e.name === value)?.parameters)
-                        }}
-                        options={indicators.map(e => ({
-                            value: e.name,
-                            label: `${e.label} (${e.name}) `
-                        }))}
+                    initialValue={indicator?.name}
+                >
+                    <Input
+                        readOnly
+                        value={indicator?.name}
                     />
                 </Form.Item>
-                {indicator && (
-                    <>
-                        <Form.Item label={<Title level={3}>Condition</Title>}>
-                            <Condition
-                                indicator={indicator}
-                                returns={indicator.returns}
-                                name={name}
-                                resetCondition={resetCondition}
-                                side={side}
-                            />
-                        </Form.Item>
-                        <Form.Item
-                            // name={[name.toString(), indicator.name, 'returns']}
-                            name={[name.toString(), 'returns']}
-                            hidden
-                            initialValue={indicator.returns?.map(e => e.value)}
-                        /> */}
-                {/* // Todo: implement parameters */}
-                {/* {indicator.parameters.length > 0 && (
-                            // <Form.List name={[name.toString(), indicator.name, 'parameters']}>
-                            <Form.List name={[name.toString(), 'parameters']}>
-                                {() => (
-                                    <div className='flex flex-wrap'>
-                                        {indicator.parameters
-                                            .sort((a, b) => a.name.localeCompare(b.name))
-                                            .map(e => (
-                                                <Parameter
-                                                    indicator={indicator}
-                                                    key={e.name}
-                                                    parameter={e}
-                                                    name={name}
-                                                />
-                                            ))}
-                                    </div>
-                                )}
-                            </Form.List>
-                        )} */}
-                {/* {indicator.parameters.filter(
-                            e => e.type === ParameterType.NUMBER || e.type === ParameterType.SELECTION
-                        ).length > 0 && (
-                            <Form.Item
-                                name={[name.toString(), 'parameters']}
-                                label={<Title level={3}>Parameters</Title>}
-                                className={`border border-solid border-${color}-500 rounded-lg p-2`}
-                            >
+                <Form.Item label={<Title level={3}>Condition</Title>}>
+                    <Condition
+                        indicator={indicator}
+                        returns={indicator?.returns}
+                        name={name}
+                    />
+                </Form.Item>
+                <Form.Item
+                    name={[name.toString(), 'returns']}
+                    hidden
+                    initialValue={indicator?.returns?.map(e => e.value)}
+                />
+                {(indicator?.parameters?.length ?? 0) > 0 && (
+                    <Form.Item label={<Title level={3}>Parameters</Title>}>
+                        <Form.List
+                            name={[name.toString(), 'parameters']}
+                            initialValue={indicator.parameters}
+                        >
+                            {fields => (
                                 <div className='flex flex-wrap'>
-                                    {indicator.parameters
-                                        .sort((a, b) => a.name.localeCompare(b.name))
-                                        .map(e => (
-                                            <Parameter
-                                                indicator={indicator}
-                                                key={e.name}
-                                                parameter={e}
-                                                name={name}
-                                            />
-                                        ))}
+                                    {fields.map((field, index) => (
+                                        <Parameter
+                                            key={field.key}
+                                            parameter={indicator?.parameters?.[index]}
+                                            name={field.name}
+                                        />
+                                    ))}
                                 </div>
-                            </Form.Item>
-                        )} */}
-                {/* </>
-                )} */}
+                            )}
+                        </Form.List>
+                    </Form.Item>
+                )}
             </div>
-            <MinusCircleOutlined
-                className='ml-2'
+            <Button
+                className='mx-2'
                 onClick={() => {
                     remove(name)
                 }}
+                danger
+                icon={<DeleteOutlined />}
             />
         </div>
     )
