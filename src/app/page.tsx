@@ -2,7 +2,7 @@
 
 import Chart from '@/components/Chart'
 import InputTelegramUser from '@/components/InputTelegramUser'
-import InputWhatsappUser from '@/components/InputWhatsappUser'
+// import InputWhatsappUser from '@/components/InputWhatsappUser'
 import NotifyCondition from '@/components/NotifyCondition'
 import StockSelection from '@/components/StockSelection'
 import TimeFrameSelection from '@/components/TimeFrameSelection'
@@ -21,8 +21,8 @@ const { Title } = Typography
 export default function NotifyPage() {
     const [api, contextHolder] = notification.useNotification()
 
-    const [symbol, setSymbol] = useState<string>()
-    const [timeFrame, setTimeFrame] = useState<string>()
+    const [symbol, setSymbol] = useState<string>('')
+    const [timeFrame, setTimeFrame] = useState<string>('')
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
     const buttonSubmit = useRef(null)
 
@@ -130,14 +130,10 @@ export default function NotifyPage() {
                             onFinish={onFinish}
                         >
                             <div className='flex justify-between'>
-                                <div className='w-1/2 mx-4'>
-                                    <StockSelection setSymbol={setSymbol} />
-                                    <TimeFrameSelection setTimeFrame={setTimeFrame} />
-                                </div>
-                                <div className='w-1/2 mx-4'>
-                                    <InputTelegramUser />
-                                    <InputWhatsappUser />
-                                </div>
+                                <StockSelection setSymbol={setSymbol} />
+                                <TimeFrameSelection setTimeFrame={setTimeFrame} />
+                                <InputTelegramUser />
+                                {/* <InputWhatsappUser /> */}
                             </div>
                             <div className='flex justify-between'>
                                 <NotifyCondition
@@ -157,7 +153,10 @@ export default function NotifyPage() {
                                 </Form.Item>
                             </div>
                         </Form>
-                        <Chart />
+                        <Chart
+                            symbol={symbol}
+                            timeFrame={timeFrame}
+                        />
                     </Col>
                 </Row>
             </Layout>
