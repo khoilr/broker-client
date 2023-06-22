@@ -2,10 +2,10 @@
 
 import Chart from '@/components/Chart'
 import InputTelegramUser from '@/components/InputTelegramUser'
-// import InputWhatsappUser from '@/components/InputWhatsappUser'
+import InputWhatsappUser from '@/components/InputWhatsappUser'
 import NotifyCondition from '@/components/NotifyCondition'
 import StockSelection from '@/components/StockSelection'
-import TimeFrameSelection from '@/components/TimeFrameSelection'
+// import TimeFrameSelection from '@/components/TimeFrameSelection'
 // import Indicator from '@/components/side/Indicator'
 // import indicatorsJSON from '@/data/indicators.json'
 import { clientApi } from '@/lib/axios'
@@ -22,7 +22,7 @@ export default function NotifyPage() {
     const [api, contextHolder] = notification.useNotification()
 
     const [symbol, setSymbol] = useState<string>('')
-    const [timeFrame, setTimeFrame] = useState<string>('')
+    // const [timeFrame, setTimeFrame] = useState<string>('')
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
     const buttonSubmit = useRef(null)
 
@@ -131,9 +131,9 @@ export default function NotifyPage() {
                         >
                             <div className='flex justify-between'>
                                 <StockSelection setSymbol={setSymbol} />
-                                <TimeFrameSelection setTimeFrame={setTimeFrame} />
+                                {/* <TimeFrameSelection setTimeFrame={setTimeFrame} /> */}
                                 <InputTelegramUser />
-                                {/* <InputWhatsappUser /> */}
+                                <InputWhatsappUser />
                             </div>
                             <div className='flex justify-between'>
                                 <NotifyCondition
@@ -155,7 +155,8 @@ export default function NotifyPage() {
                         </Form>
                         <Chart
                             symbol={symbol}
-                            timeFrame={timeFrame}
+                            timeFrame='1H'
+                            // timeFrame={timeFrame}
                         />
                     </Col>
                 </Row>
