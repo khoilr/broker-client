@@ -12,20 +12,23 @@ export default function InputWhatsappUser() {
                 }
             ]}
         >
-            <Space.Compact size='large'>
+            <Space.Compact
+                size='large'
+                className='w-full'
+            >
                 <Form.Item
                     name='whatsapp_area_code'
                     noStyle
                     initialValue='+84'
                 >
-                    <Input style={{ minWidth: 16 * 3, width: '20%' }} />
+                    <Input className='w-2/12' />
                 </Form.Item>
                 <Form.Item
                     name='whatsapp_number'
                     noStyle
                 >
                     <Input
-                        style={{ width: '80%' }}
+                        className='w-10/12'
                         maxLength={9}
                         minLength={9}
                     />

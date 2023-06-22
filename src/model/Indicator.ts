@@ -2,10 +2,11 @@ import Parameter from './Parameter'
 import Return from './Return'
 
 type Indicator = {
+    id: string
     label: string
-    value: string
+    name: string
     parameters: Parameter[]
-    returns: Return[]
+    returns?: Return[]
 }
 
 export default Indicator

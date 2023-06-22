@@ -5,12 +5,14 @@ import InputTelegramUser from '@/components/InputTelegramUser'
 import InputWhatsappUser from '@/components/InputWhatsappUser'
 import NotifyCondition from '@/components/NotifyCondition'
 import StockSelection from '@/components/StockSelection'
-import TimeFrameSelection from '@/components/TimeFrameSelection'
-import indicatorsJSON from '@/data/indicators.json'
-import apiAxios from '@/lib/axios'
+// import TimeFrameSelection from '@/components/TimeFrameSelection'
+// import Indicator from '@/components/side/Indicator'
+// import indicatorsJSON from '@/data/indicators.json'
+import { clientApi } from '@/lib/axios'
 import IndicatorModel from '@/model/Indicator'
 import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
+import ReturnModel from '@/model/Return'
 import { Button, Col, ConfigProvider, Form, Layout, Row, Typography, notification } from 'antd'
 import { useEffect, useRef, useState } from 'react'
 
@@ -19,47 +21,53 @@ const { Title } = Typography
 export default function NotifyPage() {
     const [api, contextHolder] = notification.useNotification()
 
-    const [symbol, setSymbol] = useState<string>()
-    const [timeFrame, setTimeFrame] = useState<string>()
+    const [symbol, setSymbol] = useState<string>('')
+    // const [timeFrame, setTimeFrame] = useState<string>('')
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
     const buttonSubmit = useRef(null)
 
     useEffect(() => {
-        const thisIndicators = indicatorsJSON.map(indicator => {
-            const parameters = indicator.parameters.map(parameter => {
-                return {
-                    ...parameter,
-                    type: ParameterType[parameter.type.toUpperCase() as keyof typeof ParameterType]
-                } as ParameterModel
-            })
-            return {
-                ...indicator,
-                parameters
-            } as unknown as IndicatorModel
-        })
+        clientApi.get('/indicators/').then(res => {
+            const indicatorsData = res.data as []
 
-        setIndicators(thisIndicators)
+            // Parse indicators
+            const thisIndicators = indicatorsData.map((indicator: IndicatorModel) => {
+                // Parse parameters
+                const parameters = indicator.parameters.map((parameter: ParameterModel) => {
+                    return {
+                        ...parameter,
+                        type: ParameterType[parameter.type as unknown as keyof typeof ParameterType]
+                    } as ParameterModel
+                })
+
+                // Parse returns
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const returns = indicator.returns?.map((ret: any) => {
+                    return {
+                        ...ret,
+                        value: ret.name
+                    } as ReturnModel
+                })
+
+                // Return parsed Indicator Model
+                return {
+                    ...indicator,
+                    parameters,
+                    returns
+                } as unknown as IndicatorModel
+            })
+
+            // Set indicators
+            setIndicators(thisIndicators)
+        })
     }, [])
+
     const [form] = Form.useForm()
 
     // handle form submission
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onFinish = (values: any) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars, camelcase
-        const { indicators, whatsapp_area_code, whatsapp_number, ...rest } = values
-
-        const valuesObject = {
-            ...rest,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            indicators: values.indicators.map((indicator: any) => {
-                const { name } = indicator
-                return { ...indicator[name], name }
-            }),
-            // eslint-disable-next-line camelcase
-            whatsapp_number: `${whatsapp_area_code}${whatsapp_number}`
-        }
-
-        apiAxios.post('/strategies/', valuesObject).then(res => {
+        clientApi.post('/strategies/', values).then(res => {
             if (res.status === 200) {
                 api.info({
                     message: 'Added notification',
@@ -69,39 +77,39 @@ export default function NotifyPage() {
         })
     }
 
-    const resetCondition = (source: string, side: string, index: number) => {
-        const fieldsValue = form.getFieldsValue()
+    // * Deprecated
+    // const resetCondition = (source: string, side: string, index: number) => {
+    //     const fieldsValue = form.getFieldsValue()
 
-        // replace return in condition in side and index with _return
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const fields = fieldsValue.indicators?.map((indicator: any, i: number) => {
-            if (i === index) {
-                const { name } = indicator
-                const indicatorObject = indicator[name]
+    //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    //     const fields = fieldsValue.indicators?.map((indicator: any, i: number) => {
+    //         if (i === index) {
+    //             const { name } = indicator
+    //             const indicatorObject = indicator[name]
 
-                const condition = {
-                    ...indicatorObject?.condition,
-                    source
-                }
+    //             const condition = {
+    //                 ...indicatorObject?.condition,
+    //                 source
+    //             }
 
-                return {
-                    ...indicator,
-                    [name]: {
-                        ...indicatorObject,
-                        condition
-                    }
-                }
-            }
+    //             return {
+    //                 ...indicator,
+    //                 [name]: {
+    //                     ...indicatorObject,
+    //                     condition
+    //                 }
+    //             }
+    //         }
 
-            return indicator
-        })
+    //         return indicator
+    //     })
 
-        const fieldsObject = {
-            indicators: fields
-        }
+    //     const fieldsObject = {
+    //         indicators: fields
+    //     }
 
-        form.setFieldsValue(fieldsObject)
-    }
+    //     form.setFieldsValue(fieldsObject)
+    // }
 
     return (
         <ConfigProvider
@@ -123,13 +131,12 @@ export default function NotifyPage() {
                         >
                             <div className='flex justify-between'>
                                 <StockSelection setSymbol={setSymbol} />
-                                <TimeFrameSelection setTimeFrame={setTimeFrame} />
+                                {/* <TimeFrameSelection setTimeFrame={setTimeFrame} /> */}
                                 <InputTelegramUser />
                                 <InputWhatsappUser />
                             </div>
                             <div className='flex justify-between'>
                                 <NotifyCondition
-                                    resetCondition={resetCondition}
                                     side='notification'
                                     indicators={indicators}
                                 />
@@ -147,8 +154,9 @@ export default function NotifyPage() {
                             </div>
                         </Form>
                         <Chart
-                            symbol={symbol || ''}
-                            timeFrame={timeFrame || ''}
+                            symbol={symbol}
+                            timeFrame='1H'
+                            // timeFrame={timeFrame}
                         />
                     </Col>
                 </Row>
