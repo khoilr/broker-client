@@ -20,7 +20,7 @@ export default function InputWhatsappUser() {
                     name='whatsapp_area_code'
                     noStyle
                 >
-                    <Input className='w-1/6 text-center' defaultValue='+84' />
+                    <Input className='w-2/6 text-center' defaultValue='+84' />
                 </Form.Item>
                 <Form.Item
                     name='whatsapp_number'
