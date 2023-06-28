@@ -12,6 +12,8 @@
     },
     "dependencies": {
         "@ant-design/icons": "^5.0.1",
+        "@headlessui/react": "^1.7.15",
+        "@material-tailwind/react": "^2.0.4",
         "@types/chart.js": "^2.9.37",
         "@types/js-cookie": "^3.0.3",
         "@types/react": "18.2.0",
@@ -23,6 +25,7 @@
         "d3-array": "^3.2.4",
         "d3-interpolate": "^3.0.1",
         "d3-scale": "^4.0.2",
+        "echarts-for-react": "^3.0.2",
         "eslint-config-airbnb": "^19.0.4",
         "eslint-config-next": "13.3.1",
         "fs": "^0.0.1-security",

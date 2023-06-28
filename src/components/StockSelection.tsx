@@ -1,15 +1,33 @@
-import { useState } from 'react'
-import CompanyModel from '@/model/Company'
+import { clientApi } from '@/lib/axios'
+import StockModel from '@/model/Stock'
 import { Form, Select } from 'antd'
-import companiesJSON from '../data/companies.json'
+import { useEffect, useState } from 'react'
 
 interface props {
-    setSymbol: (symbol: string) => void
+    setStock: (stock: StockModel) => void
 }
-export default function StockSelection(props: props) {
-    const { setSymbol } = props
 
-    const [companies] = useState<CompanyModel[]>(companiesJSON)
+export default function StockSelection(props: props) {
+    const { setStock } = props
+
+    const [stocks, setStocks] = useState<StockModel[]>([])
+
+    useEffect(() => {
+        clientApi.get('/stocks/').then(res => {
+            const stocksData = res.data
+
+            // rename en_name to enName
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const thisStocks = stocksData.map((stock: any) => {
+                return {
+                    ...stock,
+                    enName: stock.en_name
+                } as StockModel
+            })
+
+            setStocks(thisStocks)
+        })
+    }, [])
 
     return (
         <Form.Item
@@ -31,14 +49,16 @@ export default function StockSelection(props: props) {
                 filterSort={(optionA, optionB) =>
                     (optionA?.value ?? '').toLowerCase().localeCompare((optionB?.value ?? '').toLowerCase())
                 }
-                options={companies.map(e => {
+                options={stocks.map(e => {
                     return {
-                        value: e.symbol,
-                        label: `${e.symbol} - ${e.name}`
+                        value: `${e.symbol} - ${e.market}`,
+                        label: `${e.symbol} - ${e.market} - ${e.name}`
                     }
                 })}
                 onSelect={(value: string) => {
-                    setSymbol(value)
+                    const [symbol, market] = value.split('-')
+                    const stock = stocks.find(e => e.symbol === symbol.trim() && e.market === market.trim())
+                    setStock(stock as StockModel)
                 }}
             />
         </Form.Item>

@@ -5,6 +5,7 @@
         "antd",
         "Bollinger",
         "csrftoken",
+        "headlessui",
         "lowerband",
         "matype",
         "middleband",

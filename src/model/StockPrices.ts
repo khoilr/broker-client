@@ -1,11 +1,7 @@
 type StockPrice = {
-    datetime: Date
-    open: number
-    high: number
-    close: number
-    low: number
-    volume: number
-    average?: number
+    categoryData: string[]
+    values: number[][]
+    volumes: number[][]
 }
 
 export default StockPrice
