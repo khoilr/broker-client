@@ -33,7 +33,7 @@ export default function StockSelection(props: props) {
         <Form.Item
             name='stock'
             label='Stock'
-            className='mx-2 w-full'
+            className='w-full'
             rules={[
                 {
                     required: true,

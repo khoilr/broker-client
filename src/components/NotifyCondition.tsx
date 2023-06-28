@@ -5,27 +5,35 @@ import { useState } from 'react'
 import Indicator from './side/Indicator'
 
 type props = {
-    side: string
     indicators: IndicatorModel[]
 }
 
 export default function NotifyCondition(props: props) {
-    const { side, indicators } = props
+    const { indicators } = props
     const [selectingIndicator, setSelectingIndicator] = useState<IndicatorModel>()
 
     return (
+        <div className="rounded-lg w-full">
         <Form.List name='indicators'>
             {(fields, { add, remove }) => (
                 <>
-                    <Form.Item className='w-full'>
+                    <Form.Item
+                        label="Select Indicator"
+                        className='w-full'
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your WhatsApp number'
+                            }
+                        ]}
+                    >
                         <Space.Compact
-                            size='large'
+                            size='middle'
                             className='w-full'
                         >
                             <Select
-                                className='w-full'
                                 showSearch
-                                placeholder={`Select ${side} indicator`}
+                                placeholder="Select indicator"
                                 optionFilterProp='children'
                                 filterOption={(input, option) =>
                                     (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
@@ -44,13 +52,14 @@ export default function NotifyCondition(props: props) {
                                 }))}
                             />
                             <Button
+                                className='bg-cyan-700 rounded-lg w-2/5 text-xs flex items-center'
                                 type='primary'
                                 icon={<PlusOutlined />}
                                 onClick={() => {
                                     if (selectingIndicator) add()
                                 }}
                             >
-                                Add indicator
+                                Add
                             </Button>
                         </Space.Compact>
                     </Form.Item>
@@ -74,5 +83,6 @@ export default function NotifyCondition(props: props) {
                 </>
             )}
         </Form.List>
+        </div>
     )
 }

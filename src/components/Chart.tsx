@@ -134,7 +134,7 @@ export default function Chart(props: props) {
         },
         grid: [
             {
-                left: '6%',
+                left: '5%',
                 right: '5%',
                 height: '50%'
             },

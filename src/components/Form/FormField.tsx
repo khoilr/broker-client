@@ -86,7 +86,7 @@ export default function FormField(props: props) {
                 id='custom-animation'
                 value='notification'
             >
-                <TabsHeader className='rounded-none border-b border-blue-gray-50 bg-transparent '>
+                <TabsHeader className='rounded-none border-b border-blue-gray-50 bg-transparent'>
                     {data.map(({ label, value }) => (
                         <Tab
                             key={value}
@@ -124,7 +124,6 @@ export default function FormField(props: props) {
                                     <InputTelegramUser />
                                     <InputWhatsappUser />
                                     <NotifyCondition
-                                        side={value}
                                         indicators={indicators}
                                     />
                                     <button

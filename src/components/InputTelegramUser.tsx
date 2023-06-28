@@ -5,7 +5,7 @@ export default function InputTelegramUser() {
         <Form.Item
             name='telegram_user'
             label='Telegram user name'
-            className='mx-2 w-full'
+            className='w-full'
             tooltip={
                 <p>
                     Please go to{' '}
