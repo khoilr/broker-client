@@ -20,6 +20,7 @@ export default function Chart(props: props) {
         values: [],
         volumes: []
     })
+
     const [option, setOption] = useState<EChartsOption>({
         animation: true,
         legend: {
