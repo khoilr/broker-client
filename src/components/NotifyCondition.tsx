@@ -28,7 +28,7 @@ export default function NotifyCondition(props: props) {
                             ]}
                         >
                             <Space.Compact
-                                size='small'
+                                size='middle'
                                 className='w-full'
                             >
                                 <Select
@@ -52,7 +52,7 @@ export default function NotifyCondition(props: props) {
                                     }))}
                                 />
                                 <Button
-                                    className='bg-cyan-700 rounded-lg w-2/5 text-xs flex items-center'
+                                    className='bg-cyan-700 rounded-lg w-1/5 text-sm flex items-center'
                                     type='primary'
                                     icon={<PlusOutlined />}
                                     onClick={() => {
