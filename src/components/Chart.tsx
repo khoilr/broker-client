@@ -4,7 +4,7 @@ import StockModel from '@/model/Stock'
 import StockPriceModel from '@/model/StockPrices'
 import EChartsReact from 'echarts-for-react'
 import { useEffect, useState } from 'react'
-import * as echarts from 'echarts'
+import { EChartsOption } from 'echarts'
 
 interface props {
     stock: StockModel
@@ -14,7 +14,6 @@ const upColor = '#ec0000'
 const downColor = '#00da3c'
 
 export default function Chart(props: props) {
-    type EChartsOption = echarts.EChartsOption
     const { stock } = props
 
     const [data, setData] = useState<StockPriceModel>({
@@ -186,7 +185,8 @@ export default function Chart(props: props) {
                     borderColor0: undefined
                 },
                 tooltip: {
-                    formatter(param: { name: any; data: any[] }) {
+                    formatter: (params: TooltipFormatterParams) => {
+                        const param = params[0]
                         return [
                             `Date: ${param.name}<hr size=1 style="margin: 3px 0">`,
                             `Open: ${param.data[0]}<br/>`,
