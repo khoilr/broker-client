@@ -1,126 +1,275 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { clientApi } from '@/lib/axios'
+import StockModel from '@/model/Stock'
 import StockPriceModel from '@/model/StockPrices'
+import EChartsReact from 'echarts-for-react'
 import { useEffect, useState } from 'react'
-import {
-    Bar,
-    BarChart,
-    CartesianGrid,
-    ComposedChart,
-    Legend,
-    Line,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis
-} from 'recharts'
-
-// Having no idea what are these but without them, the code won't run :D
-// ChartJS.register(LineElement, PointElement, BarElement, CategoryScale, LinearScale, Tooltip, Legend)
+import * as echarts from 'echarts'
 
 interface props {
-    symbol: string
-    timeFrame: string
+    stock: StockModel
 }
 
+const upColor = '#ec0000'
+const downColor = '#00da3c'
+
 export default function Chart(props: props) {
-    const { symbol, timeFrame } = props
+    type EChartsOption = echarts.EChartsOption
+    const { stock } = props
 
-    const [price, setPrice] = useState<StockPriceModel[]>()
+    const [data, setData] = useState<StockPriceModel>({
+        categoryData: [],
+        values: [],
+        volumes: []
+    })
 
-    // call api to get price
+    const option: EChartsOption = {
+        animation: true,
+        title: {
+            left: 'center',
+            text: stock.name
+        },
+        legend: {
+            top: 10,
+            left: 'center',
+            data: []
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross'
+            },
+            borderWidth: 1,
+            borderColor: '#ccc',
+            padding: 8,
+            textStyle: {
+                color: '#000'
+            },
+            position(pos: number[], params: any, el: any, elRect: any, size: { viewSize: number[] }) {
+                interface PositionObject {
+                    top: number
+                    [key: string]: number
+                }
+
+                const obj: PositionObject = {
+                    top: 10
+                }
+
+                obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30
+                return obj
+            }
+            // extraCssText: 'width: 170px'
+        },
+        axisPointer: {
+            link: [
+                {
+                    xAxisIndex: 'all'
+                }
+            ],
+            label: {
+                backgroundColor: '#777'
+            }
+        },
+        toolbox: {
+            feature: {
+                dataZoom: {
+                    yAxisIndex: false
+                },
+                brush: {
+                    type: ['lineX', 'clear']
+                }
+            }
+        },
+        brush: {
+            xAxisIndex: 'all',
+            brushLink: 'all',
+            outOfBrush: {
+                colorAlpha: 0.1
+            }
+        },
+        visualMap: {
+            show: false,
+            seriesIndex: 5,
+            dimension: 2,
+            pieces: [
+                {
+                    value: -1,
+                    color: downColor
+                },
+                {
+                    value: 1,
+                    color: upColor
+                }
+            ]
+        },
+        grid: [
+            {
+                left: '5%',
+                right: '5%',
+                height: '50%'
+            },
+            {
+                left: '5%',
+                right: '5%',
+                top: '80%',
+                height: '16%'
+            }
+        ],
+        xAxis: [
+            {
+                type: 'category',
+                data: data.categoryData,
+                boundaryGap: false,
+                axisLine: { onZero: false },
+                splitLine: { show: false },
+                min: 'dataMin',
+                max: 'dataMax',
+                axisPointer: {
+                    z: 100
+                }
+            },
+            {
+                type: 'category',
+                gridIndex: 1,
+                data: data.categoryData,
+                boundaryGap: false,
+                axisLine: { onZero: false },
+                axisTick: { show: false },
+                splitLine: { show: false },
+                axisLabel: { show: false },
+                min: 'dataMin',
+                max: 'dataMax'
+            }
+        ],
+        yAxis: [
+            {
+                scale: true,
+                splitArea: {
+                    show: true
+                }
+            },
+            {
+                scale: true,
+                gridIndex: 1,
+                splitNumber: 2,
+                axisLabel: { show: false },
+                axisLine: { show: false },
+                axisTick: { show: false },
+                splitLine: { show: false }
+            }
+        ],
+        dataZoom: [
+            {
+                type: 'inside',
+                xAxisIndex: [0, 1],
+                start: 98,
+                end: 100
+            }
+            // {
+            //   show: true,
+            //   xAxisIndex: [0, 1],
+            //   type: 'slider',
+            //   top: '85%',
+            //   start: 98,
+            //   end: 100
+            // }
+        ],
+        series: [
+            {
+                name: stock.symbol,
+                type: 'candlestick',
+                data: data.values,
+                itemStyle: {
+                    color: upColor,
+                    color0: downColor,
+                    borderColor: undefined,
+                    borderColor0: undefined
+                },
+                tooltip: {
+                    formatter(param: { name: any; data: any[] }) {
+                        return [
+                            `Date: ${param.name}<hr size=1 style="margin: 3px 0">`,
+                            `Open: ${param.data[0]}<br/>`,
+                            `Close: ${param.data[1]}<br/>`,
+                            `Low: ${param.data[2]}<br/>`,
+                            `High: ${param.data[3]}<br/>`
+                        ].join('')
+                    }
+                }
+            },
+            {
+                name: 'Volume',
+                type: 'bar',
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                data: data.volumes,
+                itemStyle: {
+                    color(param: { dataIndex: number; data: any[] }) {
+                        return data.values[param.dataIndex][1] > data.values[param.dataIndex][0] ? upColor : downColor
+                    }
+                }
+            }
+        ]
+    }
+
+    // const [option, setOption] = useState<EChartsOption>(
+
     useEffect(() => {
-        // if both symbol and timeFrame are not set, return
-        if (!(symbol && timeFrame)) {
-            return
-        }
+        if (!stock.symbol) return
 
         clientApi
-            .get('prices/', {
+            .get('/prices/daily/', {
                 params: {
-                    symbol,
-                    time_frame: timeFrame
+                    symbol: stock.symbol,
+                    orient: 'records'
                 }
             })
             .then(res => {
-                const prices = res.data
+                // Get data from response
+                const resData = res.data
 
-                const data = prices.map((price: StockPriceModel) => {
-                    return {
-                        ...price,
-                        // average with rounded to 2 decimal places
-                        average: Math.round(((price.close + price.open + price.high + price.low) / 4) * 100) / 100
-                    }
+                // Create data for chart
+                const categoryData: string[] = []
+                const values: number[][] = []
+                const volumes: number[][] = []
+
+                // Add data to array
+                for (let i = 0; i < resData.length; i += 1) {
+                    const { date, open, close, low, high, volume } = resData[i]
+                    categoryData.push(date)
+                    values.push([open, close, low, high])
+                    volumes.push([i, volume, close > open ? 1 : -1])
+                }
+
+                // Set data to state
+                setData({
+                    categoryData,
+                    values,
+                    volumes
                 })
-                setPrice(data)
             })
-    }, [symbol, timeFrame])
+    }, [stock.symbol])
 
+    // useEffect(() => {
+    //     // setOption((prev: EChartsOption) => {
+    //     //     const newOption = { ...prev }
+    //     //     newOption.legend.data[0] = stock.name
+    //     //     newOption.series[0].name = stock.symbol
+
+    //     //     // console.log(newOption)
+    //     //     // console.log(stock.name)
+    //     //     // console.log(stock.symbol)
+    //     //     return newOption as EChartsOption
+    //     // })
+    // }, [data, stock.name, stock.symbol])
     return (
-        <div className='w-full h-auto'>
-            <ResponsiveContainer height={480}>
-                <ComposedChart
-                    data={price}
-                    height={480}
-                    title={symbol}
-                    syncId={symbol}
-                >
-                    <CartesianGrid strokeDasharray='3 3' />
-                    <XAxis
-                        dataKey='datetime'
-                        minTickGap={32}
-                    />
-                    <YAxis
-                        yAxisId='left'
-                        orientation='left'
-                        stroke='rgb(75, 192, 192)'
-                    />
-                    {/* <YAxis
-                        yAxisId='right'
-                        orientation='right'
-                        stroke='rgba(255, 99, 132, 1)'
-                    /> */}
-                    <Tooltip />
-                    <Legend />
-                    <Line
-                        yAxisId='left'
-                        type='monotone'
-                        dataKey='average'
-                        name='Price'
-                        stroke='rgb(75, 192, 192)'
-                        dot={false}
-                    />
-                    {/* <Bar
-                        yAxisId='right'
-                        dataKey='volume'
-                        name='Volume'
-                        fill='rgba(255, 99, 132, 1)'
-                    /> */}
-                </ComposedChart>
-            </ResponsiveContainer>
-            <ResponsiveContainer height={320}>
-                <BarChart
-                    height={320}
-                    data={price}
-                    syncId={symbol}
-                >
-                    <Tooltip />
-                    <Legend />
-                    <CartesianGrid strokeDasharray='3 3' />
-                    <XAxis
-                        dataKey='datetime'
-                        minTickGap={32}
-                    />
-                    <YAxis
-                        orientation='left'
-                        stroke='rgb(75, 192, 192)'
-                    />
-                    <Bar
-                        dataKey='volume'
-                        name='Volume'
-                        fill='rgb(75, 192, 192)'
-                    />
-                </BarChart>
-            </ResponsiveContainer>
+        <div className='w-full md:col-span-3 relative lg:h-[70vh] h-full p-4 border rounded-lg bg-white'>
+            <EChartsReact
+                option={option}
+                style={{
+                    height: '100%'
+                }}
+            />
         </div>
     )
 }

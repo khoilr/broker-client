@@ -4,7 +4,7 @@ export default function InputWhatsappUser() {
     return (
         <Form.Item
             label='WhatsApp number'
-            className='w-full mx-2'
+            className='w-full'
             rules={[
                 {
                     required: true,
@@ -13,22 +13,24 @@ export default function InputWhatsappUser() {
             ]}
         >
             <Space.Compact
-                size='large'
+                size='small'
                 className='w-full'
             >
                 <Form.Item
                     name='whatsapp_area_code'
                     noStyle
-                    initialValue='+84'
                 >
-                    <Input className='w-2/12' />
+                    <Input
+                        className='w-2/6 text-center'
+                        defaultValue='+84'
+                    />
                 </Form.Item>
                 <Form.Item
                     name='whatsapp_number'
                     noStyle
                 >
                     <Input
-                        className='w-10/12'
+                        className='w-full'
                         maxLength={9}
                         minLength={9}
                     />

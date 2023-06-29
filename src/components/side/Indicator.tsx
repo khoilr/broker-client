@@ -1,15 +1,12 @@
 import IndicatorModel from '@/model/Indicator'
 import { DeleteOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Typography } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { useEffect, useState } from 'react'
 import Condition from './Condition'
 import Parameter from './Parameter'
 
-const { Title } = Typography
-
 type props = {
     side: string
-    // indicators: IndicatorModel[]
     selectingIndicator: IndicatorModel
     name: number
     remove: (name: number) => void
@@ -34,7 +31,7 @@ export default function Indicator(props: props) {
         <div className='flex items-start'>
             <div className={`border border-solid rounded-lg border-${color}-600 p-2 w-full mb-6`}>
                 <Form.Item
-                    label={<Title level={3}>Indicator</Title>}
+                    label='Indicator'
                     name={[name.toString(), 'name']}
                     initialValue={indicator?.name}
                 >
@@ -43,7 +40,7 @@ export default function Indicator(props: props) {
                         value={indicator?.name}
                     />
                 </Form.Item>
-                <Form.Item label={<Title level={3}>Condition</Title>}>
+                <Form.Item label='Condition'>
                     <Condition
                         indicator={indicator}
                         returns={indicator?.returns}
@@ -56,7 +53,7 @@ export default function Indicator(props: props) {
                     initialValue={indicator?.returns?.map(e => e.value)}
                 />
                 {(indicator?.parameters?.length ?? 0) > 0 && (
-                    <Form.Item label={<Title level={3}>Parameters</Title>}>
+                    <Form.Item label='Parameters'>
                         <Form.List
                             name={[name.toString(), 'parameters']}
                             initialValue={indicator.parameters}
@@ -77,7 +74,7 @@ export default function Indicator(props: props) {
                 )}
             </div>
             <Button
-                className='mx-2'
+                className='mx-2 p-1 border-none'
                 onClick={() => {
                     remove(name)
                 }}

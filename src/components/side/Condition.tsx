@@ -38,10 +38,11 @@ function Condition(props: props) {
 
     return (
         <Space.Compact
-            size='large'
-            className='w-full px-2'
+            size='small'
+            className='w-full'
         >
             <Form.Item
+                noStyle
                 className='w-full'
                 name={[name.toString(), 'condition', 'source']}
                 rules={[
@@ -64,6 +65,7 @@ function Condition(props: props) {
                 />
             </Form.Item>
             <Form.Item
+                noStyle
                 className='w-full'
                 name={[name.toString(), 'condition', 'change']}
                 rules={[
@@ -85,6 +87,7 @@ function Condition(props: props) {
                 />
             </Form.Item>
             <Form.Item
+                noStyle
                 className='w-full'
                 name={[name.toString(), 'condition', 'value']}
                 rules={[{ required: true, message: 'Please input value' }]}
@@ -96,6 +99,7 @@ function Condition(props: props) {
                 />
             </Form.Item>
             <Form.Item
+                noStyle
                 className='w-full'
                 name={[name.toString(), 'condition', 'unit']}
                 rules={[
