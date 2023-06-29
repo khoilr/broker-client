@@ -2,8 +2,9 @@
 import { clientApi } from '@/lib/axios'
 import StockModel from '@/model/Stock'
 import StockPriceModel from '@/model/StockPrices'
-import EChartsReact, { EChartsOption } from 'echarts-for-react'
+import EChartsReact from 'echarts-for-react'
 import { useEffect, useState } from 'react'
+import * as echarts from 'echarts'
 
 interface props {
     stock: StockModel
@@ -13,6 +14,7 @@ const upColor = '#ec0000'
 const downColor = '#00da3c'
 
 export default function Chart(props: props) {
+    type EChartsOption = echarts.EChartsOption
     const { stock } = props
 
     const [data, setData] = useState<StockPriceModel>({
@@ -21,8 +23,12 @@ export default function Chart(props: props) {
         volumes: []
     })
 
-    const [option, setOption] = useState<EChartsOption>({
+    const option: EChartsOption = {
         animation: true,
+        title: {
+            left: 'center',
+            text: stock.name
+        },
         legend: {
             top: 10,
             left: 'center',
@@ -170,10 +176,10 @@ export default function Chart(props: props) {
         ],
         series: [
             {
-                name: '',
+                name: stock.symbol,
                 type: 'candlestick',
                 data: data.values,
-                tyle: {
+                itemStyle: {
                     color: upColor,
                     color0: downColor,
                     borderColor: undefined,
@@ -197,14 +203,16 @@ export default function Chart(props: props) {
                 xAxisIndex: 1,
                 yAxisIndex: 1,
                 data: data.volumes,
-                tyle: {
+                itemStyle: {
                     color(param: { dataIndex: number; data: any[] }) {
                         return data.values[param.dataIndex][1] > data.values[param.dataIndex][0] ? upColor : downColor
                     }
                 }
             }
         ]
-    })
+    }
+
+    // const [option, setOption] = useState<EChartsOption>(
 
     useEffect(() => {
         if (!stock.symbol) return
@@ -242,15 +250,18 @@ export default function Chart(props: props) {
             })
     }, [stock.symbol])
 
-    useEffect(() => {
-        setOption((prev: EChartsOption) => {
-            const newOption = { ...prev }
-            newOption.legend.data[0] = stock.name
-            newOption.series[0].name = stock.name
+    // useEffect(() => {
+    //     // setOption((prev: EChartsOption) => {
+    //     //     const newOption = { ...prev }
+    //     //     newOption.legend.data[0] = stock.name
+    //     //     newOption.series[0].name = stock.symbol
 
-            return newOption as EChartsOption
-        })
-    }, [data, stock.name])
+    //     //     // console.log(newOption)
+    //     //     // console.log(stock.name)
+    //     //     // console.log(stock.symbol)
+    //     //     return newOption as EChartsOption
+    //     // })
+    // }, [data, stock.name, stock.symbol])
     return (
         <div className='w-full md:col-span-3 relative lg:h-[70vh] h-full p-4 border rounded-lg bg-white'>
             <EChartsReact
