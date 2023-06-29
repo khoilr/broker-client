@@ -32,6 +32,16 @@ export default function FormField(props: props) {
 
     const [form] = Form.useForm()
 
+    // Watchers
+    const indicatorsWatcher = Form.useWatch('indicators', form)
+    const stockWatcher = Form.useWatch('stock', form)
+
+    // On stock or indicators change
+    useEffect(() => {
+        console.log(stockWatcher)
+        console.log(indicatorsWatcher)
+    }, [indicatorsWatcher, stockWatcher])
+
     // handle form submission
     const onFinish = (values: any) => {
         clientApi.post('/strategies/', values).then(res => {
