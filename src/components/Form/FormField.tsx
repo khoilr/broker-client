@@ -81,12 +81,12 @@ export default function FormField(props: props) {
     }, [])
 
     return (
-        <div className='w-full col-span-1 relative m-auto py-4 border rounded-lg bg-white'>
+        <div className='w-full col-span-1 relative  lg:h-[70vh] h-full py-4 border rounded-lg bg-white'>
             <Tabs
                 id='custom-animation'
                 value='notification'
             >
-                <TabsHeader className='rounded-none border-b border-blue-gray-50 bg-transparent'>
+                <TabsHeader className='rounded-none bg-transparent'>
                     {data.map(({ label, value }) => (
                         <Tab
                             key={value}
@@ -115,7 +115,7 @@ export default function FormField(props: props) {
                             value={value}
                         >
                             <Form
-                                size='small'
+                                size='middle'
                                 form={form}
                                 layout='vertical'
                                 onFinish={onFinish}

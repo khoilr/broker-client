@@ -13,7 +13,7 @@ export default function InputWhatsappUser() {
             ]}
         >
             <Space.Compact
-                size='small'
+                size='middle'
                 className='w-full'
             >
                 <Form.Item
@@ -21,7 +21,7 @@ export default function InputWhatsappUser() {
                     noStyle
                 >
                     <Input
-                        className='w-2/6 text-center'
+                        className='w-1/6 text-center'
                         defaultValue='+84'
                     />
                 </Form.Item>
