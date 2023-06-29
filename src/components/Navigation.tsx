@@ -1,5 +1,4 @@
 import { Disclosure } from '@headlessui/react'
-import Image from 'next/image'
 import NavItem from './NavItem'
 
 const navigation = [
@@ -17,15 +16,14 @@ export default function Nav() {
                 className='bg-white border'
             >
                 {() => (
-                    <div className='mx-auto px-6'>
+                    <div className='mx-auto px-6 py-2'>
                         <div className='flex items-center justify-between'>
                             <div className='flex items-center'>
                                 <div className='flex-shrink-0'>
-                                    <Image
+                                    <img
                                         src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
                                         alt='Your Company'
-                                        height={32}
-                                        width={32}
+                                        className="h-8 w-8"
                                     />
                                 </div>
                                 <div className='hidden md:block'>

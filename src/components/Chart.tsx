@@ -4,17 +4,16 @@ import StockModel from '@/model/Stock'
 import StockPriceModel from '@/model/StockPrices'
 import EChartsReact from 'echarts-for-react'
 import { useEffect, useState } from 'react'
-import * as echarts from 'echarts'
+import { EChartsOption } from 'echarts'
 
 interface props {
     stock: StockModel
 }
 
-const upColor = '#ec0000'
-const downColor = '#00da3c'
+const downColor = '#ec0000'
+const upColor = '#00da3c'
 
 export default function Chart(props: props) {
-    type EChartsOption = echarts.EChartsOption
     const { stock } = props
 
     const [data, setData] = useState<StockPriceModel>({
@@ -186,14 +185,16 @@ export default function Chart(props: props) {
                     borderColor0: undefined
                 },
                 tooltip: {
-                    formatter(param: { name: any; data: any[] }) {
-                        return [
-                            `Date: ${param.name}<hr size=1 style="margin: 3px 0">`,
-                            `Open: ${param.data[0]}<br/>`,
-                            `Close: ${param.data[1]}<br/>`,
-                            `Low: ${param.data[2]}<br/>`,
-                            `High: ${param.data[3]}<br/>`
-                        ].join('')
+                    formatter(param) {
+                        //     return [
+                        //         `Date: ${param.name}<hr size=1 style="margin: 3px 0">`,
+                        //         `Open: ${param.data[0]}<br/>`,
+                        //         `Close: ${param.data[1]}<br/>`,
+                        //         `Low: ${param.data[2]}<br/>`,
+                        //         `High: ${param.data[3]}<br/>`
+                        //     ].join('')
+                        // }
+                        return `${param.name}<br>${param.data || ''}`
                     }
                 }
             },
@@ -204,7 +205,7 @@ export default function Chart(props: props) {
                 yAxisIndex: 1,
                 data: data.volumes,
                 itemStyle: {
-                    color(param: { dataIndex: number; data: any[] }) {
+                    color(param) {
                         return data.values[param.dataIndex][1] > data.values[param.dataIndex][0] ? upColor : downColor
                     }
                 }
@@ -250,18 +251,6 @@ export default function Chart(props: props) {
             })
     }, [stock.symbol])
 
-    // useEffect(() => {
-    //     // setOption((prev: EChartsOption) => {
-    //     //     const newOption = { ...prev }
-    //     //     newOption.legend.data[0] = stock.name
-    //     //     newOption.series[0].name = stock.symbol
-
-    //     //     // console.log(newOption)
-    //     //     // console.log(stock.name)
-    //     //     // console.log(stock.symbol)
-    //     //     return newOption as EChartsOption
-    //     // })
-    // }, [data, stock.name, stock.symbol])
     return (
         <div className='w-full md:col-span-3 relative lg:h-[70vh] h-full p-4 border rounded-lg bg-white'>
             <EChartsReact
