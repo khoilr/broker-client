@@ -81,7 +81,7 @@ export default function FormField(props: props) {
     }, [])
 
     return (
-        <div className='w-full col-span-1 relative lg:h-[70vh] h-[50vh] m-auto py-4 border rounded-lg bg-white'>
+        <div className='w-full col-span-1 relative m-auto py-4 border rounded-lg bg-white'>
             <Tabs
                 id='custom-animation'
                 value='notification'
@@ -115,17 +115,16 @@ export default function FormField(props: props) {
                             value={value}
                         >
                             <Form
+                                size='small'
                                 form={form}
-                                layout='horizontal'
+                                layout='vertical'
                                 onFinish={onFinish}
                             >
                                 <div className='items-center pl-2 pr-4 pt-2 rounded-lg'>
                                     <StockSelection setStock={setStock} />
                                     <InputTelegramUser />
                                     <InputWhatsappUser />
-                                    <NotifyCondition
-                                        indicators={indicators}
-                                    />
+                                    <NotifyCondition indicators={indicators} />
                                     <button
                                         type='button'
                                         className='bg-cyan-700 text-white py-2 px-4 rounded-lg m-auto flex items-center'

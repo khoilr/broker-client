@@ -2,7 +2,7 @@
 import { clientApi } from '@/lib/axios'
 import StockModel from '@/model/Stock'
 import StockPriceModel from '@/model/StockPrices'
-import ReactEckhart, { EChartsOption } from 'echarts-for-react'
+import EChartsReact, { EChartsOption } from 'echarts-for-react'
 import { useEffect, useState } from 'react'
 
 interface props {
@@ -20,50 +20,12 @@ export default function Chart(props: props) {
         values: [],
         volumes: []
     })
-
-    useEffect(() => {
-        if (!stock.symbol) return
-
-        clientApi
-            .get('/prices/daily/', {
-                params: {
-                    symbol: stock.symbol,
-                    orient: 'records'
-                }
-            })
-            .then(res => {
-                // Get data from response
-                const resData = res.data
-
-                // Create data for chart
-                const categoryData: string[] = []
-                const values: number[][] = []
-                const volumes: number[][] = []
-
-                // Add data to array
-                for (let i = 0; i < resData.length; i += 1) {
-                    const item = resData[i]
-
-                    categoryData.push(item.date)
-                    values.push([item.open, item.close, item.low, item.high])
-                    volumes.push([i, item.volume, item.close > item.open ? 1 : -1])
-                }
-
-                // Set data to state
-                setData({
-                    categoryData,
-                    values,
-                    volumes
-                })
-            })
-    }, [setData, stock])
-
-    const option = {
-        animation: false,
+    const [option, setOption] = useState<EChartsOption>({
+        animation: true,
         legend: {
             top: 10,
             left: 'center',
-            data: ['Dow-Jones index']
+            data: []
         },
         tooltip: {
             trigger: 'axis',
@@ -72,7 +34,7 @@ export default function Chart(props: props) {
             },
             borderWidth: 1,
             borderColor: '#ccc',
-            padding: 10,
+            padding: 8,
             textStyle: {
                 color: '#000'
             },
@@ -85,6 +47,7 @@ export default function Chart(props: props) {
                 const obj: PositionObject = {
                     top: 10
                 }
+
                 obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30
                 return obj
             }
@@ -206,10 +169,10 @@ export default function Chart(props: props) {
         ],
         series: [
             {
-                name: 'Dow-Jones index',
+                name: '',
                 type: 'candlestick',
                 data: data.values,
-                itemStyle: {
+                tyle: {
                     color: upColor,
                     color0: downColor,
                     borderColor: undefined,
@@ -233,18 +196,63 @@ export default function Chart(props: props) {
                 xAxisIndex: 1,
                 yAxisIndex: 1,
                 data: data.volumes,
-                itemStyle: {
+                tyle: {
                     color(param: { dataIndex: number; data: any[] }) {
                         return data.values[param.dataIndex][1] > data.values[param.dataIndex][0] ? upColor : downColor
                     }
                 }
             }
         ]
-    } as EChartsOption
+    })
 
+    useEffect(() => {
+        if (!stock.symbol) return
+
+        clientApi
+            .get('/prices/daily/', {
+                params: {
+                    symbol: stock.symbol,
+                    orient: 'records'
+                }
+            })
+            .then(res => {
+                // Get data from response
+                const resData = res.data
+
+                // Create data for chart
+                const categoryData: string[] = []
+                const values: number[][] = []
+                const volumes: number[][] = []
+
+                // Add data to array
+                for (let i = 0; i < resData.length; i += 1) {
+                    const { date, open, close, low, high, volume } = resData[i]
+                    categoryData.push(date)
+                    values.push([open, close, low, high])
+                    volumes.push([i, volume, close > open ? 1 : -1])
+                }
+
+                // Set data to state
+                setData({
+                    categoryData,
+                    values,
+                    volumes
+                })
+            })
+    }, [stock.symbol])
+
+    useEffect(() => {
+        setOption((prev: EChartsOption) => {
+            const newOption = { ...prev }
+            newOption.legend.data[0] = stock.name
+            newOption.series[0].name = stock.name
+
+            return newOption as EChartsOption
+        })
+    }, [data, stock.name])
     return (
         <div className='w-full md:col-span-3 relative lg:h-[70vh] h-full p-4 border rounded-lg bg-white'>
-            <ReactEckhart
+            <EChartsReact
                 option={option}
                 style={{
                     height: '100%'
