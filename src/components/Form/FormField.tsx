@@ -78,7 +78,7 @@ export default function FormField(props: props) {
                 })
 
                 // Return parsed Indicator Model
-                return {
+return {
                     ...indicator,
                     parameters,
                     returns

@@ -12,13 +12,13 @@ export default function ConditionSelection(props: props) {
     const [returnOptions, setReturnOptions] = useState<BaseOptionType[]>([])
     const [initialReturn, setInitialReturn] = useState<BaseOptionType>()
 
-    useEffect(() => {
+useEffect(() => {
         const thisReturn = returns.map(e => e as BaseOptionType)
         setReturnOptions(thisReturn)
         setInitialReturn(thisReturn[0])
     }, [returns])
 
-    return (
+return (
         <Select
             showSearch
             placeholder='Select return'

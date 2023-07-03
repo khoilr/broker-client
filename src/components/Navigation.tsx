@@ -2,10 +2,10 @@ import { Disclosure } from '@headlessui/react'
 import NavItem from './NavItem'
 
 const navigation = [
-    { name: 'Market', href: '/', current: true },
-    { name: 'Notification', href: '/notification' },
-    { name: 'About', href: '/' },
-    { name: 'Contact', href: '/' }
+    { name: 'Home', href: '/', current: true },
+    // { name: 'Notification', href: '/notification' },
+    // { name: 'About', href: '/' },
+    // { name: 'Contact', href: '/' }
 ]
 
 export default function Nav() {
@@ -21,9 +21,9 @@ export default function Nav() {
                             <div className='flex items-center'>
                                 <div className='flex-shrink-0'>
                                     <img
-                                        src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
+                                        src='@svg/stock-svgrepo-com.svg'
                                         alt='Your Company'
-                                        className="h-8 w-8"
+                                        className='h-8 w-8'
                                     />
                                 </div>
                                 <div className='hidden md:block'>
