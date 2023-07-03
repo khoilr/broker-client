@@ -130,7 +130,7 @@ return {
                                 layout='vertical'
                                 onFinish={onFinish}
                             >
-                                <div className='items-center pl-2 pr-4 pt-2 rounded-lg'>
+                                <div className='items-center px-2 pt-2 rounded-lg m-auto flex-col'>
                                     <StockSelection setStock={setStock} />
                                     <InputTelegramUser />
                                     <InputWhatsappUser />

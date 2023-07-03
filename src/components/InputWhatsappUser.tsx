@@ -1,6 +1,19 @@
-import { Form, Input, Space } from 'antd'
+import { Form, Input, Select } from 'antd'
+
+const { Option } = Select
 
 export default function InputWhatsappUser() {
+const prefixSelector = (
+        <Form.Item
+            name='prefix'
+            noStyle
+        >
+            <Select style={{ width: 70 }} defaultValue='+84'>
+                <Option value='84'>+84</Option>
+                <Option value='86'>+86</Option>
+            </Select>
+        </Form.Item>
+    )
     return (
         <Form.Item
             label='WhatsApp number'
@@ -12,30 +25,10 @@ export default function InputWhatsappUser() {
                 }
             ]}
         >
-            <Space.Compact
-                size='middle'
-                className='w-full mx-auto'
-            >
-                <Form.Item
-                    name='whatsapp_area_code'
-                    noStyle
-                >
-                    <Input
-                        className='w-1/6 text-center mx-auto'
-                        defaultValue='+84'
-                    />
-                </Form.Item>
-                <Form.Item
-                    name='whatsapp_number'
-                    noStyle
-                >
-                    <Input
-                        className='w-full mx-auto'
-                        maxLength={9}
-                        minLength={9}
-                    />
-                </Form.Item>
-            </Space.Compact>
+            <Input
+                addonBefore={prefixSelector}
+                style={{ width: '100%' }}
+            />
         </Form.Item>
     )
 }

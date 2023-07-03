@@ -32,7 +32,7 @@ export default function StockSelection(props: props) {
     return (
         <Form.Item
             name='stock'
-            label='Stock'
+            label='Select stock'
             className='w-full'
             rules={[
                 {

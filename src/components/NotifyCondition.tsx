@@ -1,6 +1,6 @@
 import IndicatorModel from '@/model/Indicator'
-import { PlusOutlined } from '@ant-design/icons'
-import { Button, Form, Select, Space } from 'antd'
+// import { PlusOutlined } from '@ant-design/icons'
+import { Form, Select, Space } from 'antd'
 import { useState } from 'react'
 import Indicator from './side/Indicator'
 
@@ -11,11 +11,10 @@ type props = {
 export default function NotifyCondition(props: props) {
     const { indicators } = props
     const [selectingIndicator, setSelectingIndicator] = useState<IndicatorModel>()
-
     return (
-        <div className='rounded-lg w-full'>
+        <div className='rounded-lg w-full flex'>
             <Form.List name='indicators'>
-                {(fields, { add, remove }) => (
+                {(fields, { remove }) => (
                     <>
                         <Form.Item
                             label='Select Indicator'
@@ -51,8 +50,8 @@ export default function NotifyCondition(props: props) {
                                         label: `${e.label} (${e.name}) `
                                     }))}
                                 />
-                                <Button
-                                    className='bg-cyan-700 rounded-lg w-1/5 text-sm flex items-center'
+                                {/* <Button
+                                    className='bg-cyan-700 rounded-lg w-1/5 text-sm flex items-center mx-auto'
                                     type='primary'
                                     icon={<PlusOutlined />}
                                     onClick={() => {
@@ -60,7 +59,7 @@ export default function NotifyCondition(props: props) {
                                     }}
                                 >
                                     Add
-                                </Button>
+                                </Button> */}
                             </Space.Compact>
                         </Form.Item>
                         {fields.map(({ key, name }) => (

@@ -51,6 +51,7 @@
         "eslint-config-prettier": "^8.8.0",
         "eslint-import-resolver-typescript": "^3.5.5",
         "eslint-plugin-prettier": "^4.2.1",
+        "file-loader": "^6.2.0",
         "next-router-mock": "^0.9.3",
         "postcss-import": "^15.1.0",
         "postcss-loader": "^7.3.0",

@@ -1,5 +1,6 @@
 import { Disclosure } from '@headlessui/react'
 import NavItem from './NavItem'
+// import logo from '../svg/stock-svgrepo-com.svg'
 
 const navigation = [
     { name: 'Home', href: '/', current: true },
@@ -9,6 +10,8 @@ const navigation = [
 ]
 
 export default function Nav() {
+    // const logo: string = require('../svg/stock-svgrepo-com.svg').default
+
     return (
         <div className='min-h-full'>
             <Disclosure
@@ -21,7 +24,7 @@ export default function Nav() {
                             <div className='flex items-center'>
                                 <div className='flex-shrink-0'>
                                     <img
-                                        src='@svg/stock-svgrepo-com.svg'
+                                        src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
                                         alt='Your Company'
                                         className='h-8 w-8'
                                     />
