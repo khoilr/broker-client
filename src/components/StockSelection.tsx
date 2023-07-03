@@ -32,7 +32,7 @@ export default function StockSelection(props: props) {
     return (
         <Form.Item
             name='stock'
-            label='Select stock'
+            label='Select Stock'
             className='w-full'
             rules={[
                 {
@@ -43,7 +43,7 @@ export default function StockSelection(props: props) {
         >
             <Select
                 showSearch
-                placeholder='Select stock'
+                placeholder='Select Stock'
                 optionFilterProp='children'
                 filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
                 filterSort={(optionA, optionB) =>

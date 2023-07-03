@@ -16,7 +16,7 @@ const prefixSelector = (
     )
     return (
         <Form.Item
-            label='WhatsApp number'
+            label='WhatsApp Number'
             className='w-full mx-auto'
             rules={[
                 {

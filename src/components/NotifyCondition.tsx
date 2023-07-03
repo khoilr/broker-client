@@ -32,7 +32,7 @@ export default function NotifyCondition(props: props) {
                             >
                                 <Select
                                     showSearch
-                                    placeholder='Select indicator'
+                                    placeholder='Select Indicator'
                                     optionFilterProp='children'
                                     filterOption={(input, option) =>
                                         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())

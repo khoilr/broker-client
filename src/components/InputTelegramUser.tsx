@@ -4,7 +4,7 @@ export default function InputTelegramUser() {
     return (
         <Form.Item
             name='telegram_user'
-            label='Telegram user name'
+            label='Telegram User Name'
             className='w-full'
             tooltip={
                 <p>
@@ -27,7 +27,7 @@ export default function InputTelegramUser() {
             ]}
         >
             <Input
-                placeholder='@user'
+                placeholder='@User'
                 type='text'
             />
         </Form.Item>
