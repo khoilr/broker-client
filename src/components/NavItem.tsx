@@ -10,9 +10,9 @@ function NavItem({ item }: { item: Item }) {
         <a
             key={name}
             href={href}
-            className={` no-underline
-            text-gray-500 hover:bg-gray-300 hover:text-blue-700 rounded-md font-medium  text-base p-2
-                        cursor-pointer${current ? 'bg-white text-gray-500' : ''}`}
+            className={`
+            text-gray-500 hover:bg-gray-200 hover:text-cyan-700 rounded-lg font-medium text-base p-2
+                        cursor-pointer${current ? 'bg-white text-cyan-700' : ''}`}
             aria-current={current ? 'page' : undefined}
         >
             {item.name}
