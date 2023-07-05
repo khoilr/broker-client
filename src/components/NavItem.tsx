@@ -11,7 +11,7 @@ function NavItem({ item }: { item: Item }) {
             key={name}
             href={href}
             className={`
-            text-gray-500 hover:bg-gray-200 hover:text-cyan-700 rounded-lg font-medium text-base p-2
+            text-gray-500 hover:bg-gray-200 hover:text-cyan-700 rounded-lg font-sm text-base p-2
                         cursor-pointer${current ? 'bg-white text-cyan-700' : ''}`}
             aria-current={current ? 'page' : undefined}
         >
