@@ -51,7 +51,7 @@ export default function NotifyCondition(props: props) {
                                     }))}
                                 />
                                 <Button
-                                    className='bg-cyan-700 rounded-lg w-1/5 text-sm flex items-center mx-auto'
+                                    className='bg-cyan-700 rounded-lg w-1/5 text-sm flex items-center mx-auto justify-center'
                                     type='primary'
                                     icon={<PlusOutlined />}
                                     onClick={() => {
