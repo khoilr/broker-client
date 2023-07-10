@@ -55,13 +55,13 @@ export default function FormField(props: props) {
     }
 
     useEffect(() => {
-        clientApi.get('/indicators/').then(res => {
+        clientApi.get('/predefined_indicator/').then(res => {
             const indicatorsData = res.data
 
             // Parse indicators
             const thisIndicators = indicatorsData.map((indicator: IndicatorModel) => {
                 // Parse parameters
-                const parameters = indicator.parameters.map((parameter: ParameterModel) => {
+                const parameters = indicator.predefined_params.map((parameter: ParameterModel) => {
                     return {
                         ...parameter,
                         type: ParameterType[parameter.type as unknown as keyof typeof ParameterType]
@@ -70,7 +70,7 @@ export default function FormField(props: props) {
 
                 // Parse returns
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const returns = indicator.returns?.map((ret: any) => {
+                const returns = indicator.predefined_returns?.map((ret: any) => {
                     return {
                         ...ret,
                         value: ret.name
@@ -78,7 +78,7 @@ export default function FormField(props: props) {
                 })
 
                 // Return parsed Indicator Model
-return {
+                return {
                     ...indicator,
                     parameters,
                     returns

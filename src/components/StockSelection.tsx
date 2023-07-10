@@ -13,7 +13,7 @@ export default function StockSelection(props: props) {
     const [stocks, setStocks] = useState<StockModel[]>([])
 
     useEffect(() => {
-        clientApi.get('/stocks/').then(res => {
+        clientApi.get('/stock/').then(res => {
             const stocksData = res.data
 
             // rename en_name to enName

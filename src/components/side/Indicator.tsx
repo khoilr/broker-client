@@ -43,27 +43,27 @@ export default function Indicator(props: props) {
                 <Form.Item label='Condition'>
                     <Condition
                         indicator={indicator}
-                        returns={indicator?.returns}
+                        returns={indicator?.predefined_returns}
                         name={name}
                     />
                 </Form.Item>
                 <Form.Item
                     name={[name.toString(), 'returns']}
                     hidden
-                    initialValue={indicator?.returns?.map(e => e.value)}
+                    initialValue={indicator?.predefined_returns?.map(e => e.value)}
                 />
-                {(indicator?.parameters?.length ?? 0) > 0 && (
+                {(indicator?.predefined_params?.length ?? 0) > 0 && (
                     <Form.Item label='Parameters'>
                         <Form.List
                             name={[name.toString(), 'parameters']}
-                            initialValue={indicator.parameters}
+                            initialValue={indicator.predefined_params}
                         >
                             {fields => (
                                 <div className='flex flex-wrap'>
                                     {fields.map((field, index) => (
                                         <Parameter
                                             key={field.key}
-                                            parameter={indicator?.parameters?.[index]}
+                                            parameter={indicator?.predefined_params?.[index]}
                                             name={field.name}
                                         />
                                     ))}

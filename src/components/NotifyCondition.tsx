@@ -72,8 +72,8 @@ export default function NotifyCondition(props: props) {
                                         id: '',
                                         name: '',
                                         label: '',
-                                        returns: [],
-                                        parameters: []
+                                        predefined_returns: [],
+                                        predefined_params: []
                                     }
                                 }
                                 remove={remove}

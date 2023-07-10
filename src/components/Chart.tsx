@@ -219,10 +219,9 @@ export default function Chart(props: props) {
         if (!stock.symbol) return
 
         clientApi
-            .get('/prices/daily/', {
+            .get('/price/daily/', {
                 params: {
-                    symbol: stock.symbol,
-                    orient: 'records'
+                    symbol: stock.symbol
                 }
             })
             .then(res => {
@@ -236,10 +235,10 @@ export default function Chart(props: props) {
 
                 // Add data to array
                 for (let i = 0; i < resData.length; i += 1) {
-                    const { date, open, close, low, high, volume } = resData[i]
-                    categoryData.push(date)
-                    values.push([open, close, low, high])
-                    volumes.push([i, volume, close > open ? 1 : -1])
+                    const { TradingDate, Open, Close, Low, High, Volume } = resData[i]
+                    categoryData.push(TradingDate)
+                    values.push([Open, Close, Low, High])
+                    volumes.push([i, Volume, Close > Open ? 1 : -1])
                 }
 
                 // Set data to state
