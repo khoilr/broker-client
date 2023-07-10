@@ -115,10 +115,10 @@ export default function SignUp() {
                           className='block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6'
                       />
                   </div>
-                  <div className='px-28 mt-8'>
+                  <div className='px-32 mt-8 mb-2'>
                       <button
                           type='submit'
-                          className='flex w-full justify-center rounded-md bg-cyan-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700'
+                          className='flex w-full justify-center rounded-md bg-cyan-700 px-3 py-1.5 text-md font-semibold leading-6 text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700'
                       >
                           Sign Up
                       </button>
