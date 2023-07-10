@@ -14,7 +14,7 @@ export default function NotifyCondition(props: props) {
     return (
         <div className='rounded-lg w-full flex'>
             <Form.List name='indicators'>
-                {(fields, { remove }) => (
+                {(fields, { add, remove }) => (
                     <>
                         <Form.Item
                             label='Select Indicator'
