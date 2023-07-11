@@ -1,6 +1,6 @@
 import IndicatorModel from '@/model/Indicator'
-import { DeleteOutlined } from '@ant-design/icons'
-import { Button, Form, Input } from 'antd'
+// import { DeleteOutlined } from '@ant-design/icons'
+import { Form, Input } from 'antd'
 import { useEffect, useState } from 'react'
 import Condition from './Condition'
 import Parameter from './Parameter'
@@ -9,11 +9,10 @@ type props = {
     side: string
     selectingIndicator: IndicatorModel
     name: number
-    remove: (name: number) => void
 }
 
 export default function Indicator(props: props) {
-    const { side, selectingIndicator, name, remove } = props
+    const { side, selectingIndicator, name } = props
     const [color, setColor] = useState<string>()
     const [indicator] = useState<IndicatorModel>(selectingIndicator)
 
@@ -73,14 +72,6 @@ export default function Indicator(props: props) {
                     </Form.Item>
                 )}
             </div>
-            <Button
-                className='mx-2 p-1 border-none'
-                onClick={() => {
-                    remove(name)
-                }}
-                danger
-                icon={<DeleteOutlined />}
-            />
         </div>
     )
 }

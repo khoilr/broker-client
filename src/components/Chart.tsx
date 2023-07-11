@@ -13,6 +13,22 @@ interface props {
 const downColor = '#ec0000'
 const upColor = '#00da3c'
 
+// function calculateMA(dayCount) {
+//     let result = []
+//     for (let i = 0, len = data.length; i < len; i++) {
+//         if (i < dayCount) {
+//             result.push('-')
+//             continue
+//         }
+//         let sum = 0
+//         for (let j = 0; j < dayCount; j++) {
+//             sum += +data[i - j][1]
+//         }
+//         result.push((sum / dayCount).toFixed(2))
+//     }
+//     return result
+// }
+
 export default function Chart(props: props) {
     const { stock } = props
 
@@ -225,16 +241,16 @@ export default function Chart(props: props) {
                     }
                 }
             },
-            {
-                name: 'MA5',
-                type: 'line',
-                data: calculateMA(5),
-                smooth: true,
-                showSymbol: true,
-                lineStyle: {
-                    width: 3
-                }
-            }
+            // {
+            //     name: 'MA5',
+            //     type: 'line',
+            //     data: calculateMA(5),
+            //     smooth: true,
+            //     showSymbol: false,
+            //     lineStyle: {
+            //         width: 1
+            //     }
+            // }
         ]
     }
 
