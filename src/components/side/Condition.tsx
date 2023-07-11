@@ -38,12 +38,11 @@ function Condition(props: props) {
 
     return (
         <Space.Compact
-            size='small'
-            className='w-full'
+            size='middle'
+            style={{ width: '100%' }}
         >
             <Form.Item
-                noStyle
-                className='w-full'
+                style={{ width: '25%' }}
                 name={[name.toString(), 'condition', 'source']}
                 rules={[
                     {
@@ -54,6 +53,7 @@ function Condition(props: props) {
                 initialValue={returnOptions?.[0]?.value}
             >
                 <Select
+                    style={{ width: '100%' }}
                     showSearch
                     placeholder='Select source'
                     optionFilterProp='children'
@@ -65,8 +65,7 @@ function Condition(props: props) {
                 />
             </Form.Item>
             <Form.Item
-                noStyle
-                className='w-full'
+                style={{ width: '25%' }}
                 name={[name.toString(), 'condition', 'change']}
                 rules={[
                     {
@@ -87,8 +86,7 @@ function Condition(props: props) {
                 />
             </Form.Item>
             <Form.Item
-                noStyle
-                className='w-full'
+                style={{ width: '25%' }}
                 name={[name.toString(), 'condition', 'value']}
                 rules={[{ required: true, message: 'Please input value' }]}
             >
@@ -99,8 +97,7 @@ function Condition(props: props) {
                 />
             </Form.Item>
             <Form.Item
-                noStyle
-                className='w-full'
+                style={{ width: '25%' }}
                 name={[name.toString(), 'condition', 'unit']}
                 rules={[
                     {

@@ -13,21 +13,21 @@ interface props {
 const downColor = '#ec0000'
 const upColor = '#00da3c'
 
-function calculateMA(dayCount) {
-    let result = []
-    for (let i = 0, len = data.length; i < len; i++) {
-        if (i < dayCount) {
-            result.push('-')
-            continue
-        }
-        let sum = 0
-        for (let j = 0; j < dayCount; j++) {
-            sum += +data[i - j][1]
-        }
-        result.push((sum / dayCount).toFixed(2))
-    }
-    return result
-}
+// function calculateMA(dayCount) {
+//     let result = []
+//     for (let i = 0, len = data.length; i < len; i++) {
+//         if (i < dayCount) {
+//             result.push('-')
+//             continue
+//         }
+//         let sum = 0
+//         for (let j = 0; j < dayCount; j++) {
+//             sum += +data[i - j][1]
+//         }
+//         result.push((sum / dayCount).toFixed(2))
+//     }
+//     return result
+// }
 
 export default function Chart(props: props) {
     const { stock } = props
@@ -177,7 +177,7 @@ export default function Chart(props: props) {
             {
                 type: 'inside',
                 xAxisIndex: [0, 1],
-                start: 98,
+                start: 10,
                 end: 100
             }
             // {
@@ -226,16 +226,16 @@ export default function Chart(props: props) {
                     }
                 }
             },
-            {
-                name: 'MA5',
-                type: 'line',
-                data: calculateMA(5),
-                smooth: true,
-                showSymbol: false,
-                lineStyle: {
-                    width: 1
-                }
-            }
+            // {
+            //     name: 'MA5',
+            //     type: 'line',
+            //     data: calculateMA(5),
+            //     smooth: true,
+            //     showSymbol: false,
+            //     lineStyle: {
+            //         width: 1
+            //     }
+            // }
         ]
     }
 
