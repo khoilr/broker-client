@@ -38,6 +38,10 @@ export default function Chart(props: props) {
         volumes: []
     })
 
+    useEffect(() => {
+        clientApi.get('/indicator').then(res => {
+    })
+
     const option: EChartsOption = {
         animation: true,
         title: {
@@ -226,16 +230,16 @@ export default function Chart(props: props) {
                     }
                 }
             },
-            // {
-            //     name: 'MA5',
-            //     type: 'line',
-            //     data: calculateMA(5),
-            //     smooth: true,
-            //     showSymbol: false,
-            //     lineStyle: {
-            //         width: 1
-            //     }
-            // }
+            {
+                name: 'MA5',
+                type: 'line',
+                data: calculateMA(5),
+                smooth: true,
+                showSymbol: false,
+                lineStyle: {
+                    width: 1
+                }
+            }
         ]
     }
 
