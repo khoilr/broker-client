@@ -28,8 +28,9 @@ export default function Indicator(props: props) {
 
     return (
         <div className='flex items-start'>
-            <div className={`border border-solid rounded-lg border-${color}-600 p-2 w-full mb-6`}>
+            <div className={`border border-solid rounded-lg border-${color}-600 p-2 w-full min-w-full m-auto p-auto`}>
                 <Form.Item
+                    style={{ width: '100%', minWidth: '100%' }}
                     label='Indicator'
                     name={[name.toString(), 'name']}
                     initialValue={indicator?.name}
@@ -39,7 +40,9 @@ export default function Indicator(props: props) {
                         value={indicator?.name}
                     />
                 </Form.Item>
-                <Form.Item label='Condition'>
+                <Form.Item
+                    label='Condition'
+                >
                     <Condition
                         indicator={indicator}
                         returns={indicator?.predefined_returns}
@@ -54,12 +57,12 @@ export default function Indicator(props: props) {
                 {(indicator?.predefined_params?.length ?? 0) > 0 && (
                     <Form.Item label='Parameters'>
                         {indicator?.predefined_params?.map(parameter => (
-                                <Form.Item name={[name.toString(), 'parameter', parameter.name]}>
-                                    <Parameter
-                                        parameter={parameter}
-                                        name={name}
-                                    />
-                                </Form.Item>
+                            <Form.Item name={[name.toString(), 'parameter', parameter.name]}>
+                                <Parameter
+                                    parameter={parameter}
+                                    name={name}
+                                />
+                            </Form.Item>
                         ))}
                         {/* <Form.List
                             name={[name.toString(), 'parameters']}

@@ -7,16 +7,16 @@ export interface Item {
 function NavItem({ item }: { item: Item }) {
     const { name, href, current } = item
     return (
-        <a
-            key={name}
-            href={href}
-            className={`
-            text-gray-500 hover:bg-gray-200 hover:text-cyan-700 rounded-lg font-sm text-base p-2
+            <a
+                key={name}
+                href={href}
+                className={`
+            text-gray-600 hover:bg-gray-200 hover:text-cyan-700 rounded-lg font-sm text-base p-2 font-barlow font-semibold
                         cursor-pointer${current ? 'bg-white text-cyan-700' : ''}`}
-            aria-current={current ? 'page' : undefined}
-        >
-            {item.name}
-        </a>
+                aria-current={current ? 'page' : undefined}
+            >
+                {item.name}
+            </a>
     )
 }
 

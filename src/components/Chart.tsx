@@ -24,16 +24,16 @@ export default function Chart(props: props) {
         volumes: []
     })
 
-   function calculateMA(dayCount, datas) {
+   function calculateMA(dayCount: number, datas: number[]) {
        const result = []
        for (let i = 0,
-           len = datas.values.length; i < len; i++) {
+           len = datas.values.length; i < len; i += 1) {
            if (i < dayCount) {
                result.push('-')
                continue
            }
-           var sum = 0
-           for (var j = 0; j < dayCount; j++) {
+           let sum = 0
+           for (let j = 0; j < dayCount; j += 1) {
                sum += data.values[i - j][1]
            }
            result.push(+(sum / dayCount).toFixed(3))

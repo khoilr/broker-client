@@ -27,7 +27,7 @@ export default function NotifyCondition(props: props) {
                     <>
                         <Form.Item
                             label='Select Indicator'
-                            className='w-full'
+                            style={{ width: '100%' }}
                             rules={[
                                 {
                                     required: true,
@@ -37,13 +37,13 @@ export default function NotifyCondition(props: props) {
                         >
                             <Space.Compact
                                 size='middle'
-                                className='w-full'
+                                style={{ width: '100%', maxWidth: '100%' }}
                             >
                                 <Select
                                     showSearch
                                     placeholder='Select Indicator'
                                     optionFilterProp='children'
-                                    className='w-auto'
+                                    style={{ width: '80%', maxWidth: '80%' }}
                                     filterOption={(input, option) =>
                                         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                                     }
@@ -61,7 +61,7 @@ export default function NotifyCondition(props: props) {
                                     }))}
                                 />
                                 <Button
-                                    className='bg-cyan-700 rounded-lg text-sm flex items-center mx-auto justify-center hover:bg-cyan-600 w-auto'
+                                    className='bg-cyan-700 rounded-lg text-sm flex items-center mx-auto justify-center hover:bg-cyan-600 w-[20%]'
                                     type='primary'
                                     icon={<PlusOutlined />}
                                     onClick={() => {
@@ -76,7 +76,7 @@ export default function NotifyCondition(props: props) {
                         {fields.map(({ key, name }) =>
                             showModal ? (
                                 <>
-                                    <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none rounded-lg'>
+                                    <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none rounded-lg min-w-full'>
                                         <div className='relative w-auto my-6 mx-auto max-w-3xl rounded-lg'>
                                             <div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
                                                 <div className='flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-lg'>
@@ -100,18 +100,18 @@ export default function NotifyCondition(props: props) {
                                                 </div>
                                                 <div className='flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-lg'>
                                                     <button
-                                                        className='text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
+                                                        className='text-red-500 background-transparent font-bold px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
                                                         type='button'
                                                         onClick={() => setShowModal(false)}
                                                     >
                                                         Close
                                                     </button>
                                                     <button
-                                                        className='bg-cyan-700 text-white active:bg-cyan-600 font-bold uppercase text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-cyan-600'
+                                                        className='bg-cyan-700 text-white active:bg-cyan-600 font-bold text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-cyan-600'
                                                         type='button'
                                                         onClick={() => handleClick()}
                                                     >
-                                                        Save Changes
+                                                        Add Indicator
                                                     </button>
                                                 </div>
                                             </div>

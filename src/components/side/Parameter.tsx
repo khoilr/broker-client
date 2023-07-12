@@ -29,7 +29,7 @@ export default function Parameter(props: props) {
                     <Form.Item
                         name={[name.toString(), 'value']}
                         label={parameter.name as string}
-                        className='w-full basis-2/6'
+                        style={{ margin: 'auto' }}
                         initialValue='close'
                     >
                         <Select
@@ -60,7 +60,7 @@ export default function Parameter(props: props) {
                         name={[name.toString(), 'value']}
                         label={parameter.label as string}
                         initialValue={parameter.default}
-                        className='px-2 w-full basis-2/6'
+                        style={{ margin: 'auto' }}
                     >
                         <Input
                             type='number'
