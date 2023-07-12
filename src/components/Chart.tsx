@@ -24,9 +24,22 @@ export default function Chart(props: props) {
         volumes: []
     })
 
-    // useEffect(() => {
-    //     clientApi.get('/indicator').then(res => {
-    // })
+   function calculateMA(dayCount, datas) {
+       const result = []
+       for (let i = 0,
+           len = datas.values.length; i < len; i++) {
+           if (i < dayCount) {
+               result.push('-')
+               continue
+           }
+           var sum = 0
+           for (var j = 0; j < dayCount; j++) {
+               sum += data.values[i - j][1]
+           }
+           result.push(+(sum / dayCount).toFixed(3))
+       }
+       return result
+   }
 
     const option: EChartsOption = {
         animation: true,
@@ -34,6 +47,11 @@ export default function Chart(props: props) {
             left: 'center',
             text: stock.name
         },
+        // legend: {
+        //     top: 10,
+        //     left: 'center',
+        //     data: [lines.map(line => line)]
+        // },
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -193,6 +211,16 @@ export default function Chart(props: props) {
                     color(param) {
                         return data.values[param.dataIndex][1] > data.values[param.dataIndex][0] ? upColor : downColor
                     }
+                }
+            },
+            {
+                name: 'Arroon',
+                type: 'line',
+                data: calculateMA(10, lines),
+                smooth: true,
+                showSymbol: true,
+                lineStyle: {
+                    width: 2
                 }
             }
         ]
