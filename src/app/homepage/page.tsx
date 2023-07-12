@@ -23,6 +23,7 @@ export default function HomePage() {
     // Watchers
     const indicatorsWatcher = Form.useWatch('indicators', form)
     const stockWatcher = Form.useWatch('stock', form)
+    const [lines, setLines] = useState<number[]>([])
 
     // On stock or indicators change
     useEffect(() => {
@@ -58,7 +59,10 @@ export default function HomePage() {
             <div className='min-h-full bg-gray-200'>
                 {/* <TopCards /> */}
                 <div className='p-4 grid md:grid-cols-4 grid-cols-1 gap-4'>
-                    <Chart stock={stock} />
+                    <Chart
+                        stock={stock}
+                        lines={lines}
+                    />
                     <FormField
                         setStock={setStock}
                         form={form}

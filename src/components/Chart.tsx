@@ -8,13 +8,14 @@ import { EChartsOption } from 'echarts'
 
 interface props {
     stock: StockModel
+    lines: number[]
 }
 
 const downColor = '#ec0000'
 const upColor = '#00da3c'
 
 export default function Chart(props: props) {
-    const { stock } = props
+    const { stock, lines } = props
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [data, setData] = useState<StockPriceModel>({
