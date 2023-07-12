@@ -53,7 +53,7 @@ export default function FormField(props: props) {
                 const parameters = indicator.predefined_params.map((parameter: any) => {
                     let { type } = parameter
 
-                    if (type === 'float') type = 'number'
+                    if (type === 'float' || type === 'int') type = 'number'
                     else if (type.includes('OHLCV')) type = 'OHLCV'
                     else type = 'selection'
 

@@ -24,12 +24,12 @@ export default function Parameter(props: props) {
                     <Form.Item
                         hidden
                         name={[name.toString(), 'name']}
-                        initialValue={parameter.label}
+                        initialValue={parameter.name}
                     />
                     <Form.Item
                         name={[name.toString(), 'value']}
                         label={parameter.name as string}
-                        className='px-2 w-full basis-2/6'
+                        className='w-full basis-2/6'
                         initialValue='close'
                     >
                         <Select
