@@ -53,7 +53,15 @@ export default function Indicator(props: props) {
                 />
                 {(indicator?.predefined_params?.length ?? 0) > 0 && (
                     <Form.Item label='Parameters'>
-                        <Form.List
+                        {indicator?.predefined_params?.map(parameter => (
+                                <Form.Item name={[name.toString(), 'parameter', parameter.name]}>
+                                    <Parameter
+                                        parameter={parameter}
+                                        name={name}
+                                    />
+                                </Form.Item>
+                        ))}
+                        {/* <Form.List
                             name={[name.toString(), 'parameters']}
                             initialValue={indicator.predefined_params}
                         >
@@ -68,7 +76,7 @@ export default function Indicator(props: props) {
                                     ))}
                                 </div>
                             )}
-                        </Form.List>
+                        </Form.List> */}
                     </Form.Item>
                 )}
             </div>
