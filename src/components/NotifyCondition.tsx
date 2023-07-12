@@ -10,10 +10,9 @@ type props = {
 
 export default function NotifyCondition(props: props) {
     const { indicators } = props
+
     const [selectingIndicator, setSelectingIndicator] = useState<IndicatorModel>()
-
     const [showModal, setShowModal] = useState(false)
-
     const [showComponent, setShowComponent] = useState(false)
 
     const handleClick = () => {
@@ -44,6 +43,7 @@ export default function NotifyCondition(props: props) {
                                     showSearch
                                     placeholder='Select Indicator'
                                     optionFilterProp='children'
+                                    className='w-auto'
                                     filterOption={(input, option) =>
                                         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                                     }
@@ -61,7 +61,7 @@ export default function NotifyCondition(props: props) {
                                     }))}
                                 />
                                 <Button
-                                    className='bg-cyan-700 rounded-lg w-1/5 text-sm flex items-center mx-auto justify-center hover:bg-cyan-600'
+                                    className='bg-cyan-700 rounded-lg text-sm flex items-center mx-auto justify-center hover:bg-cyan-600 w-auto'
                                     type='primary'
                                     icon={<PlusOutlined />}
                                     onClick={() => {
@@ -74,7 +74,7 @@ export default function NotifyCondition(props: props) {
                             </Space.Compact>
                         </Form.Item>
                         {fields.map(({ key, name }) =>
-                            (showModal ? (
+                            showModal ? (
                                 <>
                                     <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none rounded-lg'>
                                         <div className='relative w-auto my-6 mx-auto max-w-3xl rounded-lg'>
@@ -119,7 +119,8 @@ export default function NotifyCondition(props: props) {
                                     </div>
                                     <div className='opacity-25 fixed inset-0 z-40 bg-black' />
                                 </>
-                            ) : null))}
+                            ) : null
+                        )}
                     </>
                 )}
             </Form.List>

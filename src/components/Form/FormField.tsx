@@ -5,7 +5,7 @@ import StockSelection from '@/components/StockSelection'
 import IndicatorModel from '@/model/Indicator'
 import StockModel from '@/model/Stock'
 import { Tab, TabPanel, Tabs, TabsBody, TabsHeader } from '@material-tailwind/react'
-import { Form } from 'antd'
+import { Form, FormInstance } from 'antd'
 import { useEffect, useState } from 'react'
 import { clientApi } from '@/lib/axios'
 import ParameterModel from '@/model/Parameter'
@@ -15,10 +15,11 @@ import NotifyCondition from '@/components/NotifyCondition'
 
 interface props {
     setStock: (stock: StockModel) => void
+    form: FormInstance
 }
 
 export default function FormField(props: props) {
-    const { setStock } = props
+    const { setStock, form } = props
 
     const [activeTab, setActiveTab] = useState('notification')
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
@@ -29,18 +30,6 @@ export default function FormField(props: props) {
             value: 'notification'
         }
     ]
-
-    const [form] = Form.useForm()
-
-    // Watchers
-    const indicatorsWatcher = Form.useWatch('indicators', form)
-    const stockWatcher = Form.useWatch('stock', form)
-
-    // On stock or indicators change
-    useEffect(() => {
-        console.log(stockWatcher)
-        console.log(indicatorsWatcher)
-    }, [indicatorsWatcher, stockWatcher])
 
     // handle form submission
     const onFinish = (values: any) => {
@@ -80,8 +69,8 @@ export default function FormField(props: props) {
                 // Return parsed Indicator Model
                 return {
                     ...indicator,
-                    parameters,
-                    returns
+                    predefined_params: parameters,
+                    predefined_returns: returns
                 } as unknown as IndicatorModel
             })
 
