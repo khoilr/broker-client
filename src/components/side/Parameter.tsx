@@ -17,6 +17,8 @@ type props = {
 export default function Parameter(props: props) {
     const { name, parameter } = props
 
+    console.log(parameter)
+
     switch (parameter.type) {
         case ParameterType.SELECTION:
             return (
@@ -24,11 +26,11 @@ export default function Parameter(props: props) {
                     <Form.Item
                         hidden
                         name={[name.toString(), 'name']}
-                        initialValue={parameter.name}
+                        initialValue={parameter.label}
                     />
                     <Form.Item
                         name={[name.toString(), 'value']}
-                        label={parameter.label as string}
+                        label={parameter.name as string}
                         className='px-2 w-full basis-2/6'
                         initialValue='close'
                     >
