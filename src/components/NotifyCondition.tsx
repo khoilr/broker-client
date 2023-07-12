@@ -77,16 +77,16 @@ export default function NotifyCondition(props: props) {
                             showModal ? (
                                 <>
                                     <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none rounded-lg min-w-full'>
-                                        <div className='relative w-auto my-6 mx-auto max-w-3xl rounded-lg'>
-                                            <div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
-                                                <div className='flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-lg'>
+                                        <div className='relative w-auto my-2 mx-auto max-w-3xl'>
+                                            <div className=' rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
+                                                <div className='flex items-start justify-between p-5 rounded-lg'>
                                                     <h3 className='text-3xl font-semibold pl-2'>Select Condition</h3>
                                                 </div>
-                                                <div className='relative p-6 flex-auto'>
+                                                <div className='relative px-6 py-2 flex-auto'>
                                                     <Indicator
                                                         key={key}
                                                         name={name}
-                                                        side='notification'
+                                                        // side='notification'
                                                         selectingIndicator={
                                                             selectingIndicator ?? {
                                                                 id: '',
@@ -98,16 +98,16 @@ export default function NotifyCondition(props: props) {
                                                         }
                                                     />
                                                 </div>
-                                                <div className='flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-lg'>
+                                                <div className='flex items-center justify-end p-4'>
                                                     <button
-                                                        className='text-red-500 background-transparent font-bold px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
+                                                        className='text-red-500 background-transparent font-bold p-4 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
                                                         type='button'
                                                         onClick={() => setShowModal(false)}
                                                     >
                                                         Close
                                                     </button>
                                                     <button
-                                                        className='bg-cyan-700 text-white active:bg-cyan-600 font-bold text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-cyan-600'
+                                                        className='bg-cyan-700 text-white active:bg-cyan-600 font-bold text-sm p-4 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-cyan-600'
                                                         type='button'
                                                         onClick={() => handleClick()}
                                                     >

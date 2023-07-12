@@ -1,34 +1,34 @@
 import IndicatorModel from '@/model/Indicator'
 // import { DeleteOutlined } from '@ant-design/icons'
 import { Form, Input } from 'antd'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Condition from './Condition'
 import Parameter from './Parameter'
 
 type props = {
-    side: string
+    // side: string
     selectingIndicator: IndicatorModel
     name: number
 }
 
 export default function Indicator(props: props) {
-    const { side, selectingIndicator, name } = props
-    const [color, setColor] = useState<string>()
+    const { selectingIndicator, name } = props
+    // const [color, setColor] = useState<string>()
     const [indicator] = useState<IndicatorModel>(selectingIndicator)
 
-    useEffect(() => {
-        if (side === 'buy') {
-            setColor('green')
-        } else if (side === 'notification') {
-            setColor('black')
-        } else if (side === 'sell') {
-            setColor('red')
-        }
-    }, [side])
+    // useEffect(() => {
+    //     if (side === 'buy') {
+    //         setColor('green')
+    //     } else if (side === 'notification') {
+    //         setColor('black')
+    //     } else if (side === 'sell') {
+    //         setColor('red')
+    //     }
+    // }, [side])
 
     return (
         <div className='flex items-start'>
-            <div className={`border border-solid rounded-lg border-${color}-600 p-2 w-full min-w-full m-auto p-auto`}>
+            <div className='p-2 w-full min-w-full m-auto p-auto'>
                 <Form.Item
                     style={{ width: '100%', minWidth: '100%' }}
                     label='Indicator'
