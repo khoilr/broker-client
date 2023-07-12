@@ -23,9 +23,9 @@ export default function Chart(props: props) {
         volumes: []
     })
 
-    useEffect(() => {
-        clientApi.get('/indicator').then(res => {
-    })
+    // useEffect(() => {
+    //     clientApi.get('/indicator').then(res => {
+    // })
 
     const option: EChartsOption = {
         animation: true,
