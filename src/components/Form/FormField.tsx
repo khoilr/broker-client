@@ -51,6 +51,8 @@ export default function FormField(props: props) {
             const thisIndicators = indicatorsData.map((indicator: IndicatorModel) => {
                 // Parse parameters
                 const parameters = indicator.predefined_params.map((parameter: ParameterModel) => {
+                    console.log(parameter)
+
                     return {
                         ...parameter,
                         type: ParameterType[parameter.type as unknown as keyof typeof ParameterType]
