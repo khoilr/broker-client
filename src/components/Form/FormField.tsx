@@ -50,12 +50,16 @@ export default function FormField(props: props) {
             // Parse indicators
             const thisIndicators = indicatorsData.map((indicator: IndicatorModel) => {
                 // Parse parameters
-                const parameters = indicator.predefined_params.map((parameter: ParameterModel) => {
-                    console.log(parameter)
+                const parameters = indicator.predefined_params.map((parameter: any) => {
+                    let { type } = parameter
+
+                    if (type === 'float') type = 'number'
+                    else if (type.includes('OHLCV')) type = 'OHLCV'
+                    else type = 'selection'
 
                     return {
                         ...parameter,
-                        type: ParameterType[parameter.type as unknown as keyof typeof ParameterType]
+                        type: ParameterType[type.toUpperCase() as keyof typeof ParameterType]
                     } as ParameterModel
                 })
 

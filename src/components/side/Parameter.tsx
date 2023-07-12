@@ -17,8 +17,6 @@ type props = {
 export default function Parameter(props: props) {
     const { name, parameter } = props
 
-    console.log(parameter)
-
     switch (parameter.type) {
         case ParameterType.SELECTION:
             return (
