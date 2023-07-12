@@ -3,7 +3,7 @@ import NavItem from './NavItem'
 // import logo from '../svg/stock-svgrepo-com.svg'
 
 const navigation = [
-    { name: 'Home', href: '/homepage', current: true },
+    { name: 'Home', href: '/homepage', current: true }
     // { name: 'Notification', href: '/notification' },
     // { name: 'About', href: '/' },
     // { name: 'Contact', href: '/' }

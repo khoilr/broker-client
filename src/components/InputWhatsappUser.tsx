@@ -3,12 +3,15 @@ import { Form, Input, Select } from 'antd'
 const { Option } = Select
 
 export default function InputWhatsappUser() {
-const prefixSelector = (
+    const prefixSelector = (
         <Form.Item
             name='prefix'
             noStyle
         >
-            <Select style={{ width: 70 }} defaultValue='+84'>
+            <Select
+                style={{ width: 70 }}
+                defaultValue='+84'
+            >
                 <Option value='84'>+84</Option>
                 <Option value='86'>+86</Option>
             </Select>

@@ -13,25 +13,10 @@ interface props {
 const downColor = '#ec0000'
 const upColor = '#00da3c'
 
-// function calculateMA(dayCount) {
-//     let result = []
-//     for (let i = 0, len = data.length; i < len; i++) {
-//         if (i < dayCount) {
-//             result.push('-')
-//             continue
-//         }
-//         let sum = 0
-//         for (let j = 0; j < dayCount; j++) {
-//             sum += +data[i - j][1]
-//         }
-//         result.push((sum / dayCount).toFixed(2))
-//     }
-//     return result
-// }
-
 export default function Chart(props: props) {
     const { stock } = props
 
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [data, setData] = useState<StockPriceModel>({
         categoryData: [],
         values: [],
@@ -47,11 +32,6 @@ export default function Chart(props: props) {
         title: {
             left: 'center',
             text: stock.name
-        },
-        legend: {
-            top: 10,
-            left: 'center',
-            data: []
         },
         tooltip: {
             trigger: 'axis',
@@ -74,7 +54,7 @@ export default function Chart(props: props) {
                     top: 10
                 }
 
-                obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30
+                obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 10
                 return obj
             }
             // extraCssText: 'width: 170px'
@@ -184,14 +164,6 @@ export default function Chart(props: props) {
                 start: 10,
                 end: 100
             }
-            // {
-            //   show: true,
-            //   xAxisIndex: [0, 1],
-            //   type: 'slider',
-            //   top: '85%',
-            //   start: 98,
-            //   end: 100
-            // }
         ],
         series: [
             {
@@ -206,14 +178,6 @@ export default function Chart(props: props) {
                 },
                 tooltip: {
                     formatter(param) {
-                        //     return [
-                        //         `Date: ${param.name}<hr size=1 style="margin: 3px 0">`,
-                        //         `Open: ${param.data[0]}<br/>`,
-                        //         `Close: ${param.data[1]}<br/>`,
-                        //         `Low: ${param.data[2]}<br/>`,
-                        //         `High: ${param.data[3]}<br/>`
-                        //     ].join('')
-                        // }
                         return `${param.name}<br>${param.data || ''}`
                     }
                 }
@@ -229,25 +193,14 @@ export default function Chart(props: props) {
                         return data.values[param.dataIndex][1] > data.values[param.dataIndex][0] ? upColor : downColor
                     }
                 }
-            },
-            {
-                name: 'MA5',
-                type: 'line',
-                data: calculateMA(5),
-                smooth: true,
-                showSymbol: false,
-                lineStyle: {
-                    width: 1
-                }
             }
         ]
     }
 
-    // const [option, setOption] = useState<EChartsOption>(
-
     useEffect(() => {
         if (!stock.symbol) return
 
+        setIsLoading(true)
         clientApi
             .get('/price/daily/', {
                 params: {
@@ -277,12 +230,14 @@ export default function Chart(props: props) {
                     values,
                     volumes
                 })
+                setIsLoading(false)
             })
     }, [stock.symbol])
 
     return (
         <div className='w-full md:col-span-3 relative lg:h-[70vh] h-full p-4 border rounded-lg bg-white'>
             <EChartsReact
+                showLoading={isLoading}
                 option={option}
                 style={{
                     height: '100%'
