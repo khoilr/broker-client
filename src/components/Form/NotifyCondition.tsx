@@ -14,12 +14,13 @@ export default function NotifyCondition(props: props) {
     const [selectingIndicator, setSelectingIndicator] = useState<IndicatorModel>()
     const [showModal, setShowModal] = useState(false)
     const [showComponent, setShowComponent] = useState(false)
-    const [counter, setCounter] = useState(0)
+    // const [counter, setCounter] = useState(0)
 
     const handleClick = () => {
         setShowComponent(!showComponent)
         setShowModal(false)
-        setCounter(counter + 1)
+        // setSelectedIndicator(selectedIndicator)
+        // setCounter(counter + 1)
     }
 
     return (
@@ -99,15 +100,6 @@ export default function NotifyCondition(props: props) {
                                                             }
                                                         }
                                                     />
-                                                    {/* <Button
-                                                        className='text-sm flex items-center mx-auto justify-center hover:bg-cyan-600 hover:text-white'
-                                                        type='dashed'
-                                                        onClick={() => add()}
-                                                        block
-                                                        icon={<PlusOutlined />}
-                                                    >
-                                                        Add indicator
-                                                    </Button> */}
                                                 </div>
                                                 <div className='flex items-center justify-end p-4'>
                                                     <button
@@ -136,8 +128,8 @@ export default function NotifyCondition(props: props) {
                 )}
             </Form.List>
             {showComponent && (
-                <span className='inline-flex items-center rounded-md bg-green-200 px-2 py-1 text-md font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10'>
-                    
+                <span className='inline-flex items-center rounded-md bg-cyan-200 px-2 py-1 text-md font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10'>
+                    {indicators.find(e => e.name === selectingIndicator?.name)?.name ?? ''}{' '}
                 </span>
             )}
         </div>

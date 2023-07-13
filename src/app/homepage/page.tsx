@@ -45,15 +45,14 @@ export default function HomePage() {
                     }
                 })
                 .then(res => {
-                    console.log(res.data.data)
-                    console.log(indicator.label)
-
                     setLines((prev: any) => {
                         return {
                             ...prev,
                             [indicator.label]: res.data.data
                         }
-                    })
+                    }
+                    )
+                    console.log('Data: ', res.data.data)
                 })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

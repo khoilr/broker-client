@@ -23,7 +23,7 @@ export default function Parameter(props: props) {
                 <Form.Item
                     name={[name.toString(), 'parameters', parameter.name]}
                     label={parameter.name as string}
-                    className='px-2 w-full basis-2/6'
+                    className='w-full basis-2/6'
                     initialValue='close'
                 >
                     <Select
@@ -39,25 +39,6 @@ export default function Parameter(props: props) {
                         options={OHLC}
                         defaultValue='close'
                     />
-                    <Form.Item
-                        name={[name.toString(), 'value']}
-                        label={parameter.name as string}
-                        initialValue='close'
-                    >
-                        <Select
-                            showSearch
-                            placeholder={parameter.name as string}
-                            optionFilterProp='children'
-                            filterOption={(input, option) =>
-                                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                            }
-                            filterSort={(optionA, optionB) =>
-                                (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-                            }
-                            options={OHLC}
-                            defaultValue='close'
-                        />
-                    </Form.Item>
                 </Form.Item>
             )
         case ParameterType.NUMBER:
@@ -66,7 +47,7 @@ export default function Parameter(props: props) {
                     name={[name.toString(), 'parameters', parameter.name]}
                     label={parameter.label as string}
                     initialValue={parameter.default}
-                    className='px-2 w-full basis-2/6'
+                    className='w-full basis-2/6'
                 >
                     <Input
                         type='number'
