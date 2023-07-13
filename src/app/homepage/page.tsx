@@ -26,17 +26,16 @@ export default function HomePage() {
 
     // On stock or indicators change
     useEffect(() => {
+        console.log('blabla')
+
         if (!(stockWatcher && indicatorsWatcher)) return
         if (indicatorsWatcher.some((indicator: any) => !indicator)) return
 
         const stock = stockWatcher.split('-')[0].trim()
         const indicators = indicatorsWatcher
 
-        console.log(indicators)
-
         for (let i = 0; i < indicators.length; i += 1) {
             const indicator = indicators[i]
-            console.log(indicator)
 
             clientApi
                 .get('/indicator', {
@@ -48,11 +47,13 @@ export default function HomePage() {
                 })
                 .then(res => {
                     console.log(res.data.data)
+                    console.log(indicator.label)
 
                     setLines([...lines, ...res.data.data])
                 })
         }
-    }, [indicatorsWatcher, lines, stockWatcher])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [indicatorsWatcher, stockWatcher])
 
     return (
         <>
