@@ -54,29 +54,11 @@ export default function Indicator(props: props) {
                 {(indicator?.predefined_params?.length ?? 0) > 0 && (
                     <Form.Item label='Parameters'>
                         {indicator?.predefined_params?.map(parameter => (
-                                <Form.Item name={[name.toString(), 'parameter', parameter.name]}>
-                                    <Parameter
-                                        parameter={parameter}
-                                        name={name}
-                                    />
-                                </Form.Item>
+                            <Parameter
+                                parameter={parameter}
+                                name={name}
+                            />
                         ))}
-                        {/* <Form.List
-                            name={[name.toString(), 'parameters']}
-                            initialValue={indicator.predefined_params}
-                        >
-                            {fields => (
-                                <div className='flex flex-wrap'>
-                                    {fields.map((field, index) => (
-                                        <Parameter
-                                            key={field.key}
-                                            parameter={indicator?.predefined_params?.[index]}
-                                            name={field.name}
-                                        />
-                                    ))}
-                                </div>
-                            )}
-                        </Form.List> */}
                     </Form.Item>
                 )}
             </div>

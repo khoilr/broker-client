@@ -12,26 +12,20 @@ export default function ConditionSelection(props: props) {
     const [returnOptions, setReturnOptions] = useState<BaseOptionType[]>([])
     const [initialReturn, setInitialReturn] = useState<BaseOptionType>()
 
-useEffect(() => {
+    useEffect(() => {
         const thisReturn = returns.map(e => e as BaseOptionType)
         setReturnOptions(thisReturn)
         setInitialReturn(thisReturn[0])
     }, [returns])
 
-return (
+    return (
         <Select
             showSearch
             placeholder='Select return'
             optionFilterProp='children'
-            filterOption={(input, option) =>
-                (option?.label ?? '')
-                    .toLowerCase()
-                    .includes(input.toLowerCase())
-            }
+            filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
             filterSort={(optionA, optionB) =>
-                (optionA?.label ?? '')
-                    .toLowerCase()
-                    .localeCompare((optionB?.label ?? '').toLowerCase())
+                (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
             }
             options={returnOptions}
             value={initialReturn}
