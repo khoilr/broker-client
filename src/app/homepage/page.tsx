@@ -23,12 +23,10 @@ export default function HomePage() {
     // Watchers
     const indicatorsWatcher = Form.useWatch('indicators', form)
     const stockWatcher = Form.useWatch('stock', form)
-    const [lines, setLines] = useState<number[]>([])
+    const [lines, setLines] = useState([])
 
     // On stock or indicators change
     useEffect(() => {
-        console.log('blabla')
-
         if (!(stockWatcher && indicatorsWatcher)) return
         if (indicatorsWatcher.some((indicator: any) => !indicator)) return
 
@@ -50,7 +48,12 @@ export default function HomePage() {
                     console.log(res.data.data)
                     console.log(indicator.label)
 
-                    setLines([...lines, ...res.data.data])
+                    setLines((prev: any) => {
+                        return {
+                            ...prev,
+                            [indicator.label]: res.data.data
+                        }
+                    })
                 })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
