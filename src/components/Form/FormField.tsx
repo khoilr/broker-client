@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import InputTelegramUser from '@/components/InputTelegramUser'
-import InputWhatsappUser from '@/components/InputWhatsappUser'
-import StockSelection from '@/components/StockSelection'
+import InputTelegramUser from '@/components/Form/InputTelegramUser'
+import InputWhatsappUser from '@/components/Form/InputWhatsappUser'
+import StockSelection from '@/components/Form/StockSelection'
 import IndicatorModel from '@/model/Indicator'
 import StockModel from '@/model/Stock'
 import { Tab, TabPanel, Tabs, TabsBody, TabsHeader } from '@material-tailwind/react'
@@ -11,7 +11,7 @@ import { clientApi } from '@/lib/axios'
 import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
 import ReturnModel from '@/model/Return'
-import NotifyCondition from '@/components/NotifyCondition'
+import NotifyCondition from '@/components/Form/NotifyCondition'
 
 interface props {
     setStock: (stock: StockModel) => void
@@ -86,7 +86,7 @@ export default function FormField(props: props) {
     }, [])
 
     return (
-        <div className='w-full col-span-1 relative  lg:h-[70vh] h-full py-4 border rounded-lg bg-white'>
+        <div className='w-full col-span-1 relative lg:h-[70vh] h-full py-4 border rounded-lg bg-white'>
             <Tabs
                 id='custom-animation'
                 value='notification'

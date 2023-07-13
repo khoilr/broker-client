@@ -27,8 +27,8 @@ export default function Indicator(props: props) {
     // }, [side])
 
     return (
-        <div className='flex items-start'>
-            <div className='p-2 w-full min-w-full m-auto p-auto'>
+        <div className='flex items-start w-full min-w-full max-w-full border border-gray-200 rounded-lg'>
+            <div className='w-full min-w-full max-w-full p-2'>
                 <Form.Item
                     style={{ width: '100%', minWidth: '100%' }}
                     label='Indicator'
@@ -41,6 +41,7 @@ export default function Indicator(props: props) {
                     />
                 </Form.Item>
                 <Form.Item
+                    style={{ width: '100%' }}
                     label='Condition'
                 >
                     <Condition

@@ -29,7 +29,6 @@ export default function Parameter(props: props) {
                     <Form.Item
                         name={[name.toString(), 'value']}
                         label={parameter.name as string}
-                        style={{ margin: 'auto' }}
                         initialValue='close'
                     >
                         <Select
