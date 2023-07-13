@@ -1,13 +1,14 @@
 'use client'
 
-import Nav from '@/components/Navigation'
+import Nav from '@/components/Navigation/Navigation'
 // import TopCards from '@/components/TopCards/TopCards'
 import { useEffect, useState } from 'react'
-import Chart from '@/components/Chart'
+import Chart from '@/components/Chart/Chart'
 import FormField from '@/components/Form/FormField'
 import StockModel from '@/model/Stock'
 import { Form } from 'antd'
 import { clientApi } from '@/lib/axios'
+// import Indicator from '@/components/Select indicator/Indicator'
 
 export default function HomePage() {
     const [stock, setStock] = useState<StockModel>({

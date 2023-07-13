@@ -39,6 +39,25 @@ export default function Parameter(props: props) {
                         options={OHLC}
                         defaultValue='close'
                     />
+                    <Form.Item
+                        name={[name.toString(), 'value']}
+                        label={parameter.name as string}
+                        initialValue='close'
+                    >
+                        <Select
+                            showSearch
+                            placeholder={parameter.name as string}
+                            optionFilterProp='children'
+                            filterOption={(input, option) =>
+                                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                            }
+                            filterSort={(optionA, optionB) =>
+                                (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+                            }
+                            options={OHLC}
+                            defaultValue='close'
+                        />
+                    </Form.Item>
                 </Form.Item>
             )
         case ParameterType.NUMBER:

@@ -1,5 +1,5 @@
 import { Disclosure } from '@headlessui/react'
-import NavItem from './NavItem'
+import NavItem from '../NavItem'
 // import logo from '../svg/stock-svgrepo-com.svg'
 
 const navigation = [
