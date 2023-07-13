@@ -8,7 +8,7 @@ import FormField from '@/components/Form/FormField'
 import StockModel from '@/model/Stock'
 import { Form } from 'antd'
 import { clientApi } from '@/lib/axios'
-import Indicator from '@/components/Select indicator/Indicator'
+// import Indicator from '@/components/Select indicator/Indicator'
 
 export default function HomePage() {
     const [stock, setStock] = useState<StockModel>({
@@ -28,30 +28,32 @@ export default function HomePage() {
     // On stock or indicators change
     useEffect(() => {
         if (!(stockWatcher && indicatorsWatcher)) return
+        if (indicatorsWatcher.some((indicator: any) => !indicator)) return
 
         const stock = stockWatcher.split('-')[0].trim()
         const indicators = indicatorsWatcher
 
         console.log(indicators)
-        console.log(typeof indicators)
 
-        indicators.map((indicator: any) => {
+        for (let i = 0; i < indicators.length; i += 1) {
+            const indicator = indicators[i]
             console.log(indicator)
-            return Indicator
-        })
 
-        console.log(indicators)
-        clientApi
-            .get('/indicator', {
-                params: {
-                    stock,
-                    indicator: indicators
-                }
-            })
-            .then(res => {
-                console.log(res.data)
-            })
-    }, [indicatorsWatcher, stockWatcher])
+            clientApi
+                .get('/indicator', {
+                    params: {
+                        symbol: stock,
+                        indicator: indicator.name,
+                        ...indicator.parameters
+                    }
+                })
+                .then(res => {
+                    console.log(res.data.data)
+
+                    setLines([...lines, ...res.data.data])
+                })
+        }
+    }, [indicatorsWatcher, lines, stockWatcher])
 
     return (
         <>
