@@ -40,9 +40,7 @@ export default function Indicator(props: props) {
                         value={indicator?.name}
                     />
                 </Form.Item>
-                <Form.Item
-                    label='Condition'
-                >
+                <Form.Item label='Condition'>
                     <Condition
                         indicator={indicator}
                         returns={indicator?.predefined_returns}
