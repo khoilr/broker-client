@@ -130,12 +130,20 @@ export default function FormField(props: props) {
                                     <InputTelegramUser />
                                     <InputWhatsappUser />
                                     <NotifyCondition indicators={indicators} />
-                                    <button
-                                        type='button'
-                                        className='bg-cyan-700 text-white py-2 px-4 rounded-lg m-auto flex items-center'
-                                    >
-                                        Notify me
-                                    </button>
+                                    <div className='flex justify-items-center'>
+                                        <button
+                                            type='button'
+                                            className='bg-cyan-700 text-white py-2 px-auto rounded-lg m-auto flex justify-center min-w-20 w-20'
+                                        >
+                                            Save
+                                        </button>
+                                        <button
+                                            type='button'
+                                            className='bg-cyan-700 text-white py-2 px-auto rounded-lg m-auto flex justify-center min-w-20 w-20'
+                                        >
+                                            Notify
+                                        </button>
+                                    </div>
                                 </div>
                             </Form>
                         </TabPanel>
