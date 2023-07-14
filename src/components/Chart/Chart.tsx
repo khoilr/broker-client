@@ -8,7 +8,7 @@ import { EChartsOption } from 'echarts'
 
 interface props {
     stock: StockModel
-    lines: number[]
+    lines: any
 }
 
 const downColor = '#ec0000'
@@ -16,12 +16,66 @@ const upColor = '#00da3c'
 
 export default function Chart(props: props) {
     const { stock, lines } = props
+    const [thisLines, setThisLines] = useState<any>([{ data: [] }])
+    const [names, setNames] = useState<string[]>([])
+    const [series, setSeries] = useState<any[]>([{}])
+
+    useEffect(() => {
+        // if lines if not empty
+        if (lines && lines.length > 0) {
+            setThisLines(lines)
+        }
+    }, [lines])
+
+    useEffect(() => {
+        // get every name in every data in lines
+        const thisNames = []
+        for (let i = 0; i < thisLines.length; i += 1) {
+            const line = thisLines[i]
+            for (let j = 0; j < line.data.length; j += 1) {
+                const data = line.data[j]
+                thisNames.push(data.name)
+            }
+        }
+        setNames(thisNames)
+
+        // get every series in every data in lines
+        // {
+        //         name: stock.symbol,
+        //         type: 'candlestick',
+        //         data: data.values,
+        //         itemStyle: {
+        //             color: upColor,
+        //             color0: downColor,
+        //             borderColor: undefined,
+        //             borderColor0: undefined
+        //         },
+        //         tooltip: {
+        //             formatter(param) {
+        //                 return `${param.name}<br>${param.data || ''}`
+        //             }
+        //         }
+        //     },
+        const thisSeries = []
+        for (let i = 0; i < thisLines.length; i += 1) {
+            const line = thisLines[i]
+            for (let j = 0; j < line.data.length; j += 1) {
+                const data = line.data[j]
+                thisSeries.push({
+                    name: data.name,
+                    type: 'line',
+                    data: data.data
+                })
+            }
+        }
+        setSeries(thisSeries)
+    }, [thisLines])
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [data, setData] = useState<StockPriceModel>({
         categoryData: [],
         values: [],
-        volumes: [],
+        volumes: []
     })
 
     const option: EChartsOption = {
@@ -30,11 +84,11 @@ export default function Chart(props: props) {
             left: 'center',
             text: stock.name
         },
-        // legend: {
-        //     top: 35,
-        //     left: 'center',
-        //     data: ['MA5']
-        // },
+        legend: {
+            top: 35,
+            left: 'center',
+            data: names
+        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -197,16 +251,7 @@ export default function Chart(props: props) {
                     }
                 }
             },
-            // {
-            //     name: 'MA5',
-            //     type: 'line',
-            //     data: {lines.map(line => ({ name: `MA${line}`, data: data.values }))},
-            //     smooth: true,
-            //     showSymbol: true,
-            //     lineStyle: {
-            //         width: 2
-            //     }
-            // }
+            ...series
         ]
     }
 
@@ -244,8 +289,8 @@ export default function Chart(props: props) {
                     volumes
                 })
                 setIsLoading(false)
-                console.log('lines: ', lines)
             })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stock.symbol])
 
     return (
