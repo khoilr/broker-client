@@ -24,24 +24,17 @@ export default function HomePage() {
             {/* Add more th elements for additional columns */}
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
+        <tbody className="bg-white divide-y divide-gray-200"><PredTag
+                    stock={"VN INDEX"}
+                    probability={0.65}
+                    />
         <PredTag
                     stock={"VN INDEX"}
                     probability={0.4}
-                    /><PredTag
-                    stock={"VN INDEX"}
-                    probability={0.4}
                     />
-          {/* Add more TableRow components for additional rows */}
         </tbody>
       </table>
     </div>
-                {/* <div className='p-4 grid md:grid-cols-4 grid-cols-1 gap-4'>
-                    <PredTag
-                    stock={"VN INDEX"}
-                    probability={0.4}
-                    />
-                </div> */}
             </div>
         </>
     )
