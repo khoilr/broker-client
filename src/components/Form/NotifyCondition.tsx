@@ -2,7 +2,7 @@ import IndicatorModel from '@/model/Indicator'
 // import { PlusOutlined } from '@ant-design/icons'
 import { Button, Form, Select, Space } from 'antd'
 import { useState } from 'react'
-import Indicator from '../Select indicator/Indicator'
+import Indicator from '../Select Indicator/Indicator'
 
 type props = {
     indicators: IndicatorModel[]
@@ -12,15 +12,19 @@ export default function NotifyCondition(props: props) {
     const { indicators } = props
 
     const [selectingIndicator, setSelectingIndicator] = useState<IndicatorModel>()
+    const [selectedIndicator, setSelectedIndicator] = useState<string[]>([])
     const [showModal, setShowModal] = useState(false)
-    const [showComponent, setShowComponent] = useState(false)
-    // const [counter, setCounter] = useState(0)
+    const [showBadge, setShowBadge] = useState(false)
 
     const handleClick = () => {
-        setShowComponent(!showComponent)
+        selectedIndicator.push(selectingIndicator?.name ?? '')
+        setSelectedIndicator([...selectedIndicator])
+        setShowBadge(true)
+        setShowModal(true)
+    }
+
+    const handleAdd = () => {
         setShowModal(false)
-        // setSelectedIndicator(selectedIndicator)
-        // setCounter(counter + 1)
     }
 
     return (
@@ -62,13 +66,16 @@ export default function NotifyCondition(props: props) {
                                         value: e.name,
                                         label: `${e.label} (${e.name}) `
                                     }))}
+                                    onChange={value => {
+                                        setSelectingIndicator(value)
+                                    }}
                                 />
                                 <Button
                                     className='bg-cyan-700 rounded-lg text-sm flex items-center mx-auto justify-center hover:bg-cyan-600 w-[20%]'
                                     type='primary'
                                     // icon={<PlusOutlined />}
                                     onClick={() => {
-                                        if (selectingIndicator) add()
+                                        add()
                                         setShowModal(true)
                                     }}
                                 >
@@ -112,7 +119,10 @@ export default function NotifyCondition(props: props) {
                                                     <button
                                                         className='bg-cyan-700 text-white active:bg-cyan-600 font-bold text-sm p-4 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-cyan-600'
                                                         type='button'
-                                                        onClick={() => handleClick()}
+                                                        onClick={() => {
+                                                            handleClick()
+                                                            handleAdd()
+                                                        }}
                                                     >
                                                         Add Indicator
                                                     </button>
@@ -127,11 +137,12 @@ export default function NotifyCondition(props: props) {
                     </>
                 )}
             </Form.List>
-            {showComponent && (
-                <span className='inline-flex items-center rounded-md bg-cyan-200 px-2 py-1 text-md font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10'>
-                    {indicators.find(e => e.name === selectingIndicator?.name)?.name ?? ''}{' '}
-                </span>
-            )}
+            {selectedIndicator.map((item, index) => {
+                return (
+                <span key={index} className='inline-flex items-center rounded-md bg-teal-700 px-2 py-1 mx-2 text-md font-medium text-gray-200 ring-2 ring-inset ring-gray-500/10'>
+                    {item}
+                </span>)
+            })}
         </div>
     )
 }

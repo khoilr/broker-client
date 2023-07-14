@@ -30,11 +30,11 @@ export default function Chart(props: props) {
             left: 'center',
             text: stock.name
         },
-        legend: {
-            top: 10,
-            left: 'center',
-            data: ['MA5']
-        },
+        // legend: {
+        //     top: 35,
+        //     left: 'center',
+        //     data: ['MA5']
+        // },
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -107,7 +107,8 @@ export default function Chart(props: props) {
             {
                 left: '5%',
                 right: '5%',
-                height: '50%'
+                top: '12%',
+                height: '60%'
             },
             {
                 left: '5%',
@@ -196,16 +197,16 @@ export default function Chart(props: props) {
                     }
                 }
             },
-            {
-                name: 'MA5',
-                type: 'line',
-                data: lines,
-                smooth: true,
-                showSymbol: true,
-                lineStyle: {
-                    width: 2
-                }
-            }
+            // {
+            //     name: 'MA5',
+            //     type: 'line',
+            //     data: {lines.map(line => ({ name: `MA${line}`, data: data.values }))},
+            //     smooth: true,
+            //     showSymbol: true,
+            //     lineStyle: {
+            //         width: 2
+            //     }
+            // }
         ]
     }
 
@@ -240,9 +241,10 @@ export default function Chart(props: props) {
                 setData({
                     categoryData,
                     values,
-                    volumes,
+                    volumes
                 })
                 setIsLoading(false)
+                console.log('lines: ', lines)
             })
     }, [stock.symbol])
 

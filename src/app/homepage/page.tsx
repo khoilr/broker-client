@@ -37,7 +37,7 @@ export default function HomePage() {
             const indicator = indicators[i]
 
             clientApi
-                .get('/indicator', {
+                .get('/indicator/', {
                     params: {
                         symbol: stock,
                         indicator: indicator.name,
@@ -48,7 +48,7 @@ export default function HomePage() {
                     setLines((prev: any) => {
                         return {
                             ...prev,
-                            [indicator.label]: res.data.data
+                            [indicator.label]: res.data.data,
                         }
                     }
                     )

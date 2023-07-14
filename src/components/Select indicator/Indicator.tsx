@@ -16,16 +16,6 @@ export default function Indicator(props: props) {
     // const [color, setColor] = useState<string>()
     const [indicator] = useState<IndicatorModel>(selectingIndicator)
 
-    // useEffect(() => {
-    //     if (side === 'buy') {
-    //         setColor('green')
-    //     } else if (side === 'notification') {
-    //         setColor('black')
-    //     } else if (side === 'sell') {
-    //         setColor('red')
-    //     }
-    // }, [side])
-
     return (
         <div className='flex items-start w-full min-w-full max-w-full border border-gray-200 rounded-lg'>
             <div className='w-full min-w-full max-w-full p-2'>
