@@ -2,7 +2,7 @@
 
 import Nav from '@/components/Navigation/Navigation'
 // import TopCards from '@/components/TopCards/TopCards'
-import { SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Chart from '@/components/Chart/Chart'
 import FormField from '@/components/Form/FormField'
 import StockModel from '@/model/Stock'
@@ -33,7 +33,7 @@ export default function HomePage() {
         const stock = stockWatcher.split('-')[0].trim()
         const indicators = indicatorsWatcher
 
-        const thisLines: SetStateAction<any[]> = []
+        // const thisLines = []
 
         for (let i = 0; i < indicators.length; i += 1) {
             const indicator = indicators[i]
@@ -48,11 +48,12 @@ export default function HomePage() {
                 })
                 .then(res => {
                     const { data } = res
-                    thisLines.push(data)
+                    // append data to lines
+                    // thisLines.push
+                    const thisLines = [...lines, data]
+                    setLines(thisLines)
                 })
         }
-
-        setLines(thisLines)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [indicatorsWatcher, stockWatcher])
 
