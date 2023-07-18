@@ -19,6 +19,7 @@ export default function InputWhatsappUser() {
     )
     return (
         <Form.Item
+            name='whatsapp_number'
             label='WhatsApp Number'
             className='w-full mx-auto'
             rules={[
@@ -31,6 +32,7 @@ export default function InputWhatsappUser() {
             <Input
                 addonBefore={prefixSelector}
                 style={{ width: '100%' }}
+                type='text'
             />
         </Form.Item>
     )

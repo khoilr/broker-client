@@ -85,6 +85,11 @@ export default function FormField(props: props) {
         })
     }, [])
 
+    function handleSubmit() {
+        const formData = form.getFieldsValue()
+        console.log(formData)
+    }
+
     return (
         <div className='w-full col-span-1 relative lg:h-[70vh] h-full py-4 border rounded-lg bg-white'>
             <Tabs
@@ -133,6 +138,7 @@ export default function FormField(props: props) {
                                     <div className='flex justify-items-center'>
                                         <button
                                             type='button'
+                                            onClick={() => handleSubmit()}
                                             className='bg-cyan-700 text-white py-2 px-auto rounded-lg m-auto flex justify-center min-w-20 w-20'
                                         >
                                             Save

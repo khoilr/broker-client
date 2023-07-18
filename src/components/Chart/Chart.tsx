@@ -56,6 +56,7 @@ export default function Chart(props: props) {
         //             }
         //         }
         //     },
+
         const thisSeries = []
         for (let i = 0; i < thisLines.length; i += 1) {
             const line = thisLines[i]

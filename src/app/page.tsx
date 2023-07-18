@@ -18,6 +18,10 @@ export default function LoginPage() {
                         path='/homepage'
                         element={<HomePage />}
                     />
+                    {/* <Route
+                        path='/prediction'
+                        element={<HomePage />}
+                    /> */}
                 </Routes>
             </BrowserRouter>
             {/* <div className='flex flex-col items-center min-h-screen py-2 bg-gray-200'>

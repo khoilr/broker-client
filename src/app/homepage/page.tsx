@@ -8,6 +8,7 @@ import FormField from '@/components/Form/FormField'
 import StockModel from '@/model/Stock'
 import { Form } from 'antd'
 import { clientApi } from '@/lib/axios'
+import BottomTable from '@/components/BottomTable/BottomTable'
 // import Indicator from '@/components/Select indicator/Indicator'
 
 export default function HomePage() {
@@ -71,6 +72,9 @@ export default function HomePage() {
                         setStock={setStock}
                         form={form}
                     />
+                </div>
+                <div className='px-4 pb-8'>
+                    <BottomTable />
                 </div>
             </div>
         </>
