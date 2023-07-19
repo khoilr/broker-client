@@ -2,7 +2,7 @@ interface props {
     stock: string
     probability: number
 }
-import Nav from '@/components/Navigation'
+
 export default function PredTag(props: props) {
     const { stock, probability } = props
     let result = (probability > 0.5) ? "Up" : "Down";

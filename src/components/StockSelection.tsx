@@ -15,9 +15,6 @@ export default function StockSelection(props: props) {
     useEffect(() => {
         clientApi.get('/stock/').then(res => {
             const stocksData = res.data
-
-            // rename en_name to enName
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const thisStocks = stocksData.map((stock: any) => {
                 return {
                     ...stock,
