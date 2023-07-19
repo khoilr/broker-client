@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import Chart from '@/components/Chart/Chart'
 import FormField from '@/components/Form/FormField'
 import StockModel from '@/model/Stock'
+import FormData from '@/model/Form'
 import { Form } from 'antd'
 import { clientApi } from '@/lib/axios'
 import BottomTable from '@/components/BottomTable/BottomTable'
@@ -26,7 +27,7 @@ export default function HomePage() {
     const indicatorsWatcher = Form.useWatch('indicators', form)
     const stockWatcher = Form.useWatch('stock', form)
     const [lines, setLines] = useState<any[]>([])
-    const [tableData, setTableData] = useState<FormData[]>([])
+    const [tableData, setTableData] = useState<any[]>([])
     // On stock or indicators change
     useEffect(() => {
         if (!(stockWatcher && indicatorsWatcher)) return
