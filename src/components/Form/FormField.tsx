@@ -16,13 +16,15 @@ import NotifyCondition from '@/components/Form/NotifyCondition'
 interface props {
     setStock: (stock: StockModel) => void
     form: FormInstance
+    onSubmit: (data: any) => void
 }
 
 export default function FormField(props: props) {
-    const { setStock, form } = props
+    const { setStock, form, onSubmit } = props
 
     const [activeTab, setActiveTab] = useState('notification')
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
+    const [formData, setFormData] = useState<any>([])
 
     const data = [
         {
@@ -85,10 +87,21 @@ export default function FormField(props: props) {
         })
     }, [])
 
+    useEffect(() => {
+        setFormData(form.getFieldsValue())
+    }, [formData])
+
     function handleSubmit() {
-        const formData = form.getFieldsValue()
+        onSubmit({ ...formData, form })
+        setFormData(form.getFieldsValue())
         console.log(formData)
     }
+
+    // const handleSubmit = () => {
+    //     // Add the new data to the existing table data state
+    //     onSubmit([...tableData, inputData])
+    //     setFormData(form.getFieldValue)
+    // }
 
     return (
         <div className='w-full col-span-1 relative lg:h-[70vh] h-full py-4 border rounded-lg bg-white'>

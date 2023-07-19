@@ -19,13 +19,14 @@ export default function HomePage() {
         name: '',
         enName: ''
     })
+
     const [form] = Form.useForm()
 
     // Watchers
     const indicatorsWatcher = Form.useWatch('indicators', form)
     const stockWatcher = Form.useWatch('stock', form)
     const [lines, setLines] = useState<any[]>([])
-
+    const [tableData, setTableData] = useState<FormData[]>([])
     // On stock or indicators change
     useEffect(() => {
         if (!(stockWatcher && indicatorsWatcher)) return
@@ -58,6 +59,10 @@ export default function HomePage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [indicatorsWatcher, stockWatcher])
 
+    const updateTableData = (newData: FormData[]) => {
+        setTableData(newData)
+    }
+
     return (
         <>
             <Nav />
@@ -71,10 +76,11 @@ export default function HomePage() {
                     <FormField
                         setStock={setStock}
                         form={form}
+                        onSubmit={updateTableData}
                     />
                 </div>
                 <div className='px-4 pb-8'>
-                    <BottomTable />
+                    <BottomTable data={tableData} />
                 </div>
             </div>
         </>
