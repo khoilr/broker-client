@@ -13,7 +13,7 @@ export default function PredTag(props: props) {
         <tr>
           <td className="px-6 py-4 whitespace-nowrap">{stock}</td>
           <td className={`px-6 py-4 whitespace-nowrap ${arrowColor}`}>{result} <span style={{ color: arrowColor }}>{arrow}</span></td>
-          <td className="px-6 py-4 whitespace-nowrap">{modified_result}%</td>
+          <td className="px-6 py-4 whitespace-nowrap">{modified_result.toFixed(2)}%</td>
         </tr>
       ); 
 }

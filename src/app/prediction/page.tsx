@@ -46,15 +46,12 @@ export default function HomePage() {
                 })
                 const { data } = response
                 setProbability(data.probability)
-                console.log(data.probability)
             } catch (error) {
                 console.error(error)
             }
         }
 
         fetchData()
-      console.log(selectedValue)
-      // console.log(probability)
     }, [selectedValue])
     return (
         <>
@@ -94,7 +91,9 @@ export default function HomePage() {
                         </table>
                     </div>
                     <div>
-    <select onChange={(e) => setSelectedValue(e.target.value)}>
+                      <h1 className='px-4'>Select stock</h1>
+    <select onChange={(e) => setSelectedValue(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300">
+
       {selectionOptions.map((option: Option) => (
         <option key={option.value} value={option.value}>
           {option.label}
