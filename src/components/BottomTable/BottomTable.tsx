@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import FormData from '@/model/Form'
+import Indicator from '@/model/Indicator'
 import { Table, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 
@@ -17,18 +18,21 @@ export default function BottomTable(props: props) {
 
     const dataSource: FormData[] = [
         {
-            id: data.id,
+            // id: data.id,
+            key: data.key,
             telegram_user: data.telegram_user,
             whatsapp_number: data.whatsapp_number,
             indicator: data.indicator
         }
     ]
 
+    console.log('datasource', dataSource)
+
     const columns: ColumnsType<any> = [
         {
             title: 'Strategy',
-            dataIndex: 'id',
-            key: 'id',
+            dataIndex: 'key',
+            key: 'key',
             render: text => <a>{text}</a>
         },
         {
@@ -40,29 +44,21 @@ export default function BottomTable(props: props) {
             title: 'Whatsapp Number',
             dataIndex: 'whatsapp_number',
             key: 'whatsapp_number'
-        }
+        },
         // {
         //     title: 'Indicators',
-        //     key: 'indicator',
-        //     dataIndex: 'indicator',
-        //     render: (_, { indicators }) => (
+        //     key: 'indicators',
+        //     dataIndex: 'indicators',
+        //     render: {(indicator: any[]) => (
         //         <>
-        //             {indicators.map(indicator => {
-        //                 let color = indicator.length > 5 ? 'geekblue' : 'green'
-        //                 if (indicator === 'loser') {
-        //                     color = 'volcano'
-        //                 }
-        //                 return (
-        //                     <Tag
-        //                         color={color}
-        //                         key={indicator}
-        //                     >
-        //                         {indicator.toUpperCase()}
-        //                     </Tag>
-        //                 )
-        //             })}
-        //         </>
-        //     )
+        //         {indicator.map((item: any) => (
+        //             <Tag color="blue" key={item}>
+        //                 {item}
+        //             </Tag>
+        //     ))}
+        // </>
+
+        //     )}
         // }
     ]
 
