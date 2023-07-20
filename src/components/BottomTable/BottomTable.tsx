@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import FormData from '@/model/Form'
-import Indicator from '@/model/Indicator'
-import { Table, Tag } from 'antd'
+// import Indicator from '@/model/Indicator'
+import { Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 
 type props = {
@@ -14,7 +14,7 @@ type props = {
 export default function BottomTable(props: props) {
     const { data } = props
 
-    // const [tableData, setTableData] = useState<any[]>([])
+    const [tableData, setTableData] = useState<FormData[][]>([])
 
     const dataSource: FormData[] = [
         {
@@ -26,7 +26,13 @@ export default function BottomTable(props: props) {
         }
     ]
 
+    useEffect(() => {
+        tableData.push(dataSource)
+        setTableData(tableData)
+    })
+
     console.log('datasource', dataSource)
+    console.log('tabledata', tableData)
 
     const columns: ColumnsType<any> = [
         {
@@ -67,40 +73,9 @@ export default function BottomTable(props: props) {
             <div className='p-1.5 w-full inline-block align-middle'>
                 <div className='overflow-hidden border rounded-lg'>
                     <Table
-                        dataSource={dataSource}
+                        dataSource={tableData[1]}
                         columns={columns}
-                    >
-                        {/* <Column
-                            title='Stratery'
-                            dataIndex='id'
-                            key='id'
-                        />
-                        <Column
-                            title='Telegram User'
-                            dataIndex='telegram_user'
-                            key='telegram_user'
-                        />
-                        <Column
-                            title='Whatsapp Number'
-                            dataIndex='whatsapp_number'
-                            key='whatsapp_user'
-                        />
-                        <Column
-                            title='Indicator'
-                            dataIndex='indicator'
-                            key='indicator'
-                        />
-                        {/* <Column
-                            title='Action'
-                            key='action'
-                            render={(_: any, record: DataType) => (
-                                <Space size='middle'>
-                                    <a>Invite {record.lastName}</a>
-                                    <a>Delete</a>
-                                </Space>
-                            )}
-                        /> */}
-                    </Table>
+                    />
                 </div>
             </div>
         </div>
