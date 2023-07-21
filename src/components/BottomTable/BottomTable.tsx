@@ -2,44 +2,30 @@
 import React, { useEffect, useState } from 'react'
 import FormData from '@/model/Form'
 // import Indicator from '@/model/Indicator'
-import { Table } from 'antd'
+import { Popconfirm, Space, Table, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 
 type props = {
     data: any
 }
 
-// const { Column } = Table
-
 export default function BottomTable(props: props) {
     const { data } = props
-
-    const [tableData, setTableData] = useState<FormData[][]>([])
-
-    const dataSource: FormData[] = [
-        {
-            // id: data.id,
-            key: data.key,
-            telegram_user: data.telegram_user,
-            whatsapp_number: data.whatsapp_number,
-            indicator: data.indicator
-        }
-    ]
+    const [dataArray, setDataArray] = useState<FormData[]>([])
 
     useEffect(() => {
-        tableData.push(dataSource)
-        setTableData(tableData)
-    })
+        // Push new data into the array
+            setDataArray(prevDataArray => [...prevDataArray, data])
+    }, [data])
 
-    console.log('datasource', dataSource)
-    console.log('tabledata', tableData)
+    // Delete data from the array
 
     const columns: ColumnsType<any> = [
         {
             title: 'Strategy',
-            dataIndex: 'key',
-            key: 'key',
-            render: text => <a>{text}</a>
+            dataIndex: 'id',
+            // key: 'id',
+            render: () => <a>{key}</a>
         },
         {
             title: 'Telegram User',
@@ -51,21 +37,38 @@ export default function BottomTable(props: props) {
             dataIndex: 'whatsapp_number',
             key: 'whatsapp_number'
         },
-        // {
-        //     title: 'Indicators',
-        //     key: 'indicators',
-        //     dataIndex: 'indicators',
-        //     render: {(indicator: any[]) => (
-        //         <>
-        //         {indicator.map((item: any) => (
-        //             <Tag color="blue" key={item}>
-        //                 {item}
-        //             </Tag>
-        //     ))}
-        // </>
-
-        //     )}
-        // }
+        {
+            title: 'Indicators',
+            key: 'indicators',
+            dataIndex: 'indicators',
+            render: (_, { indicators }) => (
+                // indicators >= 1 ? (
+                <>
+                    {indicators.map(
+                        (indicator) => {
+                            return <Tag key={indicator.id}>{indicator.name}</Tag>
+                        }
+                    )}
+                </>
+            )
+            // ) : null
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            // render: (_, record) =>
+            //     dataArray.length >= 1 ? (
+            //         <Space size='middle'>
+            //             <a className='font-bold'>Apply</a>
+            //             {/* <Popconfirm
+            //                 title='Sure to delete?'
+            //                 onConfirm={() => handleDelete(record.key)}
+            //             >
+            //                 <a className='font-bold'>Delete</a>
+            //             </Popconfirm> */}
+            //         </Space>
+            //     ) : null
+        }
     ]
 
     return (
@@ -73,8 +76,9 @@ export default function BottomTable(props: props) {
             <div className='p-1.5 w-full inline-block align-middle'>
                 <div className='overflow-hidden border rounded-lg'>
                     <Table
-                        dataSource={tableData[1]}
+                        dataSource={dataArray.slice(1)}
                         columns={columns}
+                        scroll={{ x: 1500, y: 300 }}
                     />
                 </div>
             </div>
