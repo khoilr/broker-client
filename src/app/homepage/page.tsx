@@ -27,7 +27,7 @@ export default function HomePage() {
     const indicatorsWatcher = Form.useWatch('indicators', form)
     const stockWatcher = Form.useWatch('stock', form)
     const [lines, setLines] = useState<any[]>([])
-    const [tableData, setTableData] = useState<any[]>([])
+    const [tableData, setTableData] = useState<any>()
     // On stock or indicators change
     useEffect(() => {
         if (!(stockWatcher && indicatorsWatcher)) return
@@ -44,8 +44,8 @@ export default function HomePage() {
             clientApi
                 .get('/indicator/', {
                     params: {
+                        name: indicator.name,
                         symbol: stock,
-                        indicator: indicator.name,
                         ...indicator.parameters
                     }
                 })
