@@ -1,10 +1,10 @@
-import React from 'react'
+// import React from 'react'
 import Indicator from './Indicator'
 
 type FormData = [
     {
     // id: string
-    key: React.Key
+    key: string
     telegram_user: string
     whatsapp_number: string
     indicator: Indicator
