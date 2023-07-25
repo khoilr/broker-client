@@ -6,14 +6,14 @@ import FormData from '@/model/Form'
 import { Space, Table, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 
-type props = {
+interface props {
     data: FormData
 }
 
 export default function BottomTable(props: props) {
     const { data } = props
 
-    // const [key, setKey] = useState<number[]>([])
+    const [key, setKey] = useState(1)
     const [dataArray, setDataArray] = useState<FormData[]>([])
 
     useEffect(() => {
@@ -22,12 +22,14 @@ export default function BottomTable(props: props) {
     }, [data])
 
     const columns: ColumnsType<any> = [
-        // {
-        //     title: 'Strategy',
-        //     dataIndex: 'key',
-        //     key: 'key',
-        //     // render: () => <a>{key.map(item => item.toString())}</a>
-        // },
+        {
+            title: 'Strategy',
+            dataIndex: 'index',
+            key: 'index',
+            render: (text: string, record: FormData, index: number) => {
+                return <a>{index + 1}</a>
+            }
+        },
         {
             title: 'Telegram User',
             dataIndex: 'telegram_user',
@@ -42,12 +44,26 @@ export default function BottomTable(props: props) {
             title: 'Indicators',
             key: 'indicators',
             dataIndex: 'indicators',
-            render: (_, { indicators }) =>
-                    <>
-                        {indicators?.map(indicator => {
+            render: (_, { indicators }) => (
+                <>
+                    {indicators?.map(
+                        (indicator: {
+                            id: React.Key | null | undefined
+                            name:
+                                | string
+                                | number
+                                | boolean
+                                | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+                                | React.ReactFragment
+                                | React.ReactPortal
+                                | null
+                                | undefined
+                        }) => {
                             return <Tag key={indicator.id}>{indicator.name}</Tag>
-                        })}
-                    </>
+                        }
+                    )}
+                </>
+            )
         },
         {
             title: 'Action',
