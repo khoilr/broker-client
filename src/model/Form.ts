@@ -1,12 +1,14 @@
-// import Indicator from './Indicator'
+// import React from 'react'
+import Indicator from './Indicator'
 
-type FormData = {
-    id: string
+type FormData = [
+    {
+    // id: string
+    key: string
     telegram_user: string
     whatsapp_number: string
-    // indicator: Indicator[]
-    indicator: string
-
-}
+    indicator: Indicator
+    }
+]
 
 export default FormData

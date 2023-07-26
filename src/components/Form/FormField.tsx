@@ -93,15 +93,8 @@ export default function FormField(props: props) {
 
     function handleSubmit() {
         onSubmit({ ...formData, form })
-        setFormData(form.getFieldsValue())
-        console.log(formData)
+        console.log('formData', formData)
     }
-
-    // const handleSubmit = () => {
-    //     // Add the new data to the existing table data state
-    //     onSubmit([...tableData, inputData])
-    //     setFormData(form.getFieldValue)
-    // }
 
     return (
         <div className='w-full col-span-1 relative lg:h-[70vh] h-full py-4 border rounded-lg bg-white'>
