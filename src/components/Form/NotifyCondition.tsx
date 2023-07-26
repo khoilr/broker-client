@@ -1,15 +1,20 @@
 import IndicatorModel from '@/model/Indicator'
 // import { PlusOutlined } from '@ant-design/icons'
+import { clientApi } from '@/lib/axios'
 import { Button, Form, Select, Space } from 'antd'
 import { useState } from 'react'
 import Indicator from '../Select Indicator/Indicator'
 
 type props = {
     indicators: IndicatorModel[]
+    stockWatcher: string
+    indicatorsWatcher: any[]
+    setLines: any
+    lines: any[]
 }
 
 export default function NotifyCondition(props: props) {
-    const { indicators } = props
+    const { indicators, stockWatcher, indicatorsWatcher, setLines, lines } = props
 
     const [selectingIndicator, setSelectingIndicator] = useState<IndicatorModel>()
     const [selectedIndicator, setSelectedIndicator] = useState<string[]>([])
@@ -17,14 +22,43 @@ export default function NotifyCondition(props: props) {
     const [showBadge, setShowBadge] = useState(false)
 
     const handleClick = () => {
+        console.log('Clicked==================================D')
+
         selectedIndicator.push(selectingIndicator?.name ?? '')
         setSelectedIndicator([...selectedIndicator])
         setShowBadge(true)
-        setShowModal(true)
-    }
+        // setShowModal(true)
 
-    const handleAdd = () => {
-        setShowModal(false)
+        if (!(stockWatcher && indicatorsWatcher)) return
+        if (indicatorsWatcher.some((indicator: any) => !indicator)) return
+
+        const stock = stockWatcher.split('-')[0].trim()
+        const indicators = indicatorsWatcher
+
+        // const thisLines = []
+
+        for (let i = 0; i < indicators.length; i += 1) {
+            const indicator = indicators[i]
+
+            clientApi
+                .get('/indicator/', {
+                    params: {
+                        name: indicator.name,
+                        symbol: stock,
+                        ...indicator.parameters
+                    }
+                })
+                .then(res => {
+                    const { data } = res
+                    // append data to lines
+                    // thisLines.push
+                    const thisLines = [...lines, data]
+
+                    console.log(thisLines)
+
+                    setLines(thisLines)
+                })
+        }
     }
 
     return (
@@ -120,8 +154,8 @@ export default function NotifyCondition(props: props) {
                                                         className='bg-cyan-700 text-white active:bg-cyan-600 font-bold text-sm p-4 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-cyan-600'
                                                         type='button'
                                                         onClick={() => {
+                                                            setShowModal(false)
                                                             handleClick()
-                                                            handleAdd()
                                                         }}
                                                     >
                                                         Add Indicator
@@ -139,9 +173,13 @@ export default function NotifyCondition(props: props) {
             </Form.List>
             {selectedIndicator.map((item, index) => {
                 return (
-                <span key={index} className='inline-flex items-center rounded-md bg-teal-700 px-2 py-1 mx-2 text-md font-medium text-gray-200 ring-2 ring-inset ring-gray-500/10'>
-                    {item}
-                </span>)
+                    <span
+                        key={index}
+                        className='inline-flex items-center rounded-md bg-teal-700 px-2 py-1 mx-2 text-md font-medium text-gray-200 ring-2 ring-inset ring-gray-500/10'
+                    >
+                        {item}
+                    </span>
+                )
             })}
         </div>
     )

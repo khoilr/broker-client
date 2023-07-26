@@ -18,7 +18,7 @@ export default function BottomTable(props: props) {
 
     useEffect(() => {
         // Push new data into the array
-            setDataArray(prevDataArray => [...prevDataArray, data])
+        setDataArray(prevDataArray => [...prevDataArray, data])
     }, [data])
 
     const columns: ColumnsType<any> = [
