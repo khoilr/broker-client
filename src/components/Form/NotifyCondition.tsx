@@ -2,7 +2,7 @@ import IndicatorModel from '@/model/Indicator'
 // import { PlusOutlined } from '@ant-design/icons'
 import { Button, Form, Select, Space } from 'antd'
 import { useState } from 'react'
-import Indicator from '../Select Indicator/Indicator'
+import Indicator from '../Select indicator/Indicator'
 
 type props = {
     indicators: IndicatorModel[]

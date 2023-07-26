@@ -36,8 +36,6 @@ export default function HomePage() {
         const stock = stockWatcher.split('-')[0].trim()
         const indicators = indicatorsWatcher
 
-        // const thisLines = []
-
         for (let i = 0; i < indicators.length; i += 1) {
             const indicator = indicators[i]
 

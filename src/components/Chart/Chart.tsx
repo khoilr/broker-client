@@ -39,24 +39,6 @@ export default function Chart(props: props) {
         }
         setNames(thisNames)
 
-        // get every series in every data in lines
-        // {
-        //         name: stock.symbol,
-        //         type: 'candlestick',
-        //         data: data.values,
-        //         itemStyle: {
-        //             color: upColor,
-        //             color0: downColor,
-        //             borderColor: undefined,
-        //             borderColor0: undefined
-        //         },
-        //         tooltip: {
-        //             formatter(param) {
-        //                 return `${param.name}<br>${param.data || ''}`
-        //             }
-        //         }
-        //     },
-
         const thisSeries = []
         for (let i = 0; i < thisLines.length; i += 1) {
             const line = thisLines[i]
