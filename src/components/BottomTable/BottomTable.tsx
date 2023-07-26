@@ -20,6 +20,7 @@ export default function BottomTable(props: props) {
         setDataArray(prevDataArray => [...prevDataArray, data])
     }, [data])
 
+    console.log('sssss', dataArray)
     // Function to delete a row
     const handleDeleteRow = (index: number) => {
         const updatedData = [...dataArray]

@@ -1,18 +1,16 @@
 'use client'
+
 import React, { useState, useEffect } from 'react';
 import { clientApi } from '@/lib/axios'
-import Nav from '@/components/Navigation'
 import PredTag from '@/components/Trend'
-import { Form } from 'antd'
+import { Form, Select, Space } from 'antd'
+import Nav from '@/components/Navigation/Navigation'
 import options from '../../data/options.json';
-
-
 
 interface Option {
   value: string;
   label: string;
 }
-
 
 export default function HomePage() {
     const [symbol, setSymbol] = useState('VN30')
@@ -20,7 +18,7 @@ export default function HomePage() {
     const [probability_week, setProbability_week] = useState(0)
     const [selectionOptions, setSelectionOptions] = useState<Option[]>([]);
     const [form] = Form.useForm()
-    const stockWatcher = Form.useWatch('stock', form)
+    // const stockWatcher = Form.useWatch('stock', form)
     const [selectedValue, setSelectedValue] = useState(options[0].label);
 
     useEffect(() => {
@@ -32,7 +30,6 @@ export default function HomePage() {
           console.error('Error loading options:', error);
         }
       };
-  
       fetchOptions();
     }, []);
     useEffect(() => {
@@ -55,11 +52,15 @@ export default function HomePage() {
 
         fetchData()
     }, [selectedValue])
+
+     const handleProvinceChange = () => {
+         setSelectedValue(options[0].label)
+     }
     return (
         <>
             <Nav />
-            <div className='min-h-full bg-gray-200'>
-                <div className='p-4 grid md:grid-cols-2 grid-cols-1 gap-4'>
+            <div className='flex items-center justify-center w-full px-20 text-center min-h-screen py-2 bg-gray-200'>
+                <div className='p-4 flex gap-4'>
                     <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
                         <table className='min-w-full divide-y divide-gray-200'>
                             <thead className='bg-gray-50'>
@@ -100,21 +101,36 @@ export default function HomePage() {
                                 <PredTag
                                     stock={symbol}
                                     probability_day={probability_day}
-                                    probability_week = {probability_week}
+                                    probability_week={probability_week}
                                 />
                             </tbody>
                         </table>
                     </div>
                     <div>
-                      <h1 className='px-4'>Select stock</h1>
-    <select onChange={(e) => setSelectedValue(e.target.value)} defaultValue={'VN30'} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300">
+                        <h1 className='px-8 pb-4 pt-2'>Select stock</h1>
+                        {/* <select
+                            onChange={e => setSelectedValue(e.target.value)}
+                            defaultValue='VN30'
+                            className='px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300'
+                        >
+                            {selectionOptions.map((option: Option) => (
+                                <option
+                                    key={option.value}
+                                    value={option.value}
+                                >
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select> */}
 
-      {selectionOptions.map((option: Option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </select>
+                        <Space wrap>
+                            <Select
+                                defaultValue='VN30'
+                                style={{ width: 120 }}
+                                onChange={handleProvinceChange}
+                                options={selectionOptions.map(option => ({ key: option.value, value: option.value }))}
+                            />
+                        </Space>
                     </div>
                 </div>
             </div>

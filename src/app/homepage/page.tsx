@@ -1,6 +1,6 @@
 'use client'
 
-import Nav from '@/components/Navigation/Navigation'
+// import Nav from '@/components/Navigation/Navigation'
 // import TopCards from '@/components/TopCards/TopCards'
 import { useState } from 'react'
 import Chart from '@/components/Chart/Chart'
@@ -9,6 +9,7 @@ import StockModel from '@/model/Stock'
 import FormData from '@/model/Form'
 import { Form } from 'antd'
 import BottomTable from '@/components/BottomTable/BottomTable'
+import Nav from '@/components/Navigation/Navigation'
 // import Indicator from '@/components/Select indicator/Indicator'
 
 export default function HomePage() {

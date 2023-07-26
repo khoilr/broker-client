@@ -19,7 +19,7 @@ export default function NotifyCondition(props: props) {
     const [selectingIndicator, setSelectingIndicator] = useState<IndicatorModel>()
     const [selectedIndicator, setSelectedIndicator] = useState<string[]>([])
     const [showModal, setShowModal] = useState(false)
-    const [showBadge, setShowBadge] = useState(false)
+    const [, setShowBadge] = useState(false)
 
     const handleClick = () => {
         console.log('Clicked==================================D')
