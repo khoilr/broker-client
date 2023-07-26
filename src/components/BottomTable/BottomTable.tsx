@@ -32,11 +32,11 @@ export default function BottomTable(props: props) {
                             dataIndex='whatsapp_number'
                             key='whatsapp_user'
                         />
-                        <Column
+                        {/* <Column
                             title='Indicator'
                             dataIndex='indicator'
                             key='indicator'
-                        />
+                        /> */}
                         {/* <Column
                             title='Action'
                             key='action'
