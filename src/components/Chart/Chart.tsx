@@ -30,20 +30,13 @@ export default function Chart(props: props) {
     useEffect(() => {
         // get every name in every data in lines
         const thisNames = []
-        for (let i = 0; i < thisLines.length; i += 1) {
-            const line = thisLines[i]
-            for (let j = 0; j < line.data.length; j += 1) {
-                const data = line.data[j]
-                thisNames.push(data.name)
-            }
-        }
-        setNames(thisNames)
-
         const thisSeries = []
         for (let i = 0; i < thisLines.length; i += 1) {
             const line = thisLines[i]
+
             for (let j = 0; j < line.data.length; j += 1) {
                 const data = line.data[j]
+                thisNames.push(data.name)
                 thisSeries.push({
                     name: data.name,
                     type: 'line',
@@ -51,7 +44,9 @@ export default function Chart(props: props) {
                 })
             }
         }
+
         setSeries(thisSeries)
+        setNames(thisNames)
     }, [thisLines])
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
