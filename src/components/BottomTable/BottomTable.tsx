@@ -3,30 +3,40 @@
 import React, { useEffect, useState } from 'react'
 import FormData from '@/model/Form'
 // import Indicator from '@/model/Indicator'
-import { Popconfirm, Space, Table, Tag } from 'antd'
+import { Button, Popconfirm, Space, Table, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 // import { index } from '@material-tailwind/react/types/components/select'
 
 interface props {
     data: FormData
+    // setDataToChart: (dataToChart: any[]) => void
 }
 
 export default function BottomTable(props: props) {
     const { data } = props
     const [dataArray, setDataArray] = useState<FormData[]>([])
+    const [dataToChart, setDataToChart] = useState<FormData>()
 
     useEffect(() => {
         // Push new data into the array
         setDataArray(prevDataArray => [...prevDataArray, data])
     }, [data])
 
-    console.log('sssss', dataArray)
+    console.log('dataArray', dataArray.slice(1))
     // Function to delete a row
     const handleDeleteRow = (index: number) => {
         const updatedData = [...dataArray]
         updatedData.splice(index, 1)
         setDataArray(updatedData)
     }
+
+    const handleApply = (index: number) => {
+        const applyData = [...dataArray]
+        const data1 = applyData.find((data, i) => i === index + 1)
+        setDataToChart(data1)
+    }
+
+    console.log('dataToChart', dataToChart)
 
     const columns: ColumnsType<any> = [
         {
@@ -78,7 +88,12 @@ export default function BottomTable(props: props) {
             render: (_, record, index: number) =>
                 dataArray.length >= 1 ? (
                     <Space size='middle'>
-                        <a className='font-bold text-blue-500'>Apply</a>
+                        <Button
+                            className='font-bold text-blue-500'
+                            onClick={() => handleApply(index)}
+                        >
+                            Apply
+                        </Button>
                         <Popconfirm
                             okButtonProps={{
                                 className: 'rounded-md bg-blue-500 hover:bg-blue-300 text-white'

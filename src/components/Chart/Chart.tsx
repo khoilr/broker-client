@@ -9,13 +9,14 @@ import { EChartsOption } from 'echarts'
 interface props {
     stock: StockModel
     lines: any
+    dataToChart: any[]
 }
 
 const downColor = '#ec0000'
 const upColor = '#00da3c'
 
 export default function Chart(props: props) {
-    const { stock, lines } = props
+    const { stock, lines, dataToChart } = props
     const [thisLines, setThisLines] = useState<any>([{ data: [] }])
     const [names, setNames] = useState<string[]>([])
     const [series, setSeries] = useState<any[]>([{}])

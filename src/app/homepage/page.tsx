@@ -26,6 +26,7 @@ export default function HomePage() {
     // States
     const [lines, setLines] = useState<any[]>([])
     const [tableData, setTableData] = useState<any>()
+    const [dataToChart, setDataToChart] = useState<any[]>([])
 
     const updateTableData = (newData: FormData[]) => {
         setTableData(newData)
@@ -40,6 +41,7 @@ export default function HomePage() {
                     <Chart
                         stock={stock}
                         lines={lines}
+                        dataToChart={dataToChart}
                     />
                     <FormField
                         lines={lines}
@@ -50,7 +52,10 @@ export default function HomePage() {
                     />
                 </div>
                 <div className='px-4 pb-8'>
-                    <BottomTable data={tableData} />
+                    <BottomTable
+                        data={tableData}
+                        setDataToChart={setDataToChart}
+                    />
                 </div>
             </div>
         </>

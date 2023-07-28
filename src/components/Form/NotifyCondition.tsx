@@ -22,7 +22,7 @@ export default function NotifyCondition(props: props) {
     const [, setShowBadge] = useState(false)
 
     const handleClick = () => {
-        console.log('Clicked==================================D')
+        // console.log('Clicked==================================D')
 
         selectedIndicator.push(selectingIndicator?.name ?? '')
         setSelectedIndicator([...selectedIndicator])
