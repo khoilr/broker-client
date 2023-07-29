@@ -23,7 +23,6 @@ export default function NotifyCondition(props: props) {
         selectedIndicator.push(selectingIndicator?.name ?? '')
         setSelectedIndicator([...selectedIndicator])
         setShowBadge(true)
-        // setShowModal(true)
 
         // if (!(stockWatcher && indicatorsWatcher)) return
         // if (indicatorsWatcher.some((indicator: any) => !indicator)) return

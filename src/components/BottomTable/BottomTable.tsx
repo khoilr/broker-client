@@ -18,11 +18,56 @@ export default function BottomTable(props: props) {
     const { data, setLines, lines } = props
     const [dataArray, setDataArray] = useState<FormData[]>([])
     const [chartData, setChartData] = useState<any[]>([])
+    // const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+
+    // const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    //     console.log('selectedRowKeys changed: ', newSelectedRowKeys)
+    //     setSelectedRowKeys(newSelectedRowKeys)
+    // }
+
+    // const rowSelection: TableRowSelection<any> = {
+    //     selectedRowKeys,
+    //     onChange: onSelectChange,
+    //     // selections: [
+    //     //     Table.SELECTION_ALL,
+    //     //     Table.SELECTION_INVERT,
+    //     //     Table.SELECTION_NONE,
+    //     //     {
+    //     //         key: 'odd',
+    //     //         text: 'Select Odd Row',
+    //     //         onSelect: changeableRowKeys => {
+    //     //             let newSelectedRowKeys = []
+    //     //             newSelectedRowKeys = changeableRowKeys.filter((_, index) => {
+    //     //                 if (index % 2 !== 0) {
+    //     //                     return false
+    //     //                 }
+    //     //                 return true
+    //     //             })
+    //     //             setSelectedRowKeys(newSelectedRowKeys)
+    //     //         }
+    //     //     },
+    //     //     {
+    //     //         key: 'even',
+    //     //         text: 'Select Even Row',
+    //     //         onSelect: changeableRowKeys => {
+    //     //             let newSelectedRowKeys = []
+    //     //             newSelectedRowKeys = changeableRowKeys.filter((_, index) => {
+    //     //                 if (index % 2 !== 0) {
+    //     //                     return true
+    //     //                 }
+    //     //                 return false
+    //     //             })
+    //     //             setSelectedRowKeys(newSelectedRowKeys)
+    //     //         }
+    //     //     }
+    //     // ]
+    // }
 
     useEffect(() => {
         // Push new data into the array
         setDataArray(prevDataArray => [...prevDataArray, data])
     }, [data])
+
     // Function to delete a row
     const handleDeleteRow = (index: number) => {
         const updatedData = [...dataArray]
@@ -33,18 +78,12 @@ export default function BottomTable(props: props) {
     const handleApply = (index: number) => {
         const applyData = [...dataArray]
         const data1 = applyData.find((data, i) => i === index + 1)
-        setChartData(prevDataArray => [...prevDataArray, data1])
-    }
+        chartData.push(data1)
 
-    useEffect(() => {
         const indicators = chartData
-
         for (let i = 0; i < indicators.length; i += 1) {
             const indicator = indicators[i].indicators[0]
             const symbol = indicators[i]
-
-            // console.log('ssssssssssssss', indicator)
-            // console.log('aaaaaaaa', symbol)
 
             clientApi
                 .get('/indicator/', {
@@ -65,7 +104,7 @@ export default function BottomTable(props: props) {
                     console.log('thisLinesssss', thisLines)
                 })
         }
-    }, [chartData])
+    }
 
     const columns: ColumnsType<any> = [
         {
@@ -81,11 +120,11 @@ export default function BottomTable(props: props) {
             dataIndex: 'telegram_user',
             key: 'telegram_user'
         },
-        {
-            title: 'Whatsapp Number',
-            dataIndex: 'whatsapp_number',
-            key: 'whatsapp_number'
-        },
+        // {
+        //     title: 'Whatsapp Number',
+        //     dataIndex: 'whatsapp_number',
+        //     key: 'whatsapp_number'
+        // },
         {
             title: 'Indicators',
             key: 'indicators',
@@ -120,6 +159,7 @@ export default function BottomTable(props: props) {
                         <Button
                             className='font-bold text-blue-500'
                             onClick={() => handleApply(index)}
+                            // onKeyPress={() => handleClick()}
                         >
                             Apply
                         </Button>
@@ -143,6 +183,7 @@ export default function BottomTable(props: props) {
                 <h1 className='font-bold p-2 pb-4 text-xl text-cyan-700'>Strategies Table</h1>
                 <div className='overflow-hidden border rounded-lg'>
                     <Table
+                        // rowSelection={rowSelection}
                         dataSource={dataArray.slice(1)}
                         columns={columns}
                         scroll={{ x: 1500, y: 300 }}

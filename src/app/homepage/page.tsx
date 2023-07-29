@@ -42,9 +42,7 @@ export default function HomePage() {
                         lines={lines}
                     />
                     <FormField
-                        // lines={lines}
                         setStock={setStock}
-                        // setLines={setLines}
                         form={form}
                         onSubmit={updateTableData}
                     />
