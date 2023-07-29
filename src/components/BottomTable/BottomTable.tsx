@@ -60,7 +60,7 @@ export default function BottomTable(props: props) {
                     // thisLines.push
                     const thisLines = [...lines, data]
 
-                    setLines(thisLines.find((line: any) => line.name === indicator.name))
+                    setLines(thisLines)
 
                     console.log('thisLinesssss', thisLines)
                 })
