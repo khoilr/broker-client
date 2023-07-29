@@ -1,20 +1,16 @@
 import IndicatorModel from '@/model/Indicator'
 // import { PlusOutlined } from '@ant-design/icons'
-import { clientApi } from '@/lib/axios'
+// import { clientApi } from '@/lib/axios'
 import { Button, Form, Select, Space } from 'antd'
 import { useState } from 'react'
 import Indicator from '../Select indicator/Indicator'
 
 type props = {
     indicators: IndicatorModel[]
-    stockWatcher: string
-    indicatorsWatcher: any[]
-    setLines: any
-    lines: any[]
 }
 
 export default function NotifyCondition(props: props) {
-    const { indicators, stockWatcher, indicatorsWatcher, setLines, lines } = props
+    const { indicators } = props
 
     const [selectingIndicator, setSelectingIndicator] = useState<IndicatorModel>()
     const [selectedIndicator, setSelectedIndicator] = useState<string[]>([])
@@ -29,36 +25,36 @@ export default function NotifyCondition(props: props) {
         setShowBadge(true)
         // setShowModal(true)
 
-        if (!(stockWatcher && indicatorsWatcher)) return
-        if (indicatorsWatcher.some((indicator: any) => !indicator)) return
+        // if (!(stockWatcher && indicatorsWatcher)) return
+        // if (indicatorsWatcher.some((indicator: any) => !indicator)) return
 
-        const stock = stockWatcher.split('-')[0].trim()
-        const indicators = indicatorsWatcher
+        // const stock = stockWatcher.split('-')[0].trim()
+        // const indicators = indicatorsWatcher
 
         // const thisLines = []
 
-        for (let i = 0; i < indicators.length; i += 1) {
-            const indicator = indicators[i]
+        // for (let i = 0; i < indicators.length; i += 1) {
+        //     const indicator = indicators[i]
 
-            clientApi
-                .get('/indicator/', {
-                    params: {
-                        name: indicator.name,
-                        symbol: stock,
-                        ...indicator.parameters
-                    }
-                })
-                .then(res => {
-                    const { data } = res
-                    // append data to lines
-                    // thisLines.push
-                    const thisLines = [...lines, data]
+        //     clientApi
+        //         .get('/indicator/', {
+        //             params: {
+        //                 name: indicator.name,
+        //                 symbol: stock,
+        //                 ...indicator.parameters
+        //             }
+        //         })
+        //         .then(res => {
+        //             const { data } = res
+        //             // append data to lines
+        //             // thisLines.push
+        //             const thisLines = [...lines, data]
 
-                    console.log(thisLines)
+        //             console.log(thisLines)
 
-                    setLines(thisLines)
-                })
-        }
+        //             setLines(thisLines)
+        //         })
+        // }
     }
 
     return (

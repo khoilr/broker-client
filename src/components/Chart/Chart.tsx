@@ -9,14 +9,13 @@ import { EChartsOption } from 'echarts'
 interface props {
     stock: StockModel
     lines: any
-    dataToChart: any[]
 }
 
 const downColor = '#ec0000'
 const upColor = '#00da3c'
 
 export default function Chart(props: props) {
-    const { stock, lines, dataToChart } = props
+    const { stock, lines } = props
     const [thisLines, setThisLines] = useState<any>([{ data: [] }])
     const [names, setNames] = useState<string[]>([])
     const [series, setSeries] = useState<any[]>([{}])
@@ -49,6 +48,40 @@ export default function Chart(props: props) {
         setSeries(thisSeries)
         setNames(thisNames)
     }, [thisLines])
+
+    console.log('series', series)
+
+    // console.log('data in chart', dataToChart)
+
+//    useEffect(() => {
+//     const indicators = dataToChart?.indicators
+
+//     // const thisLines = []
+
+//     for (let i = 0; i < indicators.length; i += 1) {
+//         const indicator = indicators[i]
+
+//         clientApi
+//             .get('/indicator/', {
+//                 params: {
+//                     name: indicator.name,
+//                     symbol: stock,
+//                     ...indicator.parameters
+//                 }
+//             })
+//             // eslint-disable-next-line no-loop-func
+//             .then(res => {
+//                 const { data } = res
+//                 // append data to lines
+//                 // thisLines.push
+//                 const thisLines = [...lines, data]
+
+//                 console.log(thisLines)
+
+//                 setThisLines(thisLines)
+//             })
+//     }
+// })
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [data, setData] = useState<StockPriceModel>({

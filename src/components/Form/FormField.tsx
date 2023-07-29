@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import InputTelegramUser from '@/components/Form/InputTelegramUser'
-import InputWhatsappUser from '@/components/Form/InputWhatsappUser'
+// import InputWhatsappUser from '@/components/Form/InputWhatsappUser'
 import StockSelection from '@/components/Form/StockSelection'
 import IndicatorModel from '@/model/Indicator'
 import StockModel from '@/model/Stock'
@@ -17,16 +17,16 @@ interface props {
     setStock: (stock: StockModel) => void
     form: FormInstance
     onSubmit: (data: any) => void
-    setLines: (lines: any[]) => void
-    lines: any[]
+    // setLines: (lines: any[]) => void
+    // lines: any[]
 }
 
 export default function FormField(props: props) {
-    const { setStock, form, onSubmit, setLines, lines } = props
-
+    // const { setStock, form, onSubmit, setLines, lines } = props
+    const { setStock, form, onSubmit } = props
     // Watchers
-    const indicatorsWatcher = Form.useWatch('indicators', form)
-    const stockWatcher = Form.useWatch('stock', form)
+    // const indicatorsWatcher = Form.useWatch('indicators', form)
+    // const stockWatcher = Form.useWatch('stock', form)
 
     const [activeTab, setActiveTab] = useState('notification')
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
@@ -34,7 +34,7 @@ export default function FormField(props: props) {
 
     const data = [
         {
-            label: 'Notification',
+            label: 'Place Order',
             value: 'notification'
         }
     ]
@@ -145,13 +145,13 @@ export default function FormField(props: props) {
                                 <div className='items-center px-2 pt-2 rounded-lg m-auto flex-col'>
                                     <StockSelection setStock={setStock} />
                                     <InputTelegramUser />
-                                    <InputWhatsappUser />
+                                    {/* <InputWhatsappUser /> */}
                                     <NotifyCondition
-                                        setLines={setLines}
-                                        lines={lines}
+                                        // setLines={setLines}
+                                        // lines={lines}
                                         indicators={indicators}
-                                        stockWatcher={stockWatcher}
-                                        indicatorsWatcher={indicatorsWatcher}
+                                        // stockWatcher={stockWatcher}
+                                        // indicatorsWatcher={indicatorsWatcher}
                                     />
                                     <div className='flex justify-items-center'>
                                         <button
@@ -161,12 +161,12 @@ export default function FormField(props: props) {
                                         >
                                             Save
                                         </button>
-                                        <button
+                                        {/* <button
                                             type='button'
                                             className='bg-cyan-700 text-white py-2 px-auto rounded-lg m-auto flex justify-center min-w-20 w-20'
                                         >
                                             Notify
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
                             </Form>

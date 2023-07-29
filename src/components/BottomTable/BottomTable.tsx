@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react'
@@ -5,24 +6,23 @@ import FormData from '@/model/Form'
 // import Indicator from '@/model/Indicator'
 import { Button, Popconfirm, Space, Table, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
-// import { index } from '@material-tailwind/react/types/components/select'
+import { clientApi } from '@/lib/axios'
 
 interface props {
     data: FormData
-    // setDataToChart: (dataToChart: any[]) => void
+    setLines: (lines: any[]) => void
+    lines: any[]
 }
 
 export default function BottomTable(props: props) {
-    const { data } = props
+    const { data, setLines, lines } = props
     const [dataArray, setDataArray] = useState<FormData[]>([])
-    const [dataToChart, setDataToChart] = useState<FormData>()
+    const [chartData, setChartData] = useState<any[]>([])
 
     useEffect(() => {
         // Push new data into the array
         setDataArray(prevDataArray => [...prevDataArray, data])
     }, [data])
-
-    console.log('dataArray', dataArray.slice(1))
     // Function to delete a row
     const handleDeleteRow = (index: number) => {
         const updatedData = [...dataArray]
@@ -33,10 +33,39 @@ export default function BottomTable(props: props) {
     const handleApply = (index: number) => {
         const applyData = [...dataArray]
         const data1 = applyData.find((data, i) => i === index + 1)
-        setDataToChart(data1)
+        setChartData(prevDataArray => [...prevDataArray, data1])
     }
 
-    console.log('dataToChart', dataToChart)
+    useEffect(() => {
+        const indicators = chartData
+
+        for (let i = 0; i < indicators.length; i += 1) {
+            const indicator = indicators[i].indicators[0]
+            const symbol = indicators[i]
+
+            // console.log('ssssssssssssss', indicator)
+            // console.log('aaaaaaaa', symbol)
+
+            clientApi
+                .get('/indicator/', {
+                    params: {
+                        name: indicator.name,
+                        symbol: symbol.stock,
+                        ...indicator.parameters
+                    }
+                })
+                .then(res => {
+                    const { data } = res
+                    // append data to lines
+                    // thisLines.push
+                    const thisLines = [...lines, data]
+
+                    setLines(thisLines.find((line: any) => line.name === indicator.name))
+
+                    console.log('thisLinesssss', thisLines)
+                })
+        }
+    }, [chartData])
 
     const columns: ColumnsType<any> = [
         {
@@ -111,7 +140,7 @@ export default function BottomTable(props: props) {
     return (
         <div className='overflow-x-auto w-full col-span-1 relative lg:h-[40vh] h-[20vh] m-auto p-4 border rounded-lg bg-white overflow-scroll'>
             <div className='p-1.5 w-full inline-block align-middle'>
-                <h1 className='font-bold p-2 pb-4 text-xl text-cyan-700'>Stratery Table</h1>
+                <h1 className='font-bold p-2 pb-4 text-xl text-cyan-700'>Strategies Table</h1>
                 <div className='overflow-hidden border rounded-lg'>
                     <Table
                         dataSource={dataArray.slice(1)}
