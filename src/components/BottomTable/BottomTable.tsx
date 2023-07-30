@@ -123,8 +123,8 @@ export default function BottomTable(props: props) {
                             return (
                                 <Tooltip
                                     placement='top'
-                                    title='{indicator.parameters}'
-                                    overlayStyle={{ zIndex: 222 }}
+                                    content={`Period: ${indicator.parameters.period}`}
+                                    overlayStyle={{ zIndex: 200 }}
                                 >
                                     <Tag key={indicator.id}>{indicator.name}</Tag>
                                 </Tooltip>
@@ -167,11 +167,11 @@ export default function BottomTable(props: props) {
                 <h1 className='font-bold p-2 pb-4 text-xl text-cyan-700'>Strategies Table</h1>
                 <div className='overflow-hidden border rounded-lg'>
                     <Table
+                        style={{ width: '100%', height: '100%' }}
                         // rowSelection={rowSelection}
                         dataSource={dataArray.slice(1)}
                         columns={columns}
                         scroll={{ x: 1500, y: 300 }}
-                        size='large'
                     />
                 </div>
             </div>
