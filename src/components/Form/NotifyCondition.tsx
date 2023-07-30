@@ -15,14 +15,14 @@ export default function NotifyCondition(props: props) {
     const [selectingIndicator, setSelectingIndicator] = useState<IndicatorModel>()
     const [selectedIndicator, setSelectedIndicator] = useState<string[]>([])
     const [showModal, setShowModal] = useState(false)
-    const [, setShowBadge] = useState(false)
+    // const [, setShowBadge] = useState(false)
 
     const handleClick = () => {
         // console.log('Clicked==================================D')
 
         selectedIndicator.push(selectingIndicator?.name ?? '')
         setSelectedIndicator([...selectedIndicator])
-        setShowBadge(true)
+        // setShowBadge(true)
 
         // if (!(stockWatcher && indicatorsWatcher)) return
         // if (indicatorsWatcher.some((indicator: any) => !indicator)) return
@@ -166,7 +166,7 @@ export default function NotifyCondition(props: props) {
                     </>
                 )}
             </Form.List>
-            {selectedIndicator.map((item, index) => {
+            {/* {selectedIndicator.map((item, index) => {
                 return (
                     <span
                         key={index}
@@ -175,7 +175,7 @@ export default function NotifyCondition(props: props) {
                         {item}
                     </span>
                 )
-            })}
+            })} */}
         </div>
     )
 }

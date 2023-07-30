@@ -4,9 +4,10 @@
 import React, { useEffect, useState } from 'react'
 import FormData from '@/model/Form'
 // import Indicator from '@/model/Indicator'
-import { Button, Popconfirm, Space, Table, Tag } from 'antd'
+import { Button, Checkbox, Popconfirm, Space, Table, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { clientApi } from '@/lib/axios'
+import { Tooltip } from '@material-tailwind/react'
 
 interface props {
     data: FormData
@@ -18,50 +19,7 @@ export default function BottomTable(props: props) {
     const { data, setLines, lines } = props
     const [dataArray, setDataArray] = useState<FormData[]>([])
     const [chartData, setChartData] = useState<any[]>([])
-    // const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
-
-    // const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    //     console.log('selectedRowKeys changed: ', newSelectedRowKeys)
-    //     setSelectedRowKeys(newSelectedRowKeys)
-    // }
-
-    // const rowSelection: TableRowSelection<any> = {
-    //     selectedRowKeys,
-    //     onChange: onSelectChange,
-    //     // selections: [
-    //     //     Table.SELECTION_ALL,
-    //     //     Table.SELECTION_INVERT,
-    //     //     Table.SELECTION_NONE,
-    //     //     {
-    //     //         key: 'odd',
-    //     //         text: 'Select Odd Row',
-    //     //         onSelect: changeableRowKeys => {
-    //     //             let newSelectedRowKeys = []
-    //     //             newSelectedRowKeys = changeableRowKeys.filter((_, index) => {
-    //     //                 if (index % 2 !== 0) {
-    //     //                     return false
-    //     //                 }
-    //     //                 return true
-    //     //             })
-    //     //             setSelectedRowKeys(newSelectedRowKeys)
-    //     //         }
-    //     //     },
-    //     //     {
-    //     //         key: 'even',
-    //     //         text: 'Select Even Row',
-    //     //         onSelect: changeableRowKeys => {
-    //     //             let newSelectedRowKeys = []
-    //     //             newSelectedRowKeys = changeableRowKeys.filter((_, index) => {
-    //     //                 if (index % 2 !== 0) {
-    //     //                     return true
-    //     //                 }
-    //     //                 return false
-    //     //             })
-    //     //             setSelectedRowKeys(newSelectedRowKeys)
-    //     //         }
-    //     //     }
-    //     // ]
-    // }
+    const [, setDataToChart] = useState<any>()
 
     useEffect(() => {
         // Push new data into the array
@@ -74,22 +32,31 @@ export default function BottomTable(props: props) {
         updatedData.splice(index, 1)
         setDataArray(updatedData)
     }
+    console.log('chartData', chartData)
 
-    const handleApply = (index: number) => {
+    const handleClick = (index: number) => {
         const applyData = [...dataArray]
         const data1 = applyData.find((data, i) => i === index + 1)
-        chartData.push(data1)
+        setDataToChart(data1)
 
+        console.log('data1', data1)
+        setChartData([...chartData, data1])
+    }
+
+    const handleApply = () => {
         const indicators = chartData
         for (let i = 0; i < indicators.length; i += 1) {
-            const indicator = indicators[i].indicators[0]
+            const indicator = indicators[i].indicators[i]
             const symbol = indicators[i]
+
+            console.log('indicator', indicator)
+            console.log('symbol', symbol)
 
             clientApi
                 .get('/indicator/', {
                     params: {
                         name: indicator.name,
-                        symbol: symbol.stock,
+                        symbol: symbol.stock.split('-')[0].trim(),
                         ...indicator.parameters
                     }
                 })
@@ -108,6 +75,19 @@ export default function BottomTable(props: props) {
 
     const columns: ColumnsType<any> = [
         {
+            title: 'Select',
+            key: 'select',
+            render: (_, record, index: number) =>
+                dataArray.length >= 1 ? (
+                    <Space size='middle'>
+                        <Checkbox
+                            className='font-bold text-blue-500'
+                            onClick={() => handleClick(index)}
+                        />
+                    </Space>
+                ) : null
+        },
+        {
             title: 'Strategy',
             dataIndex: 'index',
             key: 'index',
@@ -120,11 +100,6 @@ export default function BottomTable(props: props) {
             dataIndex: 'telegram_user',
             key: 'telegram_user'
         },
-        // {
-        //     title: 'Whatsapp Number',
-        //     dataIndex: 'whatsapp_number',
-        //     key: 'whatsapp_number'
-        // },
         {
             title: 'Indicators',
             key: 'indicators',
@@ -143,8 +118,17 @@ export default function BottomTable(props: props) {
                                 | React.ReactPortal
                                 | null
                                 | undefined
+                            parameters: any
                         }) => {
-                            return <Tag key={indicator.id}>{indicator.name}</Tag>
+                            return (
+                                <Tooltip
+                                    placement='top'
+                                    title='{indicator.parameters}'
+                                    overlayStyle={{ zIndex: 222 }}
+                                >
+                                    <Tag key={indicator.id}>{indicator.name}</Tag>
+                                </Tooltip>
+                            )
                         }
                     )}
                 </>
@@ -158,7 +142,7 @@ export default function BottomTable(props: props) {
                     <Space size='middle'>
                         <Button
                             className='font-bold text-blue-500'
-                            onClick={() => handleApply(index)}
+                            onClick={() => handleApply()}
                             // onKeyPress={() => handleClick()}
                         >
                             Apply
@@ -187,6 +171,7 @@ export default function BottomTable(props: props) {
                         dataSource={dataArray.slice(1)}
                         columns={columns}
                         scroll={{ x: 1500, y: 300 }}
+                        size='large'
                     />
                 </div>
             </div>
