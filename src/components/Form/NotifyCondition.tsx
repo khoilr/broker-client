@@ -23,37 +23,6 @@ export default function NotifyCondition(props: props) {
         selectedIndicator.push(selectingIndicator?.name ?? '')
         setSelectedIndicator([...selectedIndicator])
         // setShowBadge(true)
-
-        // if (!(stockWatcher && indicatorsWatcher)) return
-        // if (indicatorsWatcher.some((indicator: any) => !indicator)) return
-
-        // const stock = stockWatcher.split('-')[0].trim()
-        // const indicators = indicatorsWatcher
-
-        // const thisLines = []
-
-        // for (let i = 0; i < indicators.length; i += 1) {
-        //     const indicator = indicators[i]
-
-        //     clientApi
-        //         .get('/indicator/', {
-        //             params: {
-        //                 name: indicator.name,
-        //                 symbol: stock,
-        //                 ...indicator.parameters
-        //             }
-        //         })
-        //         .then(res => {
-        //             const { data } = res
-        //             // append data to lines
-        //             // thisLines.push
-        //             const thisLines = [...lines, data]
-
-        //             console.log(thisLines)
-
-        //             setLines(thisLines)
-        //         })
-        // }
     }
 
     return (

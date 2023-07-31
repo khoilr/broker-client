@@ -19,6 +19,7 @@ export default function BottomTable(props: props) {
     const { data, setLines, lines } = props
     const [dataArray, setDataArray] = useState<FormData[]>([])
     const [chartData, setChartData] = useState<any[]>([])
+    const [checked, setChecked] = useState(false)
     const [, setDataToChart] = useState<any>()
 
     useEffect(() => {
@@ -41,6 +42,7 @@ export default function BottomTable(props: props) {
 
         console.log('data1', data1)
         setChartData([...chartData, data1])
+        setChecked(!checked)
     }
 
     const handleApply = () => {
@@ -83,6 +85,7 @@ export default function BottomTable(props: props) {
                         <Checkbox
                             className='font-bold text-blue-500'
                             onClick={() => handleClick(index)}
+                            checked={checked}
                         />
                     </Space>
                 ) : null
@@ -161,6 +164,13 @@ export default function BottomTable(props: props) {
         }
     ]
 
+    // const toggleChecked = (index: number) => {
+    //     setChecked(!checked)
+    // }
+    // const onChange = (e: CheckboxChangeEvent) => {
+    //     console.log(`checked = ${e.target.checked}`)
+    // }
+
     return (
         <div className='overflow-x-auto w-full col-span-1 relative lg:h-[40vh] h-[20vh] m-auto p-4 border rounded-lg bg-white overflow-scroll'>
             <div className='p-1.5 w-full inline-block align-middle'>
@@ -172,6 +182,15 @@ export default function BottomTable(props: props) {
                         dataSource={dataArray.slice(1)}
                         columns={columns}
                         scroll={{ x: 1500, y: 300 }}
+                        // onRow={(record, rowIndex) => {
+                        //     return {
+                        //         onClick: () => { toggleChecked(rowIndex) }, // click row
+                        //         // onDoubleClick: event => {}, // double click row
+                        //         // onContextMenu: event => {}, // right button click row
+                        //         // onMouseEnter: event => {}, // mouse enter row
+                        //         // onMouseLeave: event => {} // mouse leave row
+                        //     }
+                        // }}
                     />
                 </div>
             </div>

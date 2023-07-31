@@ -22,12 +22,7 @@ interface props {
 }
 
 export default function FormField(props: props) {
-    // const { setStock, form, onSubmit, setLines, lines } = props
     const { setStock, form, onSubmit } = props
-    // Watchers
-    // const indicatorsWatcher = Form.useWatch('indicators', form)
-    // const stockWatcher = Form.useWatch('stock', form)
-
     const [activeTab, setActiveTab] = useState('notification')
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
     const [formData, setFormData] = useState<any>([])

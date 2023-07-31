@@ -20,7 +20,7 @@ export default function Indicator(props: props) {
         <div className='flex items-start w-full min-w-full max-w-full border border-gray-200 rounded-lg'>
             <div className='w-full min-w-full max-w-full p-2'>
                 <Form.Item
-                    style={{ width: '100%', minWidth: '100%' }}
+                    style={{ width: '80vh', minWidth: '100%' }}
                     label='Indicator'
                     name={[name.toString(), 'name']}
                     initialValue={indicator?.name}
