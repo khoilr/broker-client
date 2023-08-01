@@ -3,14 +3,23 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600&display=swap');
 
-@layer base{
-    body{
+@layer base {
+    body {
         @apply font-barlow;
     }
 
-    main{
-    @apply font-barlow;
+    main {
+        @apply font-barlow;
     }
-    
-    
+    .ant-btn {
+        color: #fff;
+        background-color: #0097a7;
+    }
+    .ant-btn:hover {
+        color: #fff;
+        background-color: #fffff;
+    }
+    .ant-form-item-label label {
+        font-size: 22px;
+    }
 }

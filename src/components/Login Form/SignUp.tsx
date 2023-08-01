@@ -52,16 +52,15 @@ export default function SignUp() {
                 </div>
                 <div className='border-2 w-10 border-cyan-700 inline-block mb-4 mt-2' />
                 <Form
-                    // {...formItemLayout}
                     layout='vertical'
                     form={form}
                     name='register'
                     onFinish={onFinish}
-                    style={{ maxWidth: 600 }}
+                    style={{ maxWidth: 600, padding: '0px 10px' }}
                 >
                     <Form.Item
                         name='username'
-                        label='User name'
+                        label={<p style={{ fontSize: '16px' }}>Username</p>}
                         tooltip='Username use to login'
                         rules={[{ required: true, message: 'Please input your username!', whitespace: true }]}
                     >
@@ -70,7 +69,7 @@ export default function SignUp() {
                     <Form.Item
                         style={{ fontSize: '5px' }}
                         name='email'
-                        label='E-mail'
+                        label={<p style={{ fontSize: '16px' }}>E-mail</p>}
                         rules={[
                             {
                                 type: 'email',
@@ -86,7 +85,7 @@ export default function SignUp() {
                     </Form.Item>
                     <Form.Item
                         name='password'
-                        label='Password'
+                        label={<p style={{ fontSize: '16px' }}>Password</p>}
                         rules={[
                             {
                                 required: true,
@@ -100,7 +99,7 @@ export default function SignUp() {
 
                     <Form.Item
                         name='confirm'
-                        label='Confirm Password'
+                        label={<p style={{ fontSize: '16px' }}>Confirm Password</p>}
                         dependencies={['password']}
                         hasFeedback
                         rules={[
@@ -122,7 +121,16 @@ export default function SignUp() {
                     </Form.Item>
                     <Form.Item>
                         <Button
-                            className='bg-cyan-700 hover:bg-cyan-500 w-50% text-base font-bold h-10'
+                            style={{
+                                width: '100px',
+                                height: '40px',
+                                backgroundColor: 'rgb(14 116 144 / var(--tw-bg-opacity))',
+                                color: 'white',
+                                fontSize: '16px',
+                                fontWeight: '600',
+                                borderRadius: '10px',
+                                marginTop: '20px'
+                            }}
                             type='primary'
                             htmlType='submit'
                         >

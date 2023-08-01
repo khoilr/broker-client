@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { Button, Checkbox, Form, Input } from 'antd'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
-    const navigate = useNavigate()
-    const handleSubmit = () => {
-        // navigate('/homepage')
-    }
+    // const navigate = useNavigate()
+    // const handleSubmit = () => {
+    //     // navigate('/homepage')
+    // }
 
     return (
         <div className='flex flex-col items-center justify-center w-full flex-1 px-20 text-center min-h-screen py-2 bg-gray-200'>
@@ -19,69 +19,65 @@ export default function Login() {
                         <h2 className='text-3xl font-bold mb-2 text-cyan-700'>Login to Account</h2>
                     </div>
                     <div className='border-2 w-10 border-cyan-700 inline-block mb-2' />
-                    <form
-                        onSubmit={handleSubmit}
-                        action='#'
-                        method='POST'
+                    <Form
+                        name='basic'
+                        style={{ maxWidth: 500 }}
+                        initialValues={{ remember: true }}
+                        // onFinish={onFinish}
+                        // onFinishFailed={onFinishFailed}
+                        autoComplete='on'
+                        layout='vertical'
                     >
-                        <div className='text-left mt-2 px-20'>
-                            <label
-                                htmlFor='email'
-                                className='block text-md font-medium leading-6 text-gray-900 pb-2'
+                        <Form.Item
+                            style={{ padding: '10px 40px 0px' }}
+                            label={<p style={{ fontSize: '16px' }}>Username</p>}
+                            name='username'
+                            rules={[{ required: true, message: 'Please input your username!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+
+                        <Form.Item
+                            style={{ padding: '0px 40px' }}
+                            label={<p style={{ fontSize: '16px' }}>Password</p>}
+                            name='password'
+                            rules={[{ required: true, message: 'Please input your password!' }]}
+                        >
+                            <Input.Password />
+                        </Form.Item>
+                        <Form.Item>
+                            <Form.Item
+                                style={{ float: 'left', padding: '0px 40px' }}
+                                name='remember'
+                                valuePropName='unchecked'
                             >
-                                Email address
-                            </label>
-                            <input
-                                id='email'
-                                name='email'
-                                type='email'
-                                autoComplete='email'
-                                required
-                                className='block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6'
-                            />
-                        </div>
-                        <div className='text-left mt-2 px-20'>
-                            <label
-                                htmlFor='password'
-                                className='block text-md font-medium leading-6 text-gray-900 pb-2'
+                                <Checkbox style={{ fontSize: '14px' }}>Remember me</Checkbox>
+                            </Form.Item>
+                            <a
+                                style={{ float: 'right', padding: '0px 40px' }}
+                                href=''
                             >
-                                Password
-                            </label>
-                            <input
-                                id='password'
-                                name='password'
-                                type='password'
-                                autoComplete='current-password'
-                                required
-                                className='block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6'
-                            />
-                            <div className='text-sm justify-between py-4 flex w-20rem mb-5 items-center'>
-                                <label className='flex items-center'>
-                                    <input
-                                        className='mr-1'
-                                        type='checkbox'
-                                        name='remember'
-                                    />
-                                    Remember me
-                                </label>
-                                <a
-                                    href='#'
-                                    className='text-cyan-700 hover:text-cyan-600'
-                                >
-                                    Forgot password?
-                                </a>
-                            </div>
-                        </div>
-                        <div className='px-32'>
-                            <button
-                                onClick={() => navigate('/homepage')}
-                                type='submit'
-                                className='flex w-full justify-center rounded-md bg-cyan-700 px-3 py-1.5 text-md font-semibold leading-6 text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700'
+                                Forgot password?
+                            </a>
+                        </Form.Item>
+                        <Form.Item>
+                            <Button
+                                style={{
+                                    width: '100px',
+                                    height: '40px',
+                                    backgroundColor: 'rgb(14 116 144 / var(--tw-bg-opacity))',
+                                    color: 'white',
+                                    fontSize: '16px',
+                                    fontWeight: '600',
+                                    borderRadius: '10px'
+                                }}
+                                type='primary'
+                                htmlType='submit'
                             >
-                                Login
-                            </button>
-                        </div>
-                    </form>
+                                Log in
+                            </Button>
+                        </Form.Item>
+                    </Form>
                 </div>
                 <div className='w-2/5 bg-cyan-700 text-white rounded-tr-2xl rounded-br-2xl py-36 px-12'>
                     <h2 className='text-3xl font-bold mb-2'>Hello, Friend!</h2>
