@@ -163,14 +163,6 @@ export default function BottomTable(props: props) {
                 ) : null
         }
     ]
-
-    // const toggleChecked = (index: number) => {
-    //     setChecked(!checked)
-    // }
-    // const onChange = (e: CheckboxChangeEvent) => {
-    //     console.log(`checked = ${e.target.checked}`)
-    // }
-
     return (
         <div className='overflow-x-auto w-full col-span-1 relative lg:h-[40vh] h-[20vh] m-auto p-4 border rounded-lg bg-white overflow-scroll'>
             <div className='p-1.5 w-full inline-block align-middle'>

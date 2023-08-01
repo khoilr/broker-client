@@ -12,7 +12,7 @@ interface Option {
   label: string;
 }
 
-export default function HomePage() {
+export default function Prediction() {
     const [symbol, setSymbol] = useState('VN30')
     const [probability_day, setProbability_day] = useState(0)
     const [probability_week, setProbability_week] = useState(0)

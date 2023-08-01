@@ -5,8 +5,6 @@ import NavItem from '../NavItem'
 const navigation = [
     { name: 'Home', href: '/homepage', current: true },
     { name: 'Prediction', href: '/prediction' }
-    // { name: 'About', href: '/' },
-    // { name: 'Contact', href: '/' }
 ]
 
 export default function Nav() {

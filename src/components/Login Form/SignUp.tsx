@@ -1,12 +1,18 @@
 import { Button, Form, Input, message } from 'antd'
 import axios from 'axios'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignUp() {
     const [form] = Form.useForm()
     // const [formData, setFormData] = useState<any>([])
 
     const [messageApi, contextHolder] = message.useMessage()
+    const navigate = useNavigate()
+    const goToLoginPage = () => {
+        // This will navigate to second component
+        navigate('/')
+    }
 
     const success = () => {
         messageApi.open({
@@ -30,6 +36,9 @@ export default function SignUp() {
             await axios.request(reqOptions).then(res => {
                 if (res.status === 201) {
                     success()
+                    setTimeout(() => {
+                        goToLoginPage()
+                    }, 1000)
                 }
             })
         } catch (error) {

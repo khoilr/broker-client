@@ -69,7 +69,14 @@ export default function NotifyCondition(props: props) {
                                     }}
                                 />
                                 <Button
-                                    className='bg-cyan-700 rounded-lg text-sm flex items-center mx-auto justify-center hover:bg-cyan-600 w-[20%]'
+                                    // className='bg-cyan-700 rounded-lg text-sm flex items-center mx-auto justify-center hover:bg-cyan-600 w-[20%]'
+                                    style={{
+                                        width: '20%',
+                                        maxWidth: '20%',
+                                        backgroundColor: 'rgb(14 116 144 / var(--tw-bg-opacity))',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                    }}
                                     type='primary'
                                     // icon={<PlusOutlined />}
                                     onClick={() => {
