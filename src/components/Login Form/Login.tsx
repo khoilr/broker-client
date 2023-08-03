@@ -4,6 +4,7 @@ import { Button, Checkbox, Form, Input, message } from 'antd'
 import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+// import { login } from '@/services/auth.service'
 
 export default function Login() {
     const [form] = Form.useForm()
@@ -13,7 +14,6 @@ export default function Login() {
 
     const navigate = useNavigate()
     const goToHomePage = () => {
-        // This will navigate to second component
         navigate('/homepage')
     }
     const goToSignUpPage = () => {
@@ -25,8 +25,6 @@ export default function Login() {
         formData.append('username', values.username)
         formData.append('password', values.password)
 
-        console.log('Received values of form: ', values)
-
         const reqOptions = {
             url: 'http://localhost:8000/api/auth/sign-in',
             method: 'POST',
@@ -37,6 +35,7 @@ export default function Login() {
             await axios.request(reqOptions).then(res => {
                 if (res.status === 201) {
                     goToHomePage()
+                    localStorage.setItem('user', res.data.access_token)
                 }
             })
         } catch (error) {

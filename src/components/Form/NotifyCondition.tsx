@@ -15,14 +15,10 @@ export default function NotifyCondition(props: props) {
     const [selectingIndicator, setSelectingIndicator] = useState<IndicatorModel>()
     const [selectedIndicator, setSelectedIndicator] = useState<string[]>([])
     const [showModal, setShowModal] = useState(false)
-    // const [, setShowBadge] = useState(false)
 
     const handleClick = () => {
-        // console.log('Clicked==================================D')
-
         selectedIndicator.push(selectingIndicator?.name ?? '')
         setSelectedIndicator([...selectedIndicator])
-        // setShowBadge(true)
     }
 
     return (
@@ -142,16 +138,6 @@ export default function NotifyCondition(props: props) {
                     </>
                 )}
             </Form.List>
-            {/* {selectedIndicator.map((item, index) => {
-                return (
-                    <span
-                        key={index}
-                        className='inline-flex items-center rounded-md bg-teal-700 px-2 py-1 mx-2 text-md font-medium text-gray-200 ring-2 ring-inset ring-gray-500/10'
-                    >
-                        {item}
-                    </span>
-                )
-            })} */}
         </div>
     )
 }

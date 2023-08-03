@@ -5,20 +5,19 @@ import StockSelection from '@/components/Form/StockSelection'
 import IndicatorModel from '@/model/Indicator'
 import StockModel from '@/model/Stock'
 import { Tab, TabPanel, Tabs, TabsBody, TabsHeader } from '@material-tailwind/react'
-import { Form, FormInstance } from 'antd'
+import { Form, FormInstance, message } from 'antd'
 import { useEffect, useState } from 'react'
 import { clientApi } from '@/lib/axios'
 import ParameterModel from '@/model/Parameter'
 import ParameterType from '@/model/ParameterType'
 import ReturnModel from '@/model/Return'
 import NotifyCondition from '@/components/Form/NotifyCondition'
+import axios from 'axios'
 
 interface props {
     setStock: (stock: StockModel) => void
     form: FormInstance
     onSubmit: (data: any) => void
-    // setLines: (lines: any[]) => void
-    // lines: any[]
 }
 
 export default function FormField(props: props) {
@@ -26,6 +25,7 @@ export default function FormField(props: props) {
     const [activeTab, setActiveTab] = useState('notification')
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
     const [formData, setFormData] = useState<any>([])
+    const [messageApi] = message.useMessage()
 
     const data = [
         {
@@ -34,17 +34,11 @@ export default function FormField(props: props) {
         }
     ]
 
-    // handle form submission
-    const onFinish = (values: any) => {
-        clientApi.post('/strategies/', values).then(res => {
-            if (res.status === 200) {
-                // api.info({
-                //     message: 'Added notification',
-                //     description: "You'll be notified when the condition is met"
-                // })
-            }
-        })
-    }
+    // const useToken = JSON.parse(localStorage.getItem('token')) || ''
+    // const headers = {
+    //     accept: 'application/json',
+    //     Authorization: `Bearer ${useToken.token}`
+    // }
 
     useEffect(() => {
         clientApi.get('/predefined_indicator/').then(res => {
@@ -92,9 +86,52 @@ export default function FormField(props: props) {
         setFormData(form.getFieldsValue())
     }, [formData])
 
-    function handleSubmit() {
+    async function handleClick() {
         onSubmit({ ...formData, form })
-        console.log('formData', formData)
+        console.log('formData', formData.stock.split('-')[0].trim())
+        console.log(formData.indicators.parameters)
+
+        const symbols = []
+        symbols.push(formData.stock.split('-')[0].trim())
+
+        const indicators = []
+        indicators.push(formData.indicators.name)
+
+        const tableData = new FormData()
+        tableData.append('symbols', symbols)
+        tableData.append('indicators', formData.indicators)
+
+        console.table(formData.indicators)
+
+        const userStr = localStorage.getItem('user')
+        const headersList = {
+            Authorization: `Bearer ${userStr?.toString()}`
+        }
+
+        // tableData.set('symbols', symbols)
+        // tableData.set('indicators', formData.indicators)
+
+        const reqOptions = {
+            url: 'http://localhost:8000/api/strategy',
+            method: 'POST',
+            headers: headersList,
+            data: tableData
+        }
+        try {
+            await axios.request(reqOptions).then(res => {
+                if (res.status === 201) {
+                    messageApi.open({
+                        type: 'success',
+                        content: 'Registered successfully!'
+                    })
+                }
+            })
+        } catch (error) {
+            messageApi.open({
+                type: 'error',
+                content: error.response.data.detail
+            })
+        }
     }
 
     return (
@@ -135,33 +172,21 @@ export default function FormField(props: props) {
                                 size='middle'
                                 form={form}
                                 layout='vertical'
-                                onFinish={onFinish}
+                                // onFinish={onFinish}
                             >
                                 <div className='items-center px-2 pt-2 rounded-lg m-auto flex-col'>
                                     <StockSelection setStock={setStock} />
                                     <InputTelegramUser />
                                     {/* <InputWhatsappUser /> */}
-                                    <NotifyCondition
-                                        // setLines={setLines}
-                                        // lines={lines}
-                                        indicators={indicators}
-                                        // stockWatcher={stockWatcher}
-                                        // indicatorsWatcher={indicatorsWatcher}
-                                    />
+                                    <NotifyCondition indicators={indicators} />
                                     <div className='flex justify-items-center'>
                                         <button
                                             type='button'
-                                            onClick={() => handleSubmit()}
+                                            onClick={handleClick}
                                             className='bg-cyan-700 text-white py-2 px-auto rounded-lg m-auto flex justify-center min-w-20 w-20'
                                         >
                                             Save
                                         </button>
-                                        {/* <button
-                                            type='button'
-                                            className='bg-cyan-700 text-white py-2 px-auto rounded-lg m-auto flex justify-center min-w-20 w-20'
-                                        >
-                                            Notify
-                                        </button> */}
                                     </div>
                                 </div>
                             </Form>

@@ -49,40 +49,6 @@ export default function Chart(props: props) {
         setNames(thisNames)
     }, [thisLines])
 
-    console.log('series', series)
-
-    // console.log('data in chart', dataToChart)
-
-//    useEffect(() => {
-//     const indicators = dataToChart?.indicators
-
-//     // const thisLines = []
-
-//     for (let i = 0; i < indicators.length; i += 1) {
-//         const indicator = indicators[i]
-
-//         clientApi
-//             .get('/indicator/', {
-//                 params: {
-//                     name: indicator.name,
-//                     symbol: stock,
-//                     ...indicator.parameters
-//                 }
-//             })
-//             // eslint-disable-next-line no-loop-func
-//             .then(res => {
-//                 const { data } = res
-//                 // append data to lines
-//                 // thisLines.push
-//                 const thisLines = [...lines, data]
-
-//                 console.log(thisLines)
-
-//                 setThisLines(thisLines)
-//             })
-//     }
-// })
-
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [data, setData] = useState<StockPriceModel>({
         categoryData: [],
