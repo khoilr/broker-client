@@ -141,13 +141,13 @@ export default function Chart(props: props) {
                 right: '5%',
                 top: '12%',
                 height: '60%'
-            },
-            {
-                left: '5%',
-                right: '5%',
-                top: '80%',
-                height: '16%'
             }
+            // {
+            //     left: '5%',
+            //     right: '5%',
+            //     top: '80%',
+            //     height: '16%'
+            // }
         ],
         xAxis: [
             {
@@ -162,18 +162,22 @@ export default function Chart(props: props) {
                     z: 100
                 }
             },
-            {
-                type: 'category',
-                gridIndex: 1,
-                data: data.categoryData,
-                boundaryGap: false,
-                axisLine: { onZero: false },
-                axisTick: { show: false },
-                splitLine: { show: false },
-                axisLabel: { show: false },
-                min: 'dataMin',
-                max: 'dataMax'
-            }
+            // {
+            //     type: 'category',
+            //     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            // }
+            // {
+            //     type: 'category',
+            //     data: data.categoryData,
+            //     boundaryGap: false,
+            //     axisLine: { onZero: false },
+            //     splitLine: { show: false },
+            //     min: 'dataMin',
+            //     max: 'dataMax',
+            //     axisPointer: {
+            //         z: 100
+            //     }
+            // }
         ],
         yAxis: [
             {
@@ -182,15 +186,18 @@ export default function Chart(props: props) {
                     show: true
                 }
             },
-            {
-                scale: true,
-                gridIndex: 1,
-                splitNumber: 2,
-                axisLabel: { show: false },
-                axisLine: { show: false },
-                axisTick: { show: false },
-                splitLine: { show: false }
-            }
+            // {
+            //     type: 'value'
+            // }
+            // {
+            //     scale: true,
+            //     gridIndex: 1,
+            //     splitNumber: 2,
+            //     axisLabel: { show: false },
+            //     axisLine: { show: false },
+            //     axisTick: { show: false },
+            //     splitLine: { show: false }
+            // }
         ],
         dataZoom: [
             {
@@ -217,18 +224,22 @@ export default function Chart(props: props) {
                     }
                 }
             },
-            {
-                name: 'Volume',
-                type: 'bar',
-                xAxisIndex: 1,
-                yAxisIndex: 1,
-                data: data.volumes,
-                itemStyle: {
-                    color(param) {
-                        return data.values[param.dataIndex][1] > data.values[param.dataIndex][0] ? upColor : downColor
-                    }
-                }
-            },
+            // {
+            //     name: 'Volume',
+            //     type: 'bar',
+            //     xAxisIndex: 1,
+            //     yAxisIndex: 1,
+            //     data: data.volumes,
+            //     itemStyle: {
+            //         color(param) {
+            //             return data.values[param.dataIndex][1] > data.values[param.dataIndex][0] ? upColor : downColor
+            //         }
+            //     }
+            // },
+            // {
+            //     type: 'line',
+            //     data: [150, 230, 224, 218, 135, 147, 260]
+            // },
             ...series
         ]
     }

@@ -20,7 +20,7 @@ export default function BottomTable(props: props) {
     const [dataArray, setDataArray] = useState<FormData[]>([])
     const [chartData, setChartData] = useState<any[]>([])
     const [checked, setChecked] = useState(false)
-    const [, setDataToChart] = useState<any>()
+    const [selectedRowKeys, setSelectedRowKeys] = useState<number[]>([])
 
     useEffect(() => {
         // Push new data into the array
@@ -33,26 +33,36 @@ export default function BottomTable(props: props) {
         updatedData.splice(index, 1)
         setDataArray(updatedData)
     }
-    console.log('chartData', chartData)
+
+    const handleCheckboxChange = (e: any, index: number) => {
+        if (e.target.checked) {
+            setSelectedRowKeys([...selectedRowKeys, index])
+        } else {
+            setSelectedRowKeys(selectedRowKeys.filter(key => key !== index))
+        }
+    }
 
     const handleClick = (index: number) => {
         const applyData = [...dataArray]
         const data1 = applyData.find((data, i) => i === index + 1)
-        setDataToChart(data1)
 
         console.log('data1', data1)
-        setChartData([...chartData, data1])
-        setChecked(!checked)
+
+        const data = [...chartData]
+        const check = data.some((obj) => obj === data1)
+        if (!check) { data.push(data1) }
+        setChartData(data)
+        if (checked) setChecked(false)
+        else setChecked(true)
     }
+
+    console.log('chartData', chartData)
 
     const handleApply = () => {
         const indicators = chartData
         for (let i = 0; i < indicators.length; i += 1) {
             const indicator = indicators[i].indicators[i]
             const symbol = indicators[i]
-
-            console.log('indicator', indicator)
-            console.log('symbol', symbol)
 
             clientApi
                 .get('/indicator/', {
@@ -65,8 +75,10 @@ export default function BottomTable(props: props) {
                 .then(res => {
                     const { data } = res
                     // append data to lines
-                    // thisLines.push
-                    const thisLines = [...lines, data]
+                    const thisLines = [...lines]
+
+                    const checkData = thisLines.some((obj) => obj.name === data.name)
+                    if (!checkData) { thisLines.push(data) }
 
                     setLines(thisLines)
 
@@ -79,13 +91,14 @@ export default function BottomTable(props: props) {
         {
             title: 'Select',
             key: 'select',
-            render: (_, record, index: number) =>
+            render: (_, _record, index: number) =>
                 dataArray.length >= 1 ? (
                     <Space size='middle'>
                         <Checkbox
                             className='font-bold text-blue-500'
                             onClick={() => handleClick(index)}
-                            checked={checked}
+                            checked={selectedRowKeys.includes(index)}
+                            onChange={e => handleCheckboxChange(e, index)}
                         />
                     </Space>
                 ) : null
@@ -146,7 +159,6 @@ export default function BottomTable(props: props) {
                         <Button
                             className='font-bold text-blue-500'
                             onClick={() => handleApply()}
-                            // onKeyPress={() => handleClick()}
                         >
                             Apply
                         </Button>
@@ -170,19 +182,10 @@ export default function BottomTable(props: props) {
                 <div className='overflow-hidden border rounded-lg'>
                     <Table
                         style={{ width: '100%', height: '100%' }}
-                        // rowSelection={rowSelection}
                         dataSource={dataArray.slice(1)}
                         columns={columns}
                         scroll={{ x: 1500, y: 300 }}
-                        // onRow={(record, rowIndex) => {
-                        //     return {
-                        //         onClick: () => { toggleChecked(rowIndex) }, // click row
-                        //         // onDoubleClick: event => {}, // double click row
-                        //         // onContextMenu: event => {}, // right button click row
-                        //         // onMouseEnter: event => {}, // mouse enter row
-                        //         // onMouseLeave: event => {} // mouse leave row
-                        //     }
-                        // }}
+                        rowKey={(record, index) => index.toString()}
                     />
                 </div>
             </div>

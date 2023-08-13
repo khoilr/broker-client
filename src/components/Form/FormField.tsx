@@ -34,12 +34,6 @@ export default function FormField(props: props) {
         }
     ]
 
-    // const useToken = JSON.parse(localStorage.getItem('token')) || ''
-    // const headers = {
-    //     accept: 'application/json',
-    //     Authorization: `Bearer ${useToken.token}`
-    // }
-
     useEffect(() => {
         clientApi.get('/predefined_indicator/').then(res => {
             const indicatorsData = res.data
@@ -88,28 +82,39 @@ export default function FormField(props: props) {
 
     async function handleClick() {
         onSubmit({ ...formData, form })
-        console.log('formData', formData.stock.split('-')[0].trim())
-        console.log(formData.indicators.parameters)
 
         const symbols = []
         symbols.push(formData.stock.split('-')[0].trim())
 
         const indicators = []
-        indicators.push(formData.indicators.name)
+        for (let i = 0; i < formData.indicators.length; i += 1) {
+            const indicator = formData.indicators[i]
+            const indicatorParams = indicator.parameters
+
+            const params = []
+            for (let j = 0; j < formData.indicators.length; j += 1) {
+                params.push({ params: indicatorParams })
+            }
+
+            indicators.push({
+                name: indicator.name,
+                condition: indicator.condition,
+                parameters: params
+            })
+        }
 
         const tableData = new FormData()
         tableData.append('symbols', symbols)
-        tableData.append('indicators', formData.indicators)
+        tableData.append('indicators', indicators)
 
-        console.table(formData.indicators)
+        console.log('indicators: ', indicators)
+
+        console.log('tableData: ', tableData)
 
         const userStr = localStorage.getItem('user')
         const headersList = {
             Authorization: `Bearer ${userStr?.toString()}`
         }
-
-        // tableData.set('symbols', symbols)
-        // tableData.set('indicators', formData.indicators)
 
         const reqOptions = {
             url: 'http://localhost:8000/api/strategy',
