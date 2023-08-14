@@ -145,21 +145,23 @@ export default function FormField(props: props) {
                 id='custom-animation'
                 value='notification'
             >
-                <TabsHeader className='rounded-none bg-transparent'>
-                    {data.map(({ label, value }) => (
-                        <Tab
-                            key={value}
-                            value={value}
-                            onClick={() => setActiveTab(value)}
-                            className={
-                                activeTab === value
-                                    ? 'text-cyan-700 font-semibold border-b-2 border-cyan-700 p-2'
-                                    : 'p-2'
-                            }
-                        >
-                            {label}
-                        </Tab>
-                    ))}
+                <TabsHeader>
+                    {/* {data.map(({ label, value }) => ( */}
+                    <Tab
+                        // key={value}
+                        // value={value}
+                        // onClick={() => setActiveTab(value)}
+                        // className={
+                        //     activeTab === value
+                        //         ? 'text-cyan-700 font-semibold border-b-2 border-cyan-700 p-2'
+                        //         : 'p-2'
+                        // }
+                        className='text-cyan-700 font-semibold border-b-2 border-cyan-700 p-2' 
+                        children={undefined}
+                        value={''}>
+                        Place Order
+                    </Tab>
+                    {/* ))} */}
                 </TabsHeader>
                 <TabsBody
                     animate={{
