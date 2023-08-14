@@ -5,8 +5,8 @@ type Indicator = {
     id: string
     label: string
     name: string
-    parameters: Parameter[]
-    returns?: Return[]
+    predefined_params: Parameter[]
+    predefined_returns?: Return[]
 }
 
 export default Indicator
