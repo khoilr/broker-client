@@ -127,7 +127,7 @@ export default function FormField(props: props) {
                 if (res.status === 201) {
                     messageApi.open({
                         type: 'success',
-                        content: 'Registered successfully!'
+                        content: 'Post successfully!'
                     })
                 }
             })

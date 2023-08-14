@@ -44,24 +44,28 @@ export default function BottomTable(props: props) {
 
     const handleClick = (index: number) => {
         const applyData = [...dataArray]
-        const data1 = applyData.find((data, i) => i === index + 1)
+
+        console.log('applyData', applyData)
+        const data1 = applyData[index + 1]
 
         console.log('data1', data1)
 
         const data = [...chartData]
+        data.splice(0, data.length)
+
         const check = data.some((obj) => obj === data1)
         if (!check) { data.push(data1) }
         setChartData(data)
+
         if (checked) setChecked(false)
         else setChecked(true)
     }
 
-    console.log('chartData', chartData)
-
     const handleApply = () => {
         const indicators = chartData
         for (let i = 0; i < indicators.length; i += 1) {
-            const indicator = indicators[i].indicators[i]
+            for (let j = 0; j < indicators[i].indicators.length; j += 1) {
+            const indicator = indicators[i].indicators[j]
             const symbol = indicators[i]
 
             clientApi
@@ -75,15 +79,20 @@ export default function BottomTable(props: props) {
                 .then(res => {
                     const { data } = res
                     // append data to lines
+
+                    console.log('res', data)
                     const thisLines = [...lines]
 
-                    const checkData = thisLines.some((obj) => obj.name === data.name)
-                    if (!checkData) { thisLines.push(data) }
+                    const checkData = thisLines.some(obj => obj.name === data.name)
+                     if (!checkData) {
+                         thisLines.push(data)
+                     }
 
                     setLines(thisLines)
 
                     console.log('thisLinesssss', thisLines)
                 })
+            }
         }
     }
 
@@ -138,6 +147,7 @@ export default function BottomTable(props: props) {
                         }) => {
                             return (
                                 <Tooltip
+                                    className='p-2'
                                     placement='top'
                                     content={`Period: ${indicator.parameters.period}`}
                                     overlayStyle={{ zIndex: 200 }}
