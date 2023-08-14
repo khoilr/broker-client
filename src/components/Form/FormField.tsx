@@ -92,24 +92,27 @@ export default function FormField(props: props) {
             const indicatorParams = indicator.parameters
 
             const params = []
-            for (let j = 0; j < formData.indicators.length; j += 1) {
-                params.push({ params: indicatorParams })
+            for (const key in indicatorParams) {
+                if (indicatorParams.hasOwnProperty(key)) {
+                    params.push({ name: key, value: indicatorParams[key] })
+                }
             }
 
             indicators.push({
                 name: indicator.name,
                 condition: indicator.condition,
-                parameters: params
+                params
             })
         }
 
-        const tableData = new FormData()
-        tableData.append('symbols', symbols)
-        tableData.append('indicators', indicators)
+        const data = {
+            symbols,
+            indicators
+        }
 
-        console.log('indicators: ', indicators)
-
-        console.log('tableData: ', tableData)
+        console.log('hihi')
+        console.log(indicators)
+        console.log(data)
 
         const userStr = localStorage.getItem('user')
         const headersList = {
@@ -120,7 +123,7 @@ export default function FormField(props: props) {
             url: 'http://localhost:8000/api/strategy',
             method: 'POST',
             headers: headersList,
-            data: tableData
+            data: data
         }
         try {
             await axios.request(reqOptions).then(res => {
