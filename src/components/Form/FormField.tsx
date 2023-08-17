@@ -22,7 +22,7 @@ interface props {
 
 export default function FormField(props: props) {
     const { setStock, form, onSubmit } = props
-    const [activeTab, setActiveTab] = useState('notification')
+    // const [activeTab, setActiveTab] = useState('notification')
     const [indicators, setIndicators] = useState<IndicatorModel[]>([])
     const [formData, setFormData] = useState<any>([])
     const [messageApi] = message.useMessage()
@@ -91,7 +91,10 @@ export default function FormField(props: props) {
             const indicator = formData.indicators[i]
             const indicatorParams = indicator.parameters
 
+            console.log({ ...indicator.condition, value: Number(indicator.condition.value)})
+
             const params = []
+            // eslint-disable-next-line no-restricted-syntax
             for (const key in indicatorParams) {
                 if (indicatorParams.hasOwnProperty(key)) {
                     params.push({ name: key, value: indicatorParams[key] })
@@ -100,7 +103,7 @@ export default function FormField(props: props) {
 
             indicators.push({
                 name: indicator.name,
-                condition: indicator.condition,
+                condition: { ...indicator.condition, value: Number(indicator.condition.value) },
                 params
             })
         }
@@ -110,23 +113,31 @@ export default function FormField(props: props) {
             indicators
         }
 
-        console.log('hihi')
-        console.log(indicators)
         console.log(data)
 
+        // const dataJson = JSON.stringify(data)
+
+        // console.log(dataJson)
+
         const userStr = localStorage.getItem('user')
-        const headersList = {
-            Authorization: `Bearer ${userStr?.toString()}`
+        // const headersList = {
+        //     Authorization: `Bearer ${userStr?.toString()}`
+        // }
+
+        // const reqOptions = {
+        //     data: data,
+        // }
+
+        const customConfig = {
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: `Bearer ${userStr?.toString()}`,
+            }
         }
 
-        const reqOptions = {
-            url: 'http://localhost:8000/api/strategy',
-            method: 'POST',
-            headers: headersList,
-            data: data
-        }
         try {
-            await axios.request(reqOptions).then(res => {
+            await axios.post('http://localhost:8000/api/strategy', JSON.stringify(data), customConfig).then(res => {
                 if (res.status === 201) {
                     messageApi.open({
                         type: 'success',
@@ -135,10 +146,15 @@ export default function FormField(props: props) {
                 }
             })
         } catch (error) {
-            messageApi.open({
-                type: 'error',
-                content: error.response.data.detail
-            })
+            if (error instanceof Error) {
+                // ✅ TypeScript knows err is Error
+                messageApi.open({
+                    type: 'error',
+                    content: error.response.data.detail
+                })
+            } else {
+                console.log('Unexpected error', error)
+            }
         }
     }
 
@@ -159,9 +175,8 @@ export default function FormField(props: props) {
                         //         ? 'text-cyan-700 font-semibold border-b-2 border-cyan-700 p-2'
                         //         : 'p-2'
                         // }
-                        className='text-cyan-700 font-semibold border-b-2 border-cyan-700 p-2' 
-                        children={undefined}
-                        value={''}>
+                        className='text-cyan-700 font-semibold border-b-2 border-cyan-700 p-2'
+                    >
                         Place Order
                     </Tab>
                     {/* ))} */}

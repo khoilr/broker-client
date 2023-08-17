@@ -39,10 +39,15 @@ export default function Login() {
                 }
             })
         } catch (error) {
-            messageApi.open({
-                type: 'error',
-                content: error.response.data.detail
-            })
+            if (error instanceof Error) {
+                // ✅ TypeScript knows err is Error
+                messageApi.open({
+                    type: 'error',
+                    content: error.response.data.detail
+                })
+            } else {
+                console.log('Unexpected error', error)
+            }
         }
     }
 

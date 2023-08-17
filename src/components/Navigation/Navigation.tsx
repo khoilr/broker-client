@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import NavItem from '../NavItem'
 import { Fragment } from 'react'
+import NavItem from '../NavItem'
 
 const navigation = [
     { name: 'Home', href: '/homepage', current: true },
@@ -10,8 +12,13 @@ const navigation = [
 
 export default function Nav() {
     // const logo: string = require('../svg/stock-svgrepo-com.svg').default
-    function classNames(...classes) {
+    function classNames(...classes: string[]) {
         return classes.filter(Boolean).join(' ')
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem('user')
+        window.location.href = '/'
     }
 
     return (
@@ -23,7 +30,7 @@ export default function Nav() {
                 {() => {
                     return (
                         <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start px-12 py-2'>
-                            <div className='w-full text-2xl font-bold'>
+                            <div className='w-full text-2xl font-bold py-2'>
                                 <span className='text-cyan-700'>1C</span> Innovation
                             </div>
                             <div className=' flex items-center justify-center sm:items-stretch sm:justify-start'>
@@ -88,7 +95,7 @@ export default function Nav() {
                                                 <Menu.Item>
                                                     {({ active }) => (
                                                         <a
-                                                            href='#'
+                                                            onClick={handleLogout}
                                                             className={classNames(
                                                                 active ? 'bg-gray-100' : '',
                                                                 'block px-4 py-2 text-sm text-gray-700'

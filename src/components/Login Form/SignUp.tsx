@@ -42,10 +42,15 @@ export default function SignUp() {
                 }
             })
         } catch (error) {
-            messageApi.open({
-                type: 'error',
-                content: error.response.data.detail
-            })
+            if (error instanceof Error) {
+                // ✅ TypeScript knows err is Error
+                messageApi.open({
+                    type: 'error',
+                    content: error.message
+                })
+            } else {
+                console.log('Unexpected error', error)
+            }
         }
     }
 

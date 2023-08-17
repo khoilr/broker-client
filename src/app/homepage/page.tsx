@@ -1,7 +1,5 @@
 'use client'
 
-// import Nav from '@/components/Navigation/Navigation'
-// import TopCards from '@/components/TopCards/TopCards'
 import { useEffect, useState } from 'react'
 import Chart from '@/components/Chart/Chart'
 import FormField from '@/components/Form/FormField'
@@ -37,8 +35,7 @@ export default function HomePage() {
             Authorization: `Bearer ${userStr?.toString()}`
         }
         axios.get('http://localhost:8000/api/strategy/', { headers: headersList }).then(res => {
-            console.log(res.data)
-            // setTableData(res.data)
+            console.log('strategy', res.data)
         })
     }, [tableData])
 
@@ -46,7 +43,6 @@ export default function HomePage() {
         <>
             <Nav />
             <div className='min-h-full bg-gray-200'>
-                {/* <TopCards /> */}
                 <div className='p-4 grid md:grid-cols-4 grid-cols-1 gap-4'>
                     <Chart
                         stock={stock}

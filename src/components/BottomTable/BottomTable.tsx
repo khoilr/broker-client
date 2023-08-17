@@ -149,7 +149,7 @@ export default function BottomTable(props: props) {
                                 <Tooltip
                                     className='p-2'
                                     placement='top'
-                                    content={`Period: ${indicator.parameters.period}`}
+                                    content={`Period: ${indicator.parameters.period || ''} `}
                                     overlayStyle={{ zIndex: 200 }}
                                 >
                                     <Tag key={indicator.id}>{indicator.name}</Tag>
