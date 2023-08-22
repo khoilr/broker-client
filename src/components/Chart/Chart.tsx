@@ -9,30 +9,35 @@ import { EChartsOption } from 'echarts'
 interface props {
     stock: StockModel
     lines: any
+    difLines: any
 }
 
 const downColor = '#ec0000'
 const upColor = '#00da3c'
 
 export default function Chart(props: props) {
-    const { stock, lines } = props
-    const [thisLines, setThisLines] = useState<any>([{ data: [] }])
+    const { stock, lines, difLines } = props
+    const [sameLines, setSameLines] = useState<any>([{ data: [] }])
+    const [diffLines, setDiffLines] = useState<any>([{ data: [] }])
     const [names, setNames] = useState<string[]>([])
     const [series, setSeries] = useState<any[]>([{}])
+    const [difSeries, setDifSeries] = useState<any[]>([{}])
 
     useEffect(() => {
         // if lines if not empty
         if (lines && lines.length > 0) {
-            setThisLines(lines)
+            setSameLines(lines)
+            setDiffLines(difLines)
         }
     }, [lines])
 
+    // Same Chart
     useEffect(() => {
         // get every name in every data in lines
         const thisNames = []
         const thisSeries = []
-        for (let i = 0; i < thisLines.length; i += 1) {
-            const line = thisLines[i]
+        for (let i = 0; i < sameLines.length; i += 1) {
+            const line = sameLines[i]
 
             for (let j = 0; j < line.data.length; j += 1) {
                 const data = line.data[j]
@@ -47,7 +52,30 @@ export default function Chart(props: props) {
 
         setSeries(thisSeries)
         setNames(thisNames)
-    }, [thisLines])
+    }, [sameLines])
+
+    // Dif Chart
+    useEffect(() => {
+        // get every name in every data in lines
+        const thisNames = []
+        const thisSeries = []
+        for (let i = 0; i < diffLines.length; i += 1) {
+            const line = diffLines[i]
+
+            for (let j = 0; j < line.data.length; j += 1) {
+                const data = line.data[j]
+                thisNames.push(data.name)
+                thisSeries.push({
+                    name: data.name,
+                    type: 'line',
+                    data: data.data
+                })
+            }
+        }
+
+        setDifSeries(thisSeries)
+        setNames(thisNames)
+    }, [difLines])
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [data, setData] = useState<StockPriceModel>({
@@ -139,14 +167,14 @@ export default function Chart(props: props) {
             {
                 left: '5%',
                 right: '5%',
-                top: '12%',
+                top: '15%',
                 height: '60%'
             },
             {
                 left: '5%',
                 right: '5%',
-                top: '80%',
-                height: '16%'
+                top: '85%',
+                height: '12%'
             }
         ],
         xAxis: [
@@ -233,6 +261,36 @@ export default function Chart(props: props) {
         ]
     }
 
+    const lineoption: EChartsOption = {
+        grid: [
+            {
+                left: '5%',
+                right: '5%',
+                top: '5%',
+                height: '70%'
+            }
+        ],
+        xAxis: {
+            type: 'category',
+            data: data.categoryData,
+            boundaryGap: false,
+            axisLine: { onZero: false },
+            splitLine: { show: false },
+            min: 'dataMin',
+            max: 'dataMax',
+            axisPointer: {
+                z: 100
+            }
+        },
+        yAxis: {
+            scale: true,
+            splitArea: {
+                show: true
+            }
+        },
+        series: [...difSeries]
+    }
+
     useEffect(() => {
         if (!stock.symbol) return
 
@@ -272,12 +330,19 @@ export default function Chart(props: props) {
     }, [stock.symbol])
 
     return (
-        <div className='w-full md:col-span-3 relative lg:h-[70vh] h-full p-4 border rounded-lg bg-white'>
+        <div className='w-full md:col-span-3 relative lg:h-[70vh] h-full px-4 pt-4 border rounded-lg bg-white'>
             <EChartsReact
                 showLoading={isLoading}
                 option={option}
                 style={{
-                    height: '100%'
+                    height: '70%'
+                }}
+            />
+            <EChartsReact
+                showLoading={isLoading}
+                option={lineoption}
+                style={{
+                    height: '30%'
                 }}
             />
         </div>

@@ -12,11 +12,12 @@ import { Tooltip } from '@material-tailwind/react'
 interface props {
     data: FormData
     setLines: (lines: any[]) => void
+    setDifLines: (lines: any[]) => void
     lines: any[]
 }
 
 export default function BottomTable(props: props) {
-    const { data, setLines, lines } = props
+    const { data, setLines, setDifLines, lines } = props
     const [dataArray, setDataArray] = useState<FormData[]>([])
     const [chartData, setChartData] = useState<any[]>([])
     const [checked, setChecked] = useState(false)
@@ -53,8 +54,10 @@ export default function BottomTable(props: props) {
         const data = [...chartData]
         data.splice(0, data.length)
 
-        const check = data.some((obj) => obj === data1)
-        if (!check) { data.push(data1) }
+        const check = data.some(obj => obj === data1)
+        if (!check) {
+            data.push(data1)
+        }
         setChartData(data)
 
         if (checked) setChecked(false)
@@ -65,33 +68,36 @@ export default function BottomTable(props: props) {
         const indicators = chartData
         for (let i = 0; i < indicators.length; i += 1) {
             for (let j = 0; j < indicators[i].indicators.length; j += 1) {
-            const indicator = indicators[i].indicators[j]
-            const symbol = indicators[i]
+                const indicator = indicators[i].indicators[j]
+                const symbol = indicators[i]
 
-            clientApi
-                .get('/indicator/', {
-                    params: {
-                        name: indicator.name,
-                        symbol: symbol.stock.split('-')[0].trim(),
-                        ...indicator.parameters
-                    }
-                })
-                .then(res => {
-                    const { data } = res
-                    // append data to lines
+                clientApi
+                    .get('/indicator/', {
+                        params: {
+                            name: indicator.name,
+                            symbol: symbol.stock.split('-')[0].trim(),
+                            ...indicator.parameters
+                        }
+                    })
+                    .then(res => {
+                        const { data } = res
+                        // append data to lines
 
-                    console.log('res', data)
-                    const thisLines = [...lines]
+                        console.log('res', data)
 
-                    const checkData = thisLines.some(obj => obj.name === data.name)
-                     if (!checkData) {
-                         thisLines.push(data)
-                     }
+                        const thisLines = [...lines]
 
-                    setLines(thisLines)
+                        const checkData = thisLines.some(obj => obj.name === data.name)
+                        if (!checkData) {
+                            thisLines.push(data)
+                        }
 
-                    console.log('thisLinesssss', thisLines)
-                })
+                        const sameChart = thisLines.filter(obj => obj.same_chart === true)
+                        const difChart = thisLines.filter(obj => obj.same_chart === false)
+
+                        setLines(sameChart)
+                        setDifLines(difChart)
+                    })
             }
         }
     }
@@ -166,12 +172,6 @@ export default function BottomTable(props: props) {
             render: (_, record, index: number) =>
                 dataArray.length >= 1 ? (
                     <Space size='middle'>
-                        <Button
-                            className='font-bold text-blue-500'
-                            onClick={() => handleApply()}
-                        >
-                            Apply
-                        </Button>
                         <Popconfirm
                             okButtonProps={{
                                 className: 'rounded-md bg-blue-500 hover:bg-blue-300 text-white'
@@ -197,6 +197,21 @@ export default function BottomTable(props: props) {
                         scroll={{ x: 1500, y: 300 }}
                         rowKey={(record, index) => index.toString()}
                     />
+                    <Button
+                        onClick={handleApply}
+                        type='primary'
+                        style={{
+                            height: 40,
+                            width: 80,
+                            fontWeight: 'bold',
+                            textAlign: 'center',
+                            margin: 16,
+                            float: 'right',
+                            backgroundColor: 'rgb(14 116 144 / var(--tw-bg-opacity))'
+                        }}
+                    >
+                        Apply
+                    </Button>
                 </div>
             </div>
         </div>

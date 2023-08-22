@@ -19,6 +19,7 @@ export default function NotifyCondition(props: props) {
     const handleClick = () => {
         selectedIndicator.push(selectingIndicator?.name ?? '')
         setSelectedIndicator([...selectedIndicator])
+        console.log('selectedIndicator', selectedIndicator)
     }
 
     return (
@@ -71,7 +72,7 @@ export default function NotifyCondition(props: props) {
                                         maxWidth: '20%',
                                         backgroundColor: 'rgb(14 116 144 / var(--tw-bg-opacity))',
                                         display: 'flex',
-                                        justifyContent: 'center',
+                                        justifyContent: 'center'
                                     }}
                                     type='primary'
                                     // icon={<PlusOutlined />}

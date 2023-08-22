@@ -23,6 +23,7 @@ export default function HomePage() {
 
     // States
     const [lines, setLines] = useState<any[]>([])
+    const [difLines, setDifLines] = useState<any[]>([])
     const [tableData, setTableData] = useState<any>()
 
     const updateTableData = (newData: FormData[]) => {
@@ -47,6 +48,7 @@ export default function HomePage() {
                     <Chart
                         stock={stock}
                         lines={lines}
+                        difLines={difLines}
                     />
                     <FormField
                         setStock={setStock}
@@ -58,6 +60,7 @@ export default function HomePage() {
                     <BottomTable
                         data={tableData}
                         setLines={setLines}
+                        setDifLines={setDifLines}
                         lines={lines}
                     />
                 </div>

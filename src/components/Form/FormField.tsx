@@ -80,7 +80,7 @@ export default function FormField(props: props) {
         setFormData(form.getFieldsValue())
     }, [formData])
 
-    async function handleClick() {
+    async function handleSave() {
         onSubmit({ ...formData, form })
 
         const symbols = []
@@ -90,8 +90,6 @@ export default function FormField(props: props) {
         for (let i = 0; i < formData.indicators.length; i += 1) {
             const indicator = formData.indicators[i]
             const indicatorParams = indicator.parameters
-
-            console.log({ ...indicator.condition, value: Number(indicator.condition.value)})
 
             const params = []
             // eslint-disable-next-line no-restricted-syntax
@@ -110,23 +108,11 @@ export default function FormField(props: props) {
 
         const data = {
             symbols,
+            telegram: formData.telegram_user,
             indicators
         }
 
-        console.log(data)
-
-        // const dataJson = JSON.stringify(data)
-
-        // console.log(dataJson)
-
         const userStr = localStorage.getItem('user')
-        // const headersList = {
-        //     Authorization: `Bearer ${userStr?.toString()}`
-        // }
-
-        // const reqOptions = {
-        //     data: data,
-        // }
 
         const customConfig = {
             headers: {
@@ -207,7 +193,7 @@ export default function FormField(props: props) {
                                     <div className='flex justify-items-center'>
                                         <button
                                             type='button'
-                                            onClick={handleClick}
+                                            onClick={handleSave}
                                             className='bg-cyan-700 text-white py-2 px-auto rounded-lg m-auto flex justify-center min-w-20 w-20'
                                         >
                                             Save
