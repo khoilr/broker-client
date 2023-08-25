@@ -172,6 +172,12 @@ export default function BottomTable(props: props) {
             render: (_, record, index: number) =>
                 dataArray.length >= 1 ? (
                     <Space size='middle'>
+                        <Button
+                            className='font-bold text-blue-500'
+                            onClick={() => handleApply()}
+                        >
+                            Apply
+                        </Button>
                         <Popconfirm
                             okButtonProps={{
                                 className: 'rounded-md bg-blue-500 hover:bg-blue-300 text-white'
@@ -198,7 +204,7 @@ export default function BottomTable(props: props) {
                         rowKey={(record, index) => index.toString()}
                     />
                     <Button
-                        onClick={handleApply}
+                        // onClick={handleApply}
                         type='primary'
                         style={{
                             height: 40,
@@ -210,7 +216,7 @@ export default function BottomTable(props: props) {
                             backgroundColor: 'rgb(14 116 144 / var(--tw-bg-opacity))'
                         }}
                     >
-                        Apply
+                        Save
                     </Button>
                 </div>
             </div>
